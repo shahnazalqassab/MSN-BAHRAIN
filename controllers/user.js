@@ -22,8 +22,6 @@ router.post("/signIn", async (req, res) => {
   }
 });
 
-
-
 //signUp router
 
 router.get("/signUp", (req, res) => {
