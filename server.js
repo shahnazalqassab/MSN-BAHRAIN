@@ -13,8 +13,8 @@ mongoose.connection.on('connected', () => {
 })
 
 const app = express()
-const PORT = process.env.PORT
 
+const PORT = process.env.PORT
 app.get('/', (req, res) => {
   res.send('HELLO')
 })
