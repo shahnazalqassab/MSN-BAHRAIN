@@ -15,7 +15,6 @@ const AdsController = require('./controllers/Ads')
 const authController = require('./controllers/user')
 
 const app = express()
-
 const PORT = process.env.PORT
 
 app.get("/", (req, res) => {
