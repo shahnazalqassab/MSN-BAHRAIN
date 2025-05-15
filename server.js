@@ -18,12 +18,17 @@ const app = express()
 
 const PORT = process.env.PORT
 
-app.get('/', async (req, res) => {
-  res.render('index.ejs')
+app.get("/", (req, res) => {
+  if(req.session.user) {
+    res.redirect(`users/${req.session.user._id}/ads`);
+  } else {
+    res.render('index.ejs');
+  }
 })
 
 app.use('/Auth', authController)
 app.use('/Ads', AdsController)
+
 app.listen(PORT, () => {
   console.log(`Hello from ${PORT} Port`)
 })
