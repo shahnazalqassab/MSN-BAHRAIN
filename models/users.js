@@ -9,14 +9,14 @@ const AdsSchema = new mongoose.Schema({
     description: { type: String, required: true},
     category: { type: String, enum: ['books', 'phones', 'cars', 'spare parts']}
 },
-    { timestamp: true, }
+    { timestamps: true, }
 )
 
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true},
     password: { type: String, required: true},
     contactNo: { type: Number, required: true},
-    email: {type: email, required: true},
+    email: {type: string, required: true},
     Ads: [AdsSchema]
 });
 
