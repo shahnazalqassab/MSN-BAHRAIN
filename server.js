@@ -15,10 +15,11 @@ mongoose.connection.on('connected', () => {
 const app = express()
 
 const PORT = process.env.PORT
-app.get('/', (req, res) => {
-  res.send('HELLO')
+
+app.get('/', async (req, res) => {
+  res.render('index.ejs')
 })
 
 app.listen(PORT, () => {
-  console.log(`Hello from ${PORT} Post`)
+  console.log(`Hello from ${PORT} Port`)
 })
