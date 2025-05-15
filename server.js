@@ -2,13 +2,15 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const dotenv = require('dotenv').config()
 const ejs = require('ejs')
-const expressSession = require('express-session')
-const mongoose = require('mongoose')
-const MongoStore = require('connect-mongo') // INITIATING MONGOSTORE
-const morgan = require('morgan')
-const path = require('path')
 const app = express()
-const PORT = process.env.PORT
+
+const mongoose = require('mongoose');
+const methodOverride = require("method-override");
+const morgan = require('morgan')
+const expressSession = require('express-session')
+const MongoStore = require('connect-mongo') // INITIATING MONGOSTORE
+const passUserToView = require('./middleware/pass-user-to-view')
+const isSignedIn = require('./middleware/is-signed-in')
 
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected', () => {
@@ -16,9 +18,17 @@ mongoose.connection.on('connected', () => {
 })
 
 const authController = require('./controllers/user')
-const passUserToView = require('./middleware/pass-user-to-view')
-const isSignedIn = require('./middleware/is-signed-in')
+const adsController = require('./controllers/Ads')
+
+const PORT = process.env.PORT ? process.env.PORT : "3000"
+const path = require('path')
+
+
+///// THE USE SECTION //////
+
 app.use(express.urlencoded({ extended: false }))
+app.use(methodOverride("_method"));
+app.use(morgan('dev'));
 
 app.use(
   expressSession({
@@ -26,13 +36,15 @@ app.use(
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
-      mongoUrl: process.env.MONGODB_URI
+    mongoUrl: process.env.MONGODB_URI
     })
   })
 )
 app.use(passUserToView)
 
+
 app.get('/', (req, res) => {
+  // req.session.destroy();
   if (req.session.user) {
     res.redirect(`/users/${req.session.user._id}/Ads`)
   } else {
@@ -40,8 +52,10 @@ app.get('/', (req, res) => {
   }
 })
 
-app.use('/Auth', authController)
+app.use('/auth', authController)
 app.use(isSignedIn)
+app.use('/users/:userId/ads', adsController);
+
 
 app.listen(PORT, () => {
   console.log(`Hello from ${PORT} Port`)
