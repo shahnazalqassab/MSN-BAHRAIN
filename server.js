@@ -1,10 +1,8 @@
-const express = require('express')
-const app = express()
-
-app.get('/', (req, res) => {
-  res.send('HELLO')
-})
-const PORT = 2000
-app.listen(PORT, () => {
-  console.log(`Hello from ${PORT} Post`)
-})
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/css/style.css">
+    </head>
