@@ -12,6 +12,11 @@ mongoose.connection.on('connected', () => {
 })
 const app = express()
 const PORT = process.env.PORT
+const authCtrl = require('./controllers/user.js');
+
+app.use("/user", authCtrl);
+
+
 app.get('/', (req, res) => {
   res.send('HELLO')
 })
