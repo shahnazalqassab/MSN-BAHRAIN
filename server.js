@@ -11,6 +11,8 @@ mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`)
 })
+const AdsController = require('./controllers/Ads')
+const authController = require('./controllers/user')
 
 const app = express()
 
@@ -20,6 +22,8 @@ app.get('/', async (req, res) => {
   res.render('index.ejs')
 })
 
+app.use('/Auth', authController)
+app.use('/Ads', AdsController)
 app.listen(PORT, () => {
   console.log(`Hello from ${PORT} Port`)
 })

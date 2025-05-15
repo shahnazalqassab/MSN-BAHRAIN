@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
   contactNo: { type: Number, required: true },
-  email: { type: email, required: true },
+  email: { type: String, required: true },
   Ads: [AdsSchema]
 })
 
