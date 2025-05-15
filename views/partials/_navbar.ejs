@@ -1,5 +1,10 @@
 <nav>
   <li>
-    <h1>Hi</h1>
+    <% if (user) { %> 
+    <a href="/auth/signOut">Sign Out</a>
+    <% } else { %>
+    <a href="/auth/signIn">Sign in</a>
+    <a href="/auth/signUp">Sign Up</a>
+    <% } %>
   </li>
 </nav>

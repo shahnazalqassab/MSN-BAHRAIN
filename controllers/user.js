@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require("bcrypt");
 const User = require('../models/users');
-//signin
 
+
+
+//signin
 router.get("/signIn", (req, res) => {
   res.render("Auth/signIn.ejs");
 });
@@ -25,36 +28,37 @@ router.post("/signIn", async (req, res) => {
 //signUp router
 
 router.get("/signUp", (req, res) => {
-  res.render("auth/signUp.ejs");
+    res.render("Auth/signUp.ejs");
 });
 
 router.post("/signUp", async (req, res) => {
-  try {
     const userExists = await User.findOne({ username: req.body.username });
-    if (userExists) return res.send("Username already taken");
-
+    if (userExists) {
+        return res.send("Username already taken");
+    }
     if (req.body.password !== req.body.confirmPassword) {
-      return res.send("Passwords do not match");
+        return res.send("Passwords do not match");
     }
 
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-    const user = await User.create({ username: req.body.username, password: hashedPassword });
-    req.session.user = { _id: user._id, username: user.username };
-    res.redirect("/");
-  } catch (error) {
-    console.error(error);
-    res.redirect("/Auth/signUp");
-  }
+    req.body.password = hashedPassword;
+
+
+    const user = await User.create(req.body);
+
+    req.session.user = {
+        username: user.username,
+        _id: user._id
+    };
+
+    req.session.save(() => {
+        res.redirect("/");
+    });
 });
 
 router.get("/signUp", (req, res) => {
   res.render("Auth/signUp.ejs");
 });
 
-
-
-
 module.exports = router;
-const express = require('express');
-const router = express.Router();
 
