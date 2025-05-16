@@ -34,7 +34,7 @@ app.use(morgan('dev'));
 
 app.use(
   expressSession({
-    secret: 'process.env.SESSION_SECRET',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
@@ -47,12 +47,12 @@ app.use(passUserToView)
 
 
 app.get('/', (req, res) => {
-  req.session.destroy();
-  // if (req.session.user) {
-  //   res.redirect(`/users/${req.session.user._id}/user`)
-  // } else {
+  // req.session.destroy();
+  if (req.session.user) {
+    res.redirect(`/users/${req.session.user._id}/user`)
+  } else {
     res.render('index.ejs')
-  // }
+  }
 })
 
 app.use('/user', userController)

@@ -4,23 +4,19 @@ const User = require('../models/users.js')
 const router = express.Router()
 
 //:get:index
-// router.get('/', async (req, res) => {
-//   try {
-//     const currentUser = await User.findById(req.session.user._id); // LOOKING UP THE CURRENT USER
-//     // console.log(currentUser.applications);
-//     res.render('auth/index.ejs', {
-//         applications: currentUser.applications,
-//     }); // RENDERING THE PAGE WITH HIS DETAILS
+router.get('/', async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id); // LOOKING UP THE CURRENT USER
+    // console.log(currentUser.applications);
+    res.render('user/index.ejs', {
+        applications: currentUser.applications,
+    }); // RENDERING THE PAGE WITH HIS DETAILS
 
-// } catch (error) {
-//     console.log(error);
-//     res.redirect('/');
-// }
-// });
-
-//   const currentUser = await User.findById(req.session.user._id)
-//   res.render('Ads/index.ejs', { Ads: currentUser.Ads }) {SHAHNAZ COMMENT: SIGNED IN USER SHOULD BE DIRECTED TO HIS PAGE}
-// })
+} catch (error) {
+    console.log(error);
+    res.redirect('/');
+}
+});
 
 //:get:new
 router.get('/new', async (req, res) => {

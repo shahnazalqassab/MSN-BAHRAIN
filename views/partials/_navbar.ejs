@@ -1,12 +1,11 @@
 <nav>
   <li>
     <% if (user) { %> 
-    <a href="/auth/signOut">Sign Out</a>
-    <a href="/auth/index">dashboard</a>
-    <a href="/Ads">Ads</a>
+    <a href="/user/signOut">Sign Out</a>
+    <a href="/user/index">Dashboard</a>
     <% } else { %>
-    <a href="/auth/signIn">Sign in</a>
-    <a href="/auth/signUp">Sign Up</a>
+    <a href="/user/signIn">Sign in</a>
+    <a href="/user/signUp">Sign Up</a>
     <% } %>
   </li>
 </nav>
