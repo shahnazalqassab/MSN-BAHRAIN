@@ -2,6 +2,7 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const dotenv = require('dotenv').config()
 const ejs = require('ejs')
+
 const app = express()
 
 const mongoose = require('mongoose');
@@ -30,6 +31,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride("_method"));
 app.use(morgan('dev'));
 
+
 app.use(
   expressSession({
     secret: 'process.env.SESSION_SECRET',
@@ -43,6 +45,7 @@ app.use(
 app.use(passUserToView)
 
 
+
 app.get('/', (req, res) => {
   // req.session.destroy();
   if (req.session.user) {
@@ -53,8 +56,9 @@ app.get('/', (req, res) => {
 })
 
 app.use('/auth', authController)
+
+app.use('/Ads', adsController)
 app.use(isSignedIn)
-app.use('/users/:userId/ads', adsController);
 
 
 app.listen(PORT, () => {
