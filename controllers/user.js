@@ -3,34 +3,34 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 const User = require('../models/users')
 
-// ROOT ROUTE
+// ROOT ROUTER
 router.get('/', async (req, res) => {
-  try {
-    const currentUser = await User.findById(req.session.user._id); // LOOKING UP THE CURRENT USER
-    // console.log(currentUser.applications);
-    res.render('auth/index.ejs', {
-        applications: currentUser.applications,
-    }); // RENDERING THE PAGE WITH HIS DETAILS
+  res.send('user root route')});
+//   try {
+//     const currentUser = await User.findById(req.session.user._id); // LOOKING UP THE CURRENT USER
+//     // console.log(currentUser.applications);
+//     res.render('user/index.ejs', {
+//         currentUser: currentUser,
+//     }); // RENDERING THE PAGE WITH HIS DETAILS
 
-      } catch (error) {
-    console.log(error);
-    res.redirect('/');
-}
-});
-
+// } catch (error) {
+//     console.log(error);
+//     res.redirect('/');
+// }
+// });
 
 // SIGN IN PAGE CALL
 router.get('/signIn', (req, res) => {
-  res.render('auth/signIn.ejs')
+  res.render('user/signIn.ejs')
 });
 
 
 // SIGN IN ROUTE
 router.post('/signIn', async (req, res) => {
-    try {
+  // res.send('new user sign in') JUST A TESTING CODE
       const userInDatabase = await User.findOne({ username: req.body.username });     // getting the user from the db
-      
-      if (!userInDatabase)) {
+      // res.send(userInDatabase.username);
+      if (!userInDatabase) {
         return res.send("User doesn't exist. Please try again.");
       }
 
@@ -40,25 +40,25 @@ router.post('/signIn', async (req, res) => {
     );
       if (!validPassword) {
       return res.send("Wrong Password. Please try again.");
-    }
+      }
 
     req.session.user = {
       username: userInDatabase.username, 
       _id: userInDatabase._id
     };
-    //    res.send("Request to sign in received!");
+       console.log("Request to sign in received!");
     req.session.save(() => {
     res.redirect("/");
-    });
-    } catch (error) {
-      console.log(error);
-      res.redirect('/auth/signIn');
+    })
+    
 })
+
 
 // SIGN UP PAGE CALL
 router.get('/signUp', (req, res) => {
-  res.render('auth/signUp.ejs')
+  res.render('user/signUp.ejs')
 });
+
 
 // SIGN UP ROUTE  
 router.post('/signUp', async (req, res) => {
@@ -93,13 +93,10 @@ router.get('/signOut', (req, res) => {
 })
 
 
-router.get('/index', (req, res) => {
-  res.render('auth/index.ejs')
+router.get('users/:userId/user', async (req, res) => {
+  res.send('this is the get userId/user page');
 })
 
 
-router.get('/:userId/index', async (req, res) => {
-  res.render('auth/index.ejs');
 
-})
 module.exports = router
