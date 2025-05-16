@@ -1,11 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<%- include('../partials/_head.ejs')%>
+<%- include('../partials/_navbar.ejs') %> 
 <body>
+    <a href="/Ads/new">add an new Ad</a>
+
+<h1>Your Ads</h1>
+    <ul>
+        <% Ads.forEach(app => { %>
+            <a href="/users/<%= user._id %>/Ads/<%=app.id %> ">
+                <li><%= app.title %></li>
+                <li><%= app.price %></li>
+                <li><%= app.description %></li>
+                <li><%= app.category %></li>
+                </a>
+        <% }) %>
+        </ul>
     
 </body>
-</html>
+<%- include('../partials/_footer.ejs') %>
