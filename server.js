@@ -18,7 +18,7 @@ mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`)
 })
 
-const authController = require('./controllers/user')
+const userController = require('./controllers/user')
 const adsController = require('./controllers/Ads')
 
 const PORT = process.env.PORT ? process.env.PORT : "3000"
@@ -47,16 +47,15 @@ app.use(passUserToView)
 
 
 app.get('/', (req, res) => {
-  // req.session.destroy();
-  if (req.session.user) {
-    res.redirect(`/users/${req.session.user._id}/Ads`)
-  } else {
+  req.session.destroy();
+  // if (req.session.user) {
+  //   res.redirect(`/users/${req.session.user._id}/user`)
+  // } else {
     res.render('index.ejs')
-  }
+  // }
 })
 
-app.use('/auth', authController)
-
+app.use('/user', userController)
 app.use('/Ads', adsController)
 app.use(isSignedIn)
 
