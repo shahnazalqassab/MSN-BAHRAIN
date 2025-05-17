@@ -2,51 +2,66 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const dotenv = require('dotenv').config()
 const ejs = require('ejs')
-const expressSession = require('express-session')
-const mongoose = require('mongoose')
-const MongoStore = require('connect-mongo')
-// INITIATING MONGOSTORE
-const morgan = require('morgan')
-const path = require('path')
 
 const app = express()
-const PORT = process.env.PORT
+const PORT = process.env.PORT ? process.env.PORT : "3000"
+const path = require('path')
+
+const mongoose = require('mongoose');
+const methodOverride = require("method-override");
+const morgan = require('morgan')
+const expressSession = require('express-session')
+
+const MongoStore = require('connect-mongo') // INITIATING MONGOSTORE
+const passUserToView = require('./middleware/pass-user-to-view')
+const isSignedIn = require('./middleware/is-signed-in')
+
 
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`)
 })
 
-const authController = require('./controllers/user')
+const userController = require('./controllers/user')
 const adsController = require('./controllers/Ads')
-const passUserToView = require('./middleware/pass-user-to-view')
-const isSignedIn = require('./middleware/is-signed-in')
+
+
+
+
+///// THE USE SECTION //////
+
 app.use(express.urlencoded({ extended: false }))
+app.use(methodOverride("_method"));
+app.use(morgan('dev'));
+
 
 app.use(
   expressSession({
-    secret: 'process.env.SESSION_SECRET',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
-      mongoUrl: process.env.MONGODB_URI
+    mongoUrl: process.env.MONGODB_URI
     })
   })
 )
 app.use(passUserToView)
 
+
+
 app.get('/', (req, res) => {
-  res.render('index.ejs')
-  // if(req.session.user) {
-  //   res.redirect(`/users/${req.session.user._id}/Ads`);
-  // } else {
-  //   res.render('index.ejs');
-  // }
+  // req.session.destroy();
+  if (req.session.user) {
+    res.redirect(`/users/${req.session.user._id}/user`)
+  } else {
+    res.render('index.ejs')
+  }
 })
 
-app.use('/Auth', authController)
+app.use('/user', userController)
 app.use('/Ads', adsController)
 app.use(isSignedIn)
+
 
 app.listen(PORT, () => {
   console.log(`Hello from ${PORT} Port`)

@@ -3,31 +3,64 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 const User = require('../models/users')
 
-//signin
+// ROOT ROUTER
+router.get('/', async (req, res) => {
+  res.send('user root route')});
+//   try {
+//     const currentUser = await User.findById(req.session.user._id); // LOOKING UP THE CURRENT USER
+//     // console.log(currentUser.applications);
+//     res.render('user/index.ejs', {
+//         currentUser: currentUser,
+//     }); // RENDERING THE PAGE WITH HIS DETAILS
+
+// } catch (error) {
+//     console.log(error);
+//     res.redirect('/');
+// }
+// });
+
+// SIGN IN PAGE CALL
 router.get('/signIn', (req, res) => {
-  res.render('Auth/signIn.ejs')
-})
+  res.render('user/signIn.ejs')
+});
 
+
+// SIGN IN ROUTE
 router.post('/signIn', async (req, res) => {
-  try {
-    const user = await User.findOne({ username: req.body.username })
-    if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
-      return res.send('Invalid credentials')
-    }
+  // res.send('new user sign in') JUST A TESTING CODE
+      const userInDatabase = await User.findOne({ username: req.body.username });     // getting the user from the db
+      // res.send(userInDatabase.username);
+      if (!userInDatabase) {
+        return res.send("User doesn't exist. Please try again.");
+      }
 
-    req.session.user = { _id: user._id, username: user.username }
-    res.redirect('/')
-  } catch (error) {
-    console.error(error)
-    res.redirect('/Auth/signIn')
-  }
+      const validPassword = bcrypt.compareSync(  // user exist, testing password
+        req.body.password,
+        userInDatabase.password
+    );
+      if (!validPassword) {
+      return res.send("Wrong Password. Please try again.");
+      }
+
+    req.session.user = {
+      username: userInDatabase.username, 
+      _id: userInDatabase._id
+    };
+       console.log("Request to sign in received!");
+    req.session.save(() => {
+    res.redirect("/");
+    })
+    
 })
 
-//signUp router
+
+// SIGN UP PAGE CALL
 router.get('/signUp', (req, res) => {
-  res.render('Auth/signUp.ejs')
-})
+  res.render('user/signUp.ejs')
+});
 
+
+// SIGN UP ROUTE  
 router.post('/signUp', async (req, res) => {
   const userExists = await User.findOne({ username: req.body.username })
   if (userExists) {
@@ -52,17 +85,18 @@ router.post('/signUp', async (req, res) => {
   })
 })
 
-router.get('/signUp', (req, res) => {
-  res.render('Auth/signUp.ejs')
-})
 
+// SIGN OUT ROUTE
 router.get('/signOut', (req, res) => {
   req.session.destroy()
   res.redirect('/')
 })
 
-router.get('/index', (req, res) => {
-  res.render('Auth/index.ejs')
+
+router.get('users/:userId/user', async (req, res) => {
+  res.send('this is the get userId/user page');
 })
+
+
 
 module.exports = router

@@ -5,9 +5,18 @@ const router = express.Router()
 
 //:get:index
 router.get('/', async (req, res) => {
-  const currentUser = await User.findById(req.session.user._id)
-  res.render('Ads/index.ejs', { Ads: currentUser.Ads })
-})
+  try {
+    const currentUser = await User.findById(req.session.user._id); // LOOKING UP THE CURRENT USER
+    // console.log(currentUser.applications);
+    res.render('user/index.ejs', {
+        applications: currentUser.applications,
+    }); // RENDERING THE PAGE WITH HIS DETAILS
+
+} catch (error) {
+    console.log(error);
+    res.redirect('/');
+}
+});
 
 //:get:new
 router.get('/new', async (req, res) => {
@@ -23,5 +32,6 @@ router.post('/Ads', async (req, res) => {
   await User.create(req.body)
   res.redirect('/Ads/new')
 })
+
 
 module.exports = router

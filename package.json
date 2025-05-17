@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "- MSN Bahrain is an online advertising platform created to help users sell their products and facilitate connections between sellers and buyers. Users can post, browse, and manage advertisements in multiple categories, including Books, Electronics, and Car Supplies. The platform features user authentication, image upload capabilities, and ad filtering options.",
   "main": "server.js",
-  "devDependencies": {
+  "dependencies": {
     "bcrypt": "^6.0.0",
     "connect-mongo": "^5.1.0",
     "dotenv": "^16.5.0",
