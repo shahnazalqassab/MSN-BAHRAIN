@@ -4,14 +4,18 @@ const dotenv = require('dotenv').config()
 const ejs = require('ejs')
 
 const app = express()
+const PORT = process.env.PORT ? process.env.PORT : "3000"
+const path = require('path')
 
 const mongoose = require('mongoose');
 const methodOverride = require("method-override");
 const morgan = require('morgan')
 const expressSession = require('express-session')
+
 const MongoStore = require('connect-mongo') // INITIATING MONGOSTORE
 const passUserToView = require('./middleware/pass-user-to-view')
 const isSignedIn = require('./middleware/is-signed-in')
+
 
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected', () => {
@@ -21,8 +25,7 @@ mongoose.connection.on('connected', () => {
 const userController = require('./controllers/user')
 const adsController = require('./controllers/Ads')
 
-const PORT = process.env.PORT ? process.env.PORT : "3000"
-const path = require('path')
+
 
 
 ///// THE USE SECTION //////
