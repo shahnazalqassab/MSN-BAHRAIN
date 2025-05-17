@@ -4,9 +4,11 @@ const dotenv = require('dotenv').config()
 const ejs = require('ejs')
 const expressSession = require('express-session')
 const mongoose = require('mongoose')
-const MongoStore = require('connect-mongo') // INITIATING MONGOSTORE
+const MongoStore = require('connect-mongo')
+// INITIATING MONGOSTORE
 const morgan = require('morgan')
 const path = require('path')
+
 const app = express()
 const PORT = process.env.PORT
 
