@@ -35,6 +35,7 @@ router.post('/:userId/Ads', async (req, res) => {
 router.get('/:userId/Ads', async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
   const Ads = currentUser.Ads
+  console.log(Ads)
   res.render('Ads/index.ejs', { Ads })
 })
 
