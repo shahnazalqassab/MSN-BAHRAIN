@@ -70,27 +70,29 @@ router.post('/signIn', async (req, res) => {
 })
 
 
-
 // SIGN OUT ROUTE
 router.get('/signOut', (req, res) => {
   req.session.destroy()
   res.redirect('/')
 })
 
+////////////////////////////// AFTER SIGN IN ROUTES /////////////////////////
 
-// /:userId/user dashboard
+// GET /:USERID/USER DASHBOARD
 router.get('/:userId/user', async (req, res) => {
   const currentUser = await User.findById(req.session.user);
   console.log(currentUser);
   res.render('user/index.ejs', {user: currentUser});  
 })
 
-// /:userId/edit (getting the edit page)
+// GET /:USERID/EDIT (EDIT PROFILE ROUTE)
 router.get('/:userId/edit', async (req, res) => {
+const checkVar = 0;
+
   try {
     const currentUser = await User.findById(req.session.user._id);
     res.render('user/edit.ejs', {
-      user: currentUser,
+      user: currentUser, checkVar,
     });
   } catch (error) {
     console.log(error);
@@ -98,20 +100,68 @@ router.get('/:userId/edit', async (req, res) => {
   }
 });
 
+// PUT :USERID/USER (SAVING PROFILE UPDATES ROUTE)
 router.put('/:userId/user', async (req, res) => {
-  try {
-    const currentUser = await User.findById(req.session.user._id);
-    
-    currentUser.contactNo = req.body.contactNo;
-    currentUser.email = req.body.email;
+const submit = req.body.submit; // Learned this condition from stack overFlow
 
-    await currentUser.save();
+if(submit === "Update Profile") {
+    try {
+      const currentUser = await User.findById(req.session.user._id);
+      
+      currentUser.contactNo = req.body.contactNo;
+      currentUser.email = req.body.email;
 
-    res.redirect(`/user/${currentUser._id}/user`);
-  } catch (error) {
-    console.log(error);
-    res.redirect('/');
+      await currentUser.save();
+
+      res.redirect(`/user/${currentUser._id}/user`);
+    } catch (error) {
+      console.log(error);
+      res.redirect('/');
+    }
+  } else {
+      res.redirect('/');
+
   }
 })
 
+// GET :USERID/CHANGEPASSWORD (EDIT PASSWORD ROUTE)
+router.get('/:userId/changePassword', async (req, res) => {
+const checkVar = 1;
+
+try {
+  const currentUser = await User.findById(req.session.user._id);
+  res.render('user/edit.ejs', {
+    password: currentUser.password, checkVar,
+  });
+} catch (error) {
+  console.log(error);
+  res.redirect('/');
+}
+});
+
+// PUT /:USERID/USER (SAVING PASSWORD)
+router.put('/:userId/user', async (req, res) => {
+  const submit = req.body.submit;
+  if(submit === "Change Password") {
+    try {
+      const currentUser = await User.findById(req.session.user._id);
+      const databasePassword = currentUser.password;
+
+      if(databasePassword === req.body.currentPassword){
+        if(req.body.newPassword === req.body.confirmPassword) {
+              currentUser.password = req.body.newPassword;
+              await currentUser.save();
+              res.redirect(`/signOut`);
+        } else
+        { res.redirect('/'); }
+      } else
+        { res.redirect('/')}
+    } catch (error) {
+      console.log(error);
+      res.redirect('/');
+    }
+  } else {
+  res.redirect('/'); // CANCEL CHANGING PASSWORD
+  }
+})
 module.exports = router;
