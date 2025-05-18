@@ -1,0 +1,22 @@
+<%- include('../partials/_head.ejs') %>
+<%- include('../partials/_navbar.ejs') %>
+
+<body>
+  <div class="container">
+    <h1>Edit profile</h1>
+    <form action="/user/<%= user._id %>/user?_method=PUT" method="POST">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" value="<%= user.username %>" disabled>
+
+      <label for="contactNo">Contact No.:</label>
+      <input type="number" id="contactNo" name="contactNo" value="<%= user.contactNo %>">
+
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email" value="<%= user.email %>">
+
+      <button type="submit">Update</button>
+
+    </form>
+  </div>
+</body>
+</html>
