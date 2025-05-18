@@ -1,68 +1,73 @@
-const express = require('express')
-const bcrypt = require('bcrypt')
-const dotenv = require('dotenv').config()
-const ejs = require('ejs')
+const express = require("express");
+const bcrypt = require("bcrypt");
+const dotenv = require("dotenv").config();
+const ejs = require("ejs");
 
-const app = express()
-const PORT = process.env.PORT ? process.env.PORT : "3000"
-const path = require('path')
+const app = express();
+const PORT = process.env.PORT || 3000;
+const path = require("path");
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-const morgan = require('morgan')
-const expressSession = require('express-session')
+const morgan = require("morgan");
+const expressSession = require("express-session");
 
-const MongoStore = require('connect-mongo') // INITIATING MONGOSTORE
-const passUserToView = require('./middleware/pass-user-to-view')
-const isSignedIn = require('./middleware/is-signed-in')
+const MongoStore = require("connect-mongo");
 
+const passUserToView = require("./middleware/pass-user-to-view");
+const isSignedIn = require("./middleware/is-signed-in");
 
-mongoose.connect(process.env.MONGODB_URI)
-mongoose.connection.on('connected', () => {
-  console.log(`Connected to MongoDB ${mongoose.connection.name}.`)
-})
+// Controllers
+const userController = require("./controllers/user");
+const adsController = require("./controllers/Ads");
 
-const userController = require('./controllers/user')
-const adsController = require('./controllers/Ads')
+// View Engine Setup
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
+// MongoDB Connection
+mongoose.connect(process.env.MONGODB_URI, {
+ // useNewUrlParser: true,
+  //useUnifiedTopology: true,
+});
+mongoose.connection.on("connected", () => {
+  console.log(`Connected to MongoDB: ${mongoose.connection.name}`);
+});
 
+// Middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-
-///// THE USE SECTION //////
-
-app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride("_method"));
-app.use(morgan('dev'));
-
-
+app.use(morgan("dev"));
 app.use(
   expressSession({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URI
-    })
+      mongoUrl: process.env.MONGODB_URI,
+    }),
   })
-)
-app.use(passUserToView)
+);
+app.use(passUserToView);
 
-
-
-app.get('/', (req, res) => {
-  // req.session.destroy();
+// Routes
+app.get("/", (req, res) => {
   if (req.session.user) {
-    res.redirect(`/users/${req.session.user._id}/user`)
+    res.redirect(`/user/${req.session.user._id}`);
   } else {
-    res.render('index.ejs')
+    res.render("index.ejs");
   }
-})
+});
 
-app.use('/user', userController)
-app.use('/Ads', adsController)
-app.use(isSignedIn)
+// Route mounting
+app.use("/user", userController); // e.g., /user/:id
+app.use("/ads", adsController);   // consistent casing
 
+app.use(isSignedIn); // ensure this is last if it blocks access
 
+// Server
 app.listen(PORT, () => {
-  console.log(`Hello from ${PORT} Port`)
-})
+  console.log(`Server running on port ${PORT}`);
+});

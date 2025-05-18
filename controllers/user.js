@@ -18,6 +18,9 @@ router.get('/', async (req, res) => {
 //     res.redirect('/');
 // }
 // });
+router.get('/:id', (req, res) => {
+  // your code here
+});
 
 // SIGN IN PAGE CALL
 router.get('/signIn', (req, res) => {
