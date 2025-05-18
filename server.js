@@ -55,19 +55,19 @@ app.use(passUserToView);
 // Routes
 app.get("/", (req, res) => {
   if (req.session.user) {
-    res.redirect(`/user/${req.session.user._id}`);
+    res.redirect(`/user/${req.session.user._id}/user`)
   } else {
     res.render("index.ejs");
   }
-});
+})
 
-// Route mounting
-app.use("/user", userController); // e.g., /user/:id
-app.use("/ads", adsController);   // consistent casing
+app.use('/user', userController)
+app.use('/Ads', adsController)
+app.use(isSignedIn)
 
-app.use(isSignedIn); // ensure this is last if it blocks access
 
-// Server
+
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
