@@ -1,11 +1,13 @@
-<nav>
-  <li>
-    <% if (user) { %> 
-    <a href="/user/signOut">Sign Out</a>
-    <a href="">Dashboard</a>
-    <% } else { %>
-    <a href="/user/signIn">Sign in</a>
-    <a href="/user/signUp">Sign Up</a>
-    <% } %>
-  </li>
+<nav class="navbar">
+  <div class="navbar-container">
+    <ul>
+      <% if (user) { %> 
+      <li><a href="/user/signOut">Sign Out</a></li>
+      <li><a href="">Dashboard</a></li>
+      <% } else { %>
+      <li><a href="/user/signIn">Sign in</a></li>
+      <li><a href="/user/signUp">Sign Up</a></li>
+      <% } %>
+    </ul>
+  </div>
 </nav>

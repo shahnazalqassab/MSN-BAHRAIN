@@ -1,54 +1,119 @@
+/* Import Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+/* Ensure full height for html and body */
+html,
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f9fc;
+  height: 100%;
   margin: 0;
   padding: 0;
+  font-family: "Poppins", sans-serif;
 }
 
+/* Dark Overlay */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  z-index: 0;
+}
+
+img {
+  width: 100%;
+  justify-self: center;
+  height: auto;
+  /* position: absolute; */
+  /* margin-top: 0; */
+  z-index: -1; /* behind overlay */
+}
+
+/* Content Container */
 .container {
-  max-width: 500px;
-  margin: 60px auto;
-  background-color: #ffffff;
+  position: relative;
+  z-index: 1; /* above overlay */
+  max-width: 600px;
+  margin: 100px auto;
   padding: 30px;
+  background-color: rgba(255, 255, 255, 0.1); /* slight white transparency */
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
   text-align: center;
-  color: #333;
-  margin-bottom: 25px;
 }
 
-label {
-  display: block;
-  margin-top: 15px;
-  margin-bottom: 5px;
-  color: #444;
-  font-weight: bold;
+/* Headings */
+h1 {
+  font-weight: 600;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #fff;
 }
 
-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
+/* Paragraph */
+p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #ddd;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  margin: 0 10px;
+  background-color: #1ed760;
+  color: #000;
+  font-weight: 600;
   border-radius: 8px;
-  font-size: 1rem;
-}
-
-button {
-  width: 100%;
-  margin-top: 25px;
-  padding: 12px;
-  background-color: #007bff;
-  color: white;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  text-decoration: none;
   transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #0056b3;
+.btn:hover {
+  background-color: #13a14a;
+}
+
+/* Content Container */
+.container {
+  position: relative;
+  z-index: 1; /* above overlay */
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.1); /* slight white transparency */
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Headings */
+h1 {
+  font-weight: 600;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* Paragraph */
+p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #ddd;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  margin: 0 10px;
+  background-color: #1ed760;
+  color: #000;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #13a14a;
 }
