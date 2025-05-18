@@ -52,7 +52,7 @@ app.use(passUserToView)
 app.get('/', (req, res) => {
   // req.session.destroy();
   if (req.session.user) {
-    res.redirect(`/users/${req.session.user._id}/user`)
+    res.redirect(`/user/${req.session.user._id}/user`)
   } else {
     res.render('index.ejs')
   }
@@ -61,6 +61,8 @@ app.get('/', (req, res) => {
 app.use('/user', userController)
 app.use('/Ads', adsController)
 app.use(isSignedIn)
+
+
 
 
 app.listen(PORT, () => {

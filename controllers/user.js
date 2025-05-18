@@ -3,22 +3,6 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 const User = require('../models/users')
 
-// ROOT ROUTER
-router.get('/', async (req, res) => {
-  res.send('user root route')});
-//   try {
-//     const currentUser = await User.findById(req.session.user._id); // LOOKING UP THE CURRENT USER
-//     // console.log(currentUser.applications);
-//     res.render('user/index.ejs', {
-//         currentUser: currentUser,
-//     }); // RENDERING THE PAGE WITH HIS DETAILS
-
-// } catch (error) {
-//     console.log(error);
-//     res.redirect('/');
-// }
-// });
-
 // SIGN IN PAGE CALL
 router.get('/signIn', (req, res) => {
   res.render('user/signIn.ejs')
@@ -93,10 +77,9 @@ router.get('/signOut', (req, res) => {
 })
 
 
-router.get('users/:userId/user', async (req, res) => {
-  res.send('this is the get userId/user page');
+router.get('/:userId/user', async (req, res) => {
+  res.render('user/index.ejs');  
 })
 
 
-
-module.exports = router
+module.exports = router;
