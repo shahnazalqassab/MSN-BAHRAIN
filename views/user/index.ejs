@@ -2,12 +2,25 @@
 <%- include('../partials/_navbar.ejs') %>
 
 <body>
-    <h1> THE DASHBOARD OF THE USER </h1>
+    <h1> DASHBOARD </h1>
     
 
-    <a href="/user/<%= user._id %>/Ads">
-        <p>Your Ads</p>
-    </a>
 
+
+    <div class = "main-container">
+        <div class = "profile-side">
+            <h4>Welcome <%= user.username %></h4>
+            <p>Contact No. <%= user.contactNo %> </p>
+            <p>Email:  <%= user.email %> </p>
+
+            <a href="/user/<%= user._id %>/edit">Edit Profile</a>
+            <a href="/user/<%= user._id %>/edit">Change Password</a>
+        </div>
+        <div class = "Ads-side">
+            <a href="/Ads/<%= user._id %>/Ads">
+                <h4>Your Ads</h4>
+            </a>
+        </div>
+    </div>
 </body>
 <%- include('../partials/_footer') %>

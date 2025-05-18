@@ -71,17 +71,47 @@ router.post('/signIn', async (req, res) => {
 
 
 
-
 // SIGN OUT ROUTE
 router.get('/signOut', (req, res) => {
   req.session.destroy()
   res.redirect('/')
 })
 
-// /:userId/user
+
+// /:userId/user dashboard
 router.get('/:userId/user', async (req, res) => {
-  res.render('user/index.ejs');  
+  const currentUser = await User.findById(req.session.user);
+  console.log(currentUser);
+  res.render('user/index.ejs', {user: currentUser});  
 })
 
+// /:userId/edit (getting the edit page)
+router.get('/:userId/edit', async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id);
+    res.render('user/edit.ejs', {
+      user: currentUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+});
+
+router.put('/:userId/user', async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id);
+    
+    currentUser.contactNo = req.body.contactNo;
+    currentUser.email = req.body.email;
+
+    await currentUser.save();
+
+    res.redirect(`/user/${currentUser._id}/user`);
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+})
 
 module.exports = router;
