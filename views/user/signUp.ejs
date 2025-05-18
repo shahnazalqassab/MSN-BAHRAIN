@@ -2,27 +2,30 @@
 <%- include('../partials/_navbar.ejs') %>
 
 <body>
-  <div class="container">
-    <h1>Sign Up</h1>
-    <form action="/user/signUp" method="POST">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required>
-      <br>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
-<br>
-      <label for="confirmPassword">Confirm Password:</label>
-      <input type="password" id="confirmPassword" name="confirmPassword" required>
-<br>
-      <label for="contactNo">Contact No.:</label>
-      <input type="number" id="contactNo" name="contactNo" required>
-<br>
-      <label for="email">Email:</label>
-      <input type="text" id="email" name="email" required>
-<br>
-      <button type="submit">Sign Up</button>
+  <div class="overlay">
+    <div class="container">
+      <h1>Sign Up</h1>
+      <div class="box">
+        <form action="/user/signUp" method="POST">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
 
-    </form>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+
+          <label for="confirmPassword">Confirm Password:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+          <label for="contactNo">Contact No.:</label>
+          <input type="number" id="contactNo" name="contactNo" required>
+
+          <label for="email">Email:</label>
+          <input type="text" id="email" name="email" required>
+
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+    </div>
   </div>
 </body>
 </html>
