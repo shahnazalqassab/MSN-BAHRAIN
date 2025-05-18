@@ -1,14 +1,20 @@
+/* Background styling */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f9fc;
   margin: 0;
   padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-image: url("/images/picture1.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Optional: makes background stay while scrolling */
 }
+
 
 .container {
   max-width: 500px;
   margin: 60px auto;
-  background-color: #ffffff;
+  background-color: #817b0d;
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -40,7 +46,7 @@ button {
   width: 100%;
   margin-top: 25px;
   padding: 12px;
-  background-color: #007bff;
+  background-color: rgb(255, 234, 0);
   color: white;
   font-size: 1rem;
   border: none;
@@ -51,4 +57,32 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+.MyImage {
+  display: block;
+  margin: 500px auto;
+  max-width: 500%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+h1 {
+  color: rgb(255, 145, 0);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.box {
+  color: #fff;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 20%;
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.4); /* darkens background */
+  min-height: 100vh;
+  width: 100%;
 }
