@@ -76,7 +76,7 @@ router.get('/signOut', (req, res) => {
   res.redirect('/')
 })
 
-
+// /:userId/user
 router.get('/:userId/user', async (req, res) => {
   res.render('user/index.ejs');  
 })

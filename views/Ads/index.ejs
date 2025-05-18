@@ -6,7 +6,7 @@
 <h1>Your Ads</h1>
     <ul>
         <% Ads.forEach(app => { %>
-            <a href="/users/<%= user._id %>/Ads/<%=app.id %> ">
+            <a href="/user/<%= user._id %>/Ads/<%=app.id %> ">
                 <li><%= app.title %></li>
                 <li><%= app.price %></li>
                 <li><%= app.description %></li>

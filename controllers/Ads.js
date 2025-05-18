@@ -33,5 +33,18 @@ router.post('/Ads', async (req, res) => {
   res.redirect('/Ads/new')
 })
 
+router.get('/Ads', async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id); // LOOKING UP THE CURRENT USER
+    // console.log(currentUser.applications);
+    res.render('user/index.ejs', {
+        applications: currentUser.applications,
+    }); // RENDERING THE PAGE WITH HIS DETAILS
+
+} catch (error) {
+    console.log(error);
+    res.redirect('/');
+}
+});
 
 module.exports = router
