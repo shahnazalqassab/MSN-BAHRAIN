@@ -1,6 +1,6 @@
 <body>
   <h1>Add Ads</h1>
-  <form action="/user/<%=user._id %>/Ads" method="POST">
+  <form action="/ads/<%= user._id %>/Ads" method="POST">
     <label for="title">title</label>
     <input type="text" name="title" id="title">
     <br>

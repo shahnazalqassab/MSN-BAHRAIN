@@ -5,12 +5,12 @@
 
 <h1>Your Ads</h1>
     <ul>
-        <% Ads.forEach(app => { %>
-            <a href="/user/<%= user._id %>/Ads/<%=app.id %> ">
-                <li><%= app.title %></li>
-                <li><%= app.price %></li>
-                <li><%= app.description %></li>
-                <li><%= app.category %></li>
+        <% Ads.forEach(ad => { %>
+            <a href="/user/<%= user._id %>/Ads/<%=ad.id %> ">
+                <li><%= ad.title %></li>
+                <li><%= ad.price %></li>
+                <li><%= ad.description %></li>
+                <li><%= ad.category %></li>
                 </a>
         <% }) %>
         </ul>
