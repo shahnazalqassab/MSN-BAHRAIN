@@ -8,10 +8,92 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet"/>
   </head>
-  
+
+</html>
+<style>
+
+  .ads-toggle-btn {
+    display: block;
+    margin: 30px auto 0 auto;
+    padding: 10px 28px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .ads-toggle-btn:hover {
+    background: #0056b3;
+  }
+  .ads-container {
+    display: none;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px auto 40px auto;
+    max-width: 1200px;
+    padding: 0 20px;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+  .ad-box {
+    flex: 1 1 180px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(27, 224, 13, 0.1);
+    padding: 20px 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #007bff;
+    border: 2px solid #e0eafc;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 10px;
+  }
+  .ad-box:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(27, 224, 13, 0.15);
+    background: #e0eafc;
+    color: #28a745;
+    border-color: #28a745;
+  }
+  @media (max-width: 768px) {
+    .ad-box {
+      flex: 1 1 100%;
+    }
+  }
+</style>
+
+<button class="ads-toggle-btn" onclick="document.querySelector('.ads-container').style.display = document.querySelector('.ads-container').style.display === 'flex' ? 'none' : 'flex';">
+  Show Categories
+</button>
+<div class="ads-container">
+
+  <div class="ad-box">Phone</div>
+  <div class="ad-box">Car's</div>
+  <div class="ad-box">Book</div>
+  <div class="ad-box">Laptop</div>
+</div>
+
 <!-- <div class="ads-container">
+
   <div class="ad-box">phone</div>
   <div class="ad-box">car's</div>
   <div class="ad-box">book</div>
   <div class="ad-box">laptop</div>
-</div>   -->
+
+</div>  
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSN</title>
+  <link rel="stylesheet" href="/public/stylesheets/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+
+
+
+</div>  
