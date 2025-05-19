@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const AdsSchema = new mongoose.Schema(
   {
     // properties of Ads
+    img: { type: String },
     title: { type: String, required: true },
     price: { type: Number, required: true },
     description: { type: String, required: true },
