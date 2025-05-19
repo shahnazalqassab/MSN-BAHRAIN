@@ -1,17 +1,16 @@
 <%- include('../partials/_head.ejs') %>
 <%- include('../partials/_navbar.ejs') %>
 <body>
-    <div class="container">
-        <h1>Sign In</h1>
-        <form action="/user/signIn" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <br>
-            <button type="submit">Sign In</button>
-        </form>
+    <div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
+        <div class="signin-box" style="background: #fff; padding: 2rem 2.5rem; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); min-width: 320px;">
+            <h1 style="text-align: center; margin-bottom: 1.5rem;">Sign In</h1>
+            <form action="/user/signIn" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required style="width: 100%; margin-bottom: 1.5rem; padding: 0.5rem;">
+                <button type="submit" style="width: 100%; padding: 0.7rem; background: #007bff; color: #fff; border: none; border-radius: 5px;">Sign In</button>
+            </form>
+        </div>
     </div>
 </body>
-</html>

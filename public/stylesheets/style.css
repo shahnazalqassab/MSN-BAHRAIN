@@ -37,7 +37,7 @@ img {
   max-width: 600px;
   margin: 100px auto;
   padding: 30px;
-  background-color: rgba(255, 255, 255, 0.1); /* slight white transparency */
+  background-color: rgba(44, 221, 13, 0.823); /* slight white transparency */
   border-radius: 12px;
   text-align: center;
 }
@@ -63,7 +63,7 @@ p {
   padding: 12px 25px;
   margin: 0 10px;
   background-color: #1ed760;
-  color: #000;
+  color: #900505;
   font-weight: 600;
   border-radius: 8px;
   text-decoration: none;
@@ -81,7 +81,7 @@ p {
   max-width: 600px;
   margin: 100px auto;
   padding: 30px;
-  background-color: rgba(255, 255, 255, 0.1); /* slight white transparency */
+  background-color: rgba(234, 173, 5, 0.689); /* slight white transparency */
   border-radius: 12px;
   text-align: center;
 }

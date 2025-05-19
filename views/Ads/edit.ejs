@@ -1,0 +1,32 @@
+<%- include('../partials/_head.ejs') %>
+<%- include('../partials/_navbar.ejs') %>
+
+<body>
+  <div class="overlay" style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+    <div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
+      <div class="edit-box" style="background: #fff; padding: 2rem 2.5rem; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); min-width: 340px;">
+        <h1 style="text-align: center; margin-bottom: 1.5rem;">Edit Ad</h1>
+        <form action="/Ads/<%= ad._id %>?_method=PUT" method="POST">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" value="<%= ad.title %>" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;">
+
+          <label for="price">Price:</label>
+          <input type="number" id="price" name="price" value="<%= ad.price %>" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;">
+
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;"><%= ad.description %></textarea>
+
+          <label for="category">Category:</label>
+          <select id="category" name="category" required style="width: 100%; margin-bottom: 1.5rem; padding: 0.5rem;">
+            <option value="books" <%= ad.category === 'books' ? 'selected' : '' %>>Books</option>
+            <option value="phones" <%= ad.category === 'phones' ? 'selected' : '' %>>Phones</option>
+            <option value="cars" <%= ad.category === 'cars' ? 'selected' : '' %>>Cars</option>
+            <option value="spare parts" <%= ad.category === 'spare parts' ? 'selected' : '' %>>Spare Parts</option>
+          </select>
+
+          <button type="submit" style="width: 100%; padding: 0.7rem; background: #007bff; color: #fff; border: none; border-radius: 5px;">Update Ad</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
