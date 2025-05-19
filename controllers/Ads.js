@@ -21,7 +21,18 @@ router.get('/:userId/new', async (req, res) => {
 //:get:Create
 router.post('/:userId/Ads', async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
-  currentUser.Ads.push(req.body)
+  const { title, price, description, category } = req.body
+
+  const imagePath = req.file ? req.file.path : null
+
+  const newAd = {
+    title,
+    price,
+    description,
+    category,
+    img: imagePath // Store file path in the schema
+  }
+  currentUser.Ads.push(newAd)
   await currentUser.save()
   res.redirect(`/Ads/${currentUser._id}/Ads`)
 })
@@ -36,51 +47,37 @@ router.get('/:userId/Ads', async (req, res) => {
 //get:show
 router.get('/:userId/Ads/:AdsId', async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
-  const Ads = currentUser.Ads.id(req.params.AdsId)
-  res.render('Ads/show.ejs', { ad: Ads })
+  const ads = currentUser.Ads.id(req.params.AdsId)
+  res.render('Ads/show.ejs', { ad: ads })
 })
 
-
-
-// ...existing code...
-
-
-router.get('/:adId/edit', async (req, res) => {
-  const user = await User.findById(req.session.user._id);
-  const ad = user.Ads.id(req.params.adId);
-  res.render('Ads/edit.ejs', { user, ad });
-});
+//get:edit
+router.get('/:userId/Ads/:adId/edit', async (req, res) => {
+  const currentUser = await User.findById(req.session.user._id)
+  const Ad = currentUser.Ads
+  res.render('Ads/edit.ejs', { currentUser, Ad })
+})
 
 // Update Ad
 router.put('/:adId', async (req, res) => {
-  const user = await User.findById(req.session.user._id);
-  const ad = user.Ads.id(req.params.adId);
-  ad.title = req.body.title;
-  ad.price = req.body.price;
-  ad.description = req.body.description;
-  ad.category = req.body.category;
-  await user.save();
-  res.redirect('/Ads');
-});
+  const currentUser = await User.findById(req.session.user._id)
+  const ad = currentUser.Ads.id(req.params.AdsId)
+  ad.title = req.body.title
+  ad.price = req.body.price
+  ad.description = req.body.description
+  ad.category = req.body.category
+  await user.save()
+  res.redirect(`/Ads/${currentUser._id}/Ads`)
+})
 
 // Delete Ad
 router.delete('/:adId', async (req, res) => {
-  const user = await User.findById(req.session.user._id);
-  user.Ads.id(req.params.adId).remove();
-  await user.save();
-  res.redirect('/Ads');
-});
+  const user = await User.findById(req.session.user._id)
+  user.Ads.id(req.params.adId).remove()
+  await user.save()
+  res.redirect('/Ads')
+})
 
 // // ...existing code...
 
-
-
-
-
-
-
-
-
-
 module.exports = router
-
