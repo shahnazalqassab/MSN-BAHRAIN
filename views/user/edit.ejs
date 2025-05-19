@@ -6,6 +6,7 @@
     
     <% if(checkVar === 1) { %>
     <h3>Change Password</h3>
+    <br><br>
         <form action="/user/<%= user._id %>/user?_method=PUT" method="POST">
             <label for="username">Username:</label>
                 <input type="text" id="username" name="username" value="<%= user.username %>" disabled>
@@ -18,12 +19,13 @@
             <br>
             <label for="confirmPassword">Confirm Password:</label>
                 <input type="password" id="confirmPassword" name="confirmPassword">
-            <br>
+            <hr>
             <input type="submit" value="Change Password" name="submit">
             <input type="submit" value="Cancel" name="submit">
     </form>
-    <% } else { %>
+    <% } else if(checkVar === 0) { %>
     <h3>Edit Profile</h3>
+    
         <form action="/user/<%= user._id %>/user?_method=PUT" method="POST">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" value="<%= user.username %>" disabled>
@@ -33,10 +35,20 @@
             <br>
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" value="<%= user.email %>">
-            <br>
+            <hr>
             <input type="submit" value="Update Profile" name="submit">
             <input type="submit" value="Cancel" name="submit">
 
+        </form>
+    <% } else if(checkVar === 2) { %>
+    <h3>Updating profile picture</h3>
+    <hr>
+        <form>
+            <label for='files'>Select picture</label>
+            <input id='files' type="file" multiple>
+            <hr>
+            <input type="submit" value="Update Picture" name="submit">
+            <input type="submit" value="Cancel" name="submit">
         </form>
     <% } %>
 </div>
