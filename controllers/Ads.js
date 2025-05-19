@@ -3,15 +3,6 @@ const User = require('../models/users.js')
 
 const router = express.Router()
 
-//:get:index
-// router.get('/', async (req, res) => {
-//   const currentUser = await User.findById(req.session.user._id) // LOOKING UP THE CURRENT USER
-//   // console.log(currentUser.applications);
-//   res.render('Ads/index.ejs', {
-//     Ads: currentUser.user._id
-//   }) // RENDERING THE PAGE WITH HIS DETAILS
-// })
-
 //:get:new
 router.get('/:userId/new', async (req, res) => {
   const currentUser = await User.findById(req.params.userId)
@@ -54,30 +45,25 @@ router.get('/:userId/Ads/:AdsId', async (req, res) => {
 //get:edit
 router.get('/:userId/Ads/:adId/edit', async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
-  const Ad = currentUser.Ads
+  const Ad = currentUser.Ads.id(req.params.adId)
   res.render('Ads/edit.ejs', { currentUser, Ad })
 })
 
 // Update Ad
-router.put('/:adId', async (req, res) => {
+router.put('/:userId/Ads/:adId', async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
-  const ad = currentUser.Ads.id(req.params.AdsId)
-  ad.title = req.body.title
-  ad.price = req.body.price
-  ad.description = req.body.description
-  ad.category = req.body.category
-  await user.save()
-  res.redirect(`/Ads/${currentUser._id}/Ads`)
+  const ad = currentUser.Ads.id(req.params.adId)
+  ad.set(req.body)
+  await currentUser.save()
+  res.redirect(`/Ads/${currentUser._id}/Ads/${req.params.adId}`)
 })
 
 // Delete Ad
-router.delete('/:adId', async (req, res) => {
-  const user = await User.findById(req.session.user._id)
-  user.Ads.id(req.params.adId).remove()
-  await user.save()
-  res.redirect('/Ads')
+router.delete('/:userId/Ads/:adId', async (req, res) => {
+  const currentUser = await User.findById(req.session.user._id)
+  currentUser.Ads.id(req.params.adId).remove()
+  await currentUser.save()
+  res.redirect(`/Ads/${currentUser._id}/Ads`)
 })
-
-// // ...existing code...
 
 module.exports = router

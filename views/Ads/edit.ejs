@@ -1,27 +1,41 @@
 <%- include('../partials/_head.ejs') %>
 <%- include('../partials/_navbar.ejs') %>
+
 <body>
-  <div style="min-height:100vh; display:flex; align-items:center; justify-content:center;">
-    <div style="background: #fff; padding: 2rem 2.5rem; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); min-width: 340px;">
-      <h1 style="text-align: center; margin-bottom: 1.5rem;">Edit Ad</h1>
-      <form action="/Ads/<%= ad._id %>?_method=PUT" method="POST">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" value="<%= ad.title %>" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;">
+  <div class="container">
+  <div class="signin-box" >
+  <h1 class="h1-SignIn">Add Ads</h1>
+  <form action="/Ads/<%= user._id %>/Ads/<%=Ad._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
 
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" value="<%= ad.price %>" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;">
+  <label for="img">Upload Image:</label>
+  <input class="input" type="file" name="img" id="img" accept="image/*" >
+  <br>
 
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;"><%= ad.description %></textarea>
+  <label for="title">title</label>
+  <input class="input"type="text" name="title" id="title" value="<%= Ad.title %>">
+  <br>
 
-        <label for="category">Category:</label>
-        <select id="category" name="category" required style="width: 100%; margin-bottom: 1.5rem; padding: 0.5rem;">
-          <option value="items" <%= ad.category === 'items' ? 'selected' : '' %>>Items (Cars, Phones, Books, Laptops)</option>
-        </select>
+  <label for="price">price</label>
+  <input class="input" type="text" name="price" id="price" value="<%= Ad.price %>">
+  <br>
 
-        <button type="submit" style="width: 100%; padding: 0.7rem; background: #007bff; color: #fff; border: none; border-radius: 5px;">Update Ad</button>
-      </form>
-    </div>
+    <label  for="description">description</label>
+    <textarea class="input" type="text" name="description" id="description">value="<%= Ad.description %>"</textarea>
+    <br>
+
+
+    <label for="category">category</label>
+    <select class= "input" name="category" id="category">
+      <option value="phones" <%= Ad.category === "phones" ? "selected":"" %>>Phone</option>
+      <option value="cars" <%= Ad.category === "cars" ? "selected":"" %>>Car</option>
+      <option value="books" <%= Ad.category === "books" ? "selected":"" %>>Book</option>
+      <option value="spare parts" <%= Ad.category === "spare parts" ? "selected":"" %>>spare parts</option>
+    </select>
+    <br>
+
+    <button class="input-submit" type="submit">submit</button>
+  </form>
+  </div>
   </div>
 </body>
 

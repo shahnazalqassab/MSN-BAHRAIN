@@ -1,37 +1,42 @@
+<%- include('../partials/_head.ejs') %>
+<%- include('../partials/_navbar.ejs') %>
+
 <body>
-  <h1>Add Ads</h1>
-  <form action="/ads/<%= user._id %>/Ads" method="POST" enctype="multipart/form-data">
+ 
+  <div class="container">
+        <div class="signin-box" >
+           <h1 class="h1-SignIn">Add Ads</h1>
+          <form action="/ads/<%= user._id %>/Ads" method="POST" enctype="multipart/form-data">
     <label for="img">Upload Image:</label>
-  <input type="file" name="img" id="img" accept="image/*" required>
+  <input class="input" type="file" name="img" id="img" accept="image/*" required>
     <br>
 
     <label for="title">title</label>
-    <input type="text" name="title" id="title">
+    <input class="input"type="text" name="title" id="title">
     <br>
 
     <label for="price">price</label>
-    <input type="text" name="price" id="price">
+    <input class="input" type="text" name="price" id="price">
     <br>
 
-    <label for="description">description</label>
-    <textarea type="text" name="description" id="description"></textarea>
+    <label  for="description">description</label>
+    <textarea class="input" type="text" name="description" id="description"></textarea>
     <br>
+
 
     <label for="category">category</label>
-    <select name="category" id="category">
-      <option value="items">Items (Phone, Car's, Book, Laptop)</option>
+    <select class= "input" name="category" id="category">
+      <option value="books">books</option>
+      <option value="phones">phones</option>
+      <option value="cars">cars</option>
+      <option value="spare parts">spare parts</option>
     </select>
     <br>
 
-    <label for="type">type</label>
-    <select name="type" id="type">
-      <option value="phone">Phone</option>
-      <option value="car">Car's</option>
-      <option value="book">Book</option>
-      <option value="laptop">Laptop</option>
-    </select>
-    <br>
-
-    <button type="submit">submit</button>
+    <button class="input-submit" type="submit">submit</button>
   </form>
+  </div>
+  </div>
 </body>
+
+<%- include('../partials/_footer.ejs') %>

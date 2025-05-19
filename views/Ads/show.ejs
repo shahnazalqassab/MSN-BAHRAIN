@@ -1,10 +1,20 @@
+<%- include('../partials/_head.ejs') %>
+<%- include('../partials/_navbar.ejs') %>
 <body>
+    <div class="container">
+  <div class="signin-box" >
   <h1> <%= ad.title %> </h1>
   <li>Price: BD<%= ad.price %></li>
   <li>Description: <%= ad.description %></li>
   <li>Category: <%= ad.category %></li>
 
 
-   <a href="/Ads/<%= user._id %>/Ads/<%= ad._id %>/edit"> Edit </a>
+   <button class="input-submit" type="submit"><a href="/Ads/<%= user._id %>/Ads/<%= ad._id %>/edit"> Edit </a></button>
 
+   <form action="/Ads/<%= user._id %>/Ads/<%= ad._id %>?_method=DELETE" method="POST">
+     <button class="input-submit" type="submit">Delete </button>
+   </form>
+  </div>
+  </div>
 </body>
+<%- include('../partials/_footer.ejs') %>
