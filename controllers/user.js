@@ -3,6 +3,7 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 const User = require('../models/users')
 
+
 // SIGN UP PAGE CALL
 router.get('/signUp', (req, res) => {
   res.render('user/signUp.ejs')
@@ -80,7 +81,7 @@ router.post('/signIn', async (req, res) => {
 
 // SIGN OUT ROUTE
 router.get('/signOut', (req, res) => {
-  req.session.destroy()
+  req.session.destroy();
   res.redirect('/')
 })
 
@@ -111,7 +112,7 @@ const checkVar = 0;
 // PUT :USERID/USER (SAVING PROFILE UPDATES ROUTE)
 router.put('/:userId/user', async (req, res) => {
 const submit = req.body.submit; // Learned this condition from stack overFlow
-console.log(submit)
+
 const currentUser = await User.findById(req.session.user._id);
 
 if(submit === "Update Profile") { // updating profile details
@@ -128,19 +129,22 @@ if(submit === "Update Profile") { // updating profile details
     }
 } else if(submit === "Change Password") { // updating password
     try {
-      const databasePassword = currentUser.password;
-      console.log(req.body);
-      if(databasePassword === req.body.currentPassword){
+      const validPassword = bcrypt.compareSync(req.body.currentPassword, currentUser.password);
+
+      if(validPassword){
+        console.log(validPassword);
         if(req.body.newPassword === req.body.confirmPassword) {
-              currentUser.password = req.body.newPassword;
+              currentUser.password = bcrypt.hashSync(req.body.newPassword, 10);
 
               await currentUser.save();
               
-              res.redirect(`/signOut`);
-        } else
-        { res.redirect('/'); }
-      } else
-        { res.redirect('/')}
+              res.redirect(`/user/signOut`);
+        } else {
+         res.redirect('/');
+         }
+      } else {
+        res.redirect('/')
+      }
     } catch (error) {
       console.log(error);
       res.redirect('/');
