@@ -40,47 +40,33 @@ router.get('/:userId/Ads/:AdsId', async (req, res) => {
   res.render('Ads/show.ejs', { ad: Ads })
 })
 
-
-
-// ...existing code...
-
-
-router.get('/:adId/edit', async (req, res) => {
-  const user = await User.findById(req.session.user._id);
-  const ad = user.Ads.id(req.params.adId);
-  res.render('Ads/edit.ejs', { user, ad });
-});
+//get:edit
+router.get('/:userId/Ads/:adId/edit', async (req, res) => {
+  const currentUser = await User.findById(req.session.user._id)
+  const Ads = currentUser.Ads
+  res.render('Ads/edit.ejs', { user, Ads })
+})
 
 // Update Ad
 router.put('/:adId', async (req, res) => {
-  const user = await User.findById(req.session.user._id);
-  const ad = user.Ads.id(req.params.adId);
-  ad.title = req.body.title;
-  ad.price = req.body.price;
-  ad.description = req.body.description;
-  ad.category = req.body.category;
-  await user.save();
-  res.redirect('/Ads');
-});
+  const currentUser = await User.findById(req.session.user._id)
+  const ad = currentUser.Ads.id(req.params.AdsId)
+  ad.title = req.body.title
+  ad.price = req.body.price
+  ad.description = req.body.description
+  ad.category = req.body.category
+  await user.save()
+  res.redirect(`/Ads/${currentUser._id}/Ads`)
+})
 
 // Delete Ad
 router.delete('/:adId', async (req, res) => {
-  const user = await User.findById(req.session.user._id);
-  user.Ads.id(req.params.adId).remove();
-  await user.save();
-  res.redirect('/Ads');
-});
+  const user = await User.findById(req.session.user._id)
+  user.Ads.id(req.params.adId).remove()
+  await user.save()
+  res.redirect('/Ads')
+})
 
 // // ...existing code...
 
-
-
-
-
-
-
-
-
-
 module.exports = router
-
