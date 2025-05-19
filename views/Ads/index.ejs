@@ -1,19 +1,14 @@
 <%- include('../partials/_head.ejs')%>
 <%- include('../partials/_navbar.ejs') %> 
 <body>
-    <a href="/Ads/new">add an new Ad</a>
+    <a href="/Ads/<%= user._id %>/new"> add an new Ad</a>
 
 <h1>Your Ads</h1>
     <ul>
-        <% Ads.forEach(app => { %>
-            <a href="/users/<%= user._id %>/Ads/<%=app.id %> ">
-                <li><%= app.title %></li>
-                <li><%= app.price %></li>
-                <li><%= app.description %></li>
-                <li><%= app.category %></li>
-                </a>
+        <% Ads.forEach(Ads => { %>
+            <a href="/Ads/<%= user._id %>/Ads/<%=Ads._id%>">
+            <h4><li><%= Ads.title %></li></h4></a>
         <% }) %>
         </ul>
-    
 </body>
 <%- include('../partials/_footer.ejs') %>
