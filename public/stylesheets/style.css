@@ -1,38 +1,67 @@
+.navbar {
+  background-color: #004aad;
+  color: white;
+  padding: 1rem 0.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  font-size: 1.1rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #8ec5e9;
+}
+
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #8ec5e9;
 }
-body {
+.body {
   font-family: 'Roboto', Arial, sans-serif;
   min-height: 100vh;
-  background: url('/images/picture1.gif') no-repeat center center fixed;
+  /* background: url('/images/picture1.gif') no-repeat center center fixed; */
   background-size: cover;
-}
-.home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  background-color: #8ec5e9;
+  color: #8ec5e9;
 }
 
-.h1-Home {
+.Welcome {
+  text-align: center;
+  width: 100%;
+  margin-top: 12vh;
   margin-bottom: 1.5rem;
   font-family: 'Montserrat', Arial, sans-serif;
 }
 
-.div-Home {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
+.Home {
+  min-height: 90vh;
+  background-color: #8ec5e9;
 }
 
-.a-Home {
+.highlight {
+  color: #004aad;
+  font-size: 5rem;
+}
+
+.signInUp {
   padding: 0.7rem 2rem;
-  background: #007bff;
+  background: #004aad;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -40,96 +69,9 @@ body {
   font-size: 1.1rem;
 }
 
-.a-Home2 {
-  padding: 0.7rem 2rem;
-  background: #28a745;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 1.1rem;
-}
-
-.ads-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin: 40px auto;
-  max-width: 1200px;
-  padding: 0 20px;
-}
-
-.ad-box {
-  flex: 1 1 calc(25% - 20px);
-  background-color: #515151;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px green(27, 224, 13, 0.1);
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.2s ease;
-}
-
-.ad-box:hover {
-  transform: translateY(-5px);
-}
-
-@media (max-width: 768px) {
-  .ad-box {
-    flex: 1 1 100%;
-  }
-}
-/* Add inside <head> in _head.ejs  */
-
-body {
-  background: #f8f9fa;
-}
-.home-container h1 {
-  margin-bottom: 1.5rem;
-}
-.home-container a:hover {
-  opacity: 0.85;
-}
-
-.navbar-brand {
-  font-size: 1.5rem;
-  color: #fff;
-  text-decoration: none;
-  background: #007bff;
-  padding: 0.5rem 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgb(100, 102, 93);
-  letter-spacing: 1px;
-  transition: 0.2s;
-  display: inline-block;
-}
-
-.footer {
-  width: 100%;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.95);
-  color: #333;
-  text-align: center;
-  padding: 0.7rem 0;
-  font-size: 1rem;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.07);
-  letter-spacing: 1px;
-  z-index: 100;
-}
-
-body,
-html {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
-
-.overlay {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.h1-Home {
+  color: white;
+  font-size: 5rem;
 }
 
 .container {
@@ -139,46 +81,31 @@ html {
   min-height: 80vh;
 }
 
-.edit-box {
-  background: #fff;
+.signin-box {
+  background: #ffffff;
   padding: 2rem 2.5rem;
   border-radius: 10px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  min-width: 340px;
-  width: 100%;
-  max-width: 500px;
+  min-width: 320px;
 }
 
-.edit-box h1 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.edit-box form label {
-  display: block;
-  margin-bottom: 0.3rem;
-  font-weight: bold;
-}
-
-.edit-box form input,
-.edit-box form textarea,
-.edit-box form select {
+.input {
   width: 100%;
   margin-bottom: 1rem;
   padding: 0.5rem;
-  box-sizing: border-box;
 }
 
-.edit-box form button {
+.input-submit {
   width: 100%;
   padding: 0.7rem;
   background: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
 }
 
-.edit-box form button:hover {
-  background: #0056b3;
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
