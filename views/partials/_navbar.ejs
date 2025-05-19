@@ -1,13 +1,16 @@
-
-<nav>
-  <div>
-    <ul>
-      <% if (user) { %> 
-      <li><a href="/user/signOut">Sign Out</a></li>
-      <li><a href="/user/<%=user._id%>/user">Dashboard</a></li>
-      <% } else { %>
-      <li><a href="/user/signIn">Sign in</a></li>
-      <li><a href="/user/signUp">Sign Up</a></li>
-      <% } %>
-    </ul>
-  </div>
+<nav class="navbar">
+      <!-- Navigation -->
+      <div class="navbar-container">
+        <ul class="nav-links">
+          <% if (user) { %> 
+          <li><a href="/user/signOut">Sign Out</a></li>
+          <li><a href="/user/<%=user._id%>/user">Dashboard</a></li>
+          <% } else { %>
+          <li><a href="/user/signIn">Sign in</a></li>
+          <li><a href="/user/signUp">Sign Up</a></li>
+          <% } %>
+        </ul>
+      <!-- Ads container -->
+      <!-- ads content -->
+      </div>
+</nav>
