@@ -2,6 +2,8 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const dotenv = require('dotenv').config()
 const ejs = require('ejs')
+const multer = require('multer')
+
 
 const app = express()
 const PORT = process.env.PORT || 3000
