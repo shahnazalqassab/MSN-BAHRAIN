@@ -23,3 +23,13 @@
 
 </body>
 <%- include('../partials/_footer') %>
+
+<% user.Ads.forEach(function(ad) { %>
+  <div>
+    <h2><%= ad.title %></h2>
+    <a href="/Ads/<%= ad._id %>/edit">Edit</a>
+    <form action="/Ads/<%= ad._id %>?_method=DELETE" method="POST" style="display:inline;">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
+<% }) %>

@@ -2,30 +2,29 @@
 <%- include('../partials/_navbar.ejs') %>
 
 <body>
-  <div class="overlay">
-    <div class="container">
-      <h1>Sign Up</h1>
-      <div class="box">
+  <div class="overlay" style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+    <div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
+      <div class="signup-box" style="background: #fff; padding: 2rem 2.5rem; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); min-width: 340px;">
+        <h1 style="text-align: center; margin-bottom: 1.5rem;">Sign Up</h1>
         <form action="/user/signUp" method="POST">
           <label for="username">Username:</label>
-          <input type="text" id="username" name="username" required>
+          <input type="text" id="username" name="username" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;">
 
           <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required>
+          <input type="password" id="password" name="password" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;">
 
           <label for="confirmPassword">Confirm Password:</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" required>
+          <input type="password" id="confirmPassword" name="confirmPassword" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;">
 
           <label for="contactNo">Contact No.:</label>
-          <input type="number" id="contactNo" name="contactNo" required>
+          <input type="number" id="contactNo" name="contactNo" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;">
 
           <label for="email">Email:</label>
-          <input type="text" id="email" name="email" required>
+          <input type="text" id="email" name="email" required style="width: 100%; margin-bottom: 1.5rem; padding: 0.5rem;">
 
-          <button type="submit">Sign Up</button>
+          <button type="submit" style="width: 100%; padding: 0.7rem; background: #007bff; color: #fff; border: none; border-radius: 5px;">Sign Up</button>
         </form>
       </div>
     </div>
   </div>
 </body>
-</html>
