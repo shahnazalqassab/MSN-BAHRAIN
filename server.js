@@ -2,8 +2,6 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const dotenv = require('dotenv').config()
 const ejs = require('ejs')
-const multer = require('multer')
-
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -38,6 +36,7 @@ mongoose.connection.on('connected', () => {
 
 // Middleware
 app.use(express.urlencoded({ extended: false }))
+app.use('/public', express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(methodOverride('_method'))
@@ -53,6 +52,7 @@ app.use(
   })
 )
 app.use(passUserToView)
+
 
 // Routes
 app.get('/', (req, res) => {

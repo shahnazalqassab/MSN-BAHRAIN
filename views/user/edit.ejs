@@ -5,7 +5,7 @@
 <div class="container">
     
     <% if(checkVar === 1) { %>
-    <h3>Change Password</h3>
+    <h2>Change Password</h2>
     <br><br>
         <form action="/user/<%= user._id %>/user?_method=PUT" method="POST">
             <label for="username">Username:</label>
@@ -24,7 +24,7 @@
             <input type="submit" value="Cancel" name="submit">
     </form>
     <% } else if(checkVar === 0) { %>
-    <h3>Edit Profile</h3>
+    <h2>Edit Profile</h2>
     
         <form action="/user/<%= user._id %>/user?_method=PUT" method="POST">
             <label for="username">Username:</label>
@@ -41,11 +41,14 @@
 
         </form>
     <% } else if(checkVar === 2) { %>
-    <h3>Updating profile picture</h3>
-    <hr>
-        <form>
-            <label for='files'>Select picture</label>
-            <input id='files' type="file" multiple>
+        <img src=<% user.img %>>
+
+    <h2>Updating pro    file picture</h2>
+    <br>
+    <br>
+    <br>
+        <form action="/user/<%=user._id%>/changePic" method="POST" enctype="multipart/form-data">
+            <input type="file" name="img" accept="image/*" required/>
             <hr>
             <input type="submit" value="Update Picture" name="submit">
             <input type="submit" value="Cancel" name="submit">

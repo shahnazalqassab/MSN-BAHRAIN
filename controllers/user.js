@@ -2,6 +2,14 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 const User = require('../models/users')
+const multer = require('multer')
+
+// configuraton for the multer storage
+const storage = multer.diskStorage( (req, file, callBack) => {
+    callBack(null, 'public/uploads/'); // the folder to save
+  })
+
+const upload = multer({storage});
 
 
 // SIGN UP PAGE CALL
@@ -71,7 +79,7 @@ router.post('/signIn', async (req, res) => {
       username: userInDatabase.username, 
       _id: userInDatabase._id
     };
-    console.log("Request to sign in received!");
+
     req.session.save(() => {
     res.redirect("/");
     })
@@ -90,7 +98,7 @@ router.get('/signOut', (req, res) => {
 // GET /:USERID/USER DASHBOARD
 router.get('/:userId/user', async (req, res) => {
   const currentUser = await User.findById(req.session.user);
-  console.log(currentUser);
+
   res.render('user/index.ejs', {user: currentUser});  
 })
 
@@ -132,7 +140,7 @@ if(submit === "Update Profile") { // updating profile details
       const validPassword = bcrypt.compareSync(req.body.currentPassword, currentUser.password);
 
       if(validPassword){
-        console.log(validPassword);
+
         if(req.body.newPassword === req.body.confirmPassword) {
               currentUser.password = bcrypt.hashSync(req.body.newPassword, 10);
 
@@ -149,8 +157,6 @@ if(submit === "Update Profile") { // updating profile details
       console.log(error);
       res.redirect('/');
     }
-} else if(submit === "Update Picture") { 
-    const img = req.files
 } else {
       res.redirect('/');
 
@@ -172,46 +178,33 @@ try {
 }
 });
 
-// PUT /:USERID/USER (SAVING PASSWORD)
-// router.put('/:userId/user', async (req, res) => {
-//   const submit = req.body.submit;
-//   if(submit === "Change Password") {
-//     try {
-//       const currentUser = await User.findById(req.session.user._id);
-//       const databasePassword = currentUser.password;
-
-//       if(databasePassword === req.body.currentPassword){
-//         if(req.body.newPassword === req.body.confirmPassword) {
-//               currentUser.password = req.body.newPassword;
-//               await currentUser.save();
-//               res.redirect(`/signOut`);
-//         } else
-//         { res.redirect('/'); }
-//       } else
-//         { res.redirect('/')}
-//     } catch (error) {
-//       console.log(error);
-//       res.redirect('/');
-//     }
-//   } else {
-//   res.redirect('/'); // CANCEL CHANGING PASSWORD
-//   }
-// });
-
-
 router.get('/:userId/changePic', async (req, res) => {
   const checkVar = 2;
-  console.log('uploading a picture');
 
   try {
   const currentUser = await User.findById(req.session.user._id);
+  console.log(currentUser);
+
   res.render('user/edit.ejs', {
-    password: currentUser.password, checkVar,
+    currentUser, checkVar,
   });
 } catch (error) {
   console.log(error);
   res.redirect('/');
 }
 });
+
+
+// router.post('/:userId/changePic', async (req, res) => {
+// const currentUser = await User.findById(req.session._id);
+
+//   console.log(req.file);
+//   res.send('correct so far')
+// });
+
+router.post('/:userId/changePic', upload.single('profilePic'), (req, res) => {
+  console.log(req.file);
+  res.send('correct so far');
+})
 
 module.exports = router;
