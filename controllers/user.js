@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const User = require('../models/users')
 const multer = require('multer')
 
-// configuraton for the multer storage
+// // configuraton for the multer storage
 const storage = multer.diskStorage({
   destination: (req, file, callBack) => {
     callBack(null, 'public/uploads/') // the folder to save
@@ -12,8 +12,9 @@ const storage = multer.diskStorage({
   filename: (req, file, callBack) => {
     callBack(null, Date.now() + '-' + file.originalname)
   }
-})
+});
 
+// const upload = multer({destination: 'public/uploads/'});
 const upload = multer({ storage })
 
 // SIGN UP PAGE CALL
@@ -39,7 +40,7 @@ router.post('/signUp', async (req, res) => {
     password: req.body.password,
     contactNo: req.body.contactNo,
     email: req.body.email,
-    img: 'public/images/png-clipart-sticky-notes-sticky-notes-thumbnail.png'
+    profile: 'public/uploads/newUser.png'
   }
 
   const user = await User.create(newUser)
@@ -207,16 +208,21 @@ router.get('/:userId/changePic', async (req, res) => {
 //   res.send('correct so far')
 // });
 
-router.post(
-  '/:userId/changePic',
-  upload.single('profilePic'),
-  async (req, res) => {
-    const currentUser = await User.findById(req.session.user._id)
-    const picPath = req.file.filename
+router.post('/:userId/changePic', upload.single('profile'), async (req, res) => {
+  try{
+    const picPath = req.file.filename;
 
-    console.log(picPath)
-    res.send('correct so far')
+    const currentUser = await User.findByIdAndUpdate({profile: picPath}, {new: true});
+
+    console.log(picPath);
+    console.log(currentUser)
+
+  res.redirect(`/user/${currentUser._id}/user`);
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
   }
-)
+  console.log(req.file);
+})
 
 module.exports = router
