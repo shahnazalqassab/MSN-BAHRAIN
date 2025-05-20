@@ -2,21 +2,23 @@
 <%- include('../partials/_navbar.ejs') %>
 
 <body class="auth-bg">
-  <div class="auth-center-container">
+  <div class="profile-ads-flex-container">
     <div class="dashboard-box">
-      <h1 class="dashboard-title">Profile</h1>
+      <h1 class="dashboard-title"><i class="fa fa-user-circle"></i> Profile</h1>
       <div class="dashboard-profile">
         <img src="/uploads/<%= user.profile %>" alt="Profile Picture" class="dashboard-avatar">
         <h3 class="dashboard-welcome">Welcome, <span><%= user.username %></span></h3>
-        <a class="dashboard-link" href="/user/<%= user._id %>/changePic">Change Profile Picture</a>
+        <a class="dashboard-link" href="/user/<%= user._id %>/changePic">
+          <i class="fa fa-image"></i> Change Profile Picture
+        </a>
       </div>
       <div class="dashboard-info">
         <div class="dashboard-info-row">
-          <span class="dashboard-info-label">Contact No.:</span>
+          <span class="dashboard-info-label"><i class="fa fa-phone"></i> Contact No.:</span>
           <span class="dashboard-info-value"><%= user.contactNo %></span>
         </div>
         <div class="dashboard-info-row">
-          <span class="dashboard-info-label">Email:</span>
+          <span class="dashboard-info-label"><i class="fa fa-envelope"></i> Email:</span>
           <span class="dashboard-info-value"><%= user.email %></span>
         </div>
       </div>
@@ -27,10 +29,18 @@
         <a class="dashboard-link" href="/user/<%= user._id %>/changePassword">
           <i class="fa fa-key"></i> Change Password <span class="dashboard-note">(you'll have to re-log in)</span>
         </a>
-        <a class="dashboard-link" href="/Ads/<%= user._id %>/Ads">
-          <i class="fa fa-bullhorn"></i> Your Ads
-        </a>
       </div>
+    </div>
+    <div class="your-ads-box">
+      <img class="your-ads-img" src="/images/giphy-1.gif" alt="Your Ads">
+      <a class="your-ads-link" href="/Ads/<%= user._id %>/Ads">
+        <span style="font-size:1.3rem;font-weight:600;letter-spacing:1px;">
+          <i class="fa fa-bullhorn"></i> Your Ads
+        </span>
+        <span class="your-ads-desc" style="display:block;font-size:0.98rem;color:#555;margin-top:0.3rem;">
+          
+        </span>
+      </a>
     </div>
   </div>
 </body>
