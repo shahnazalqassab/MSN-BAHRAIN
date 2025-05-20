@@ -37,10 +37,15 @@
         <span style="font-size:1.3rem;font-weight:600;letter-spacing:1px;">
           <i class="fa fa-bullhorn"></i> Your Ads
         </span>
+        
         <span class="your-ads-desc" style="display:block;font-size:0.98rem;color:#555;margin-top:0.3rem;">
           
         </span>
       </a>
+      <h4>Your latest Ads:</h4>
+      <% if (user.Ads.length > 0) { %>
+      <h5><%= user.Ads[user.Ads.length-1].title %></h5>
+      <% } %>
     </div>
   </div>
 </body>

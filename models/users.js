@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
   contactNo: { type: Number, required: true },
   email: { type: String, required: true },
   profile: { type: String, required: true },
+  category: { type: String, enum: ['Admin', 'Seller', 'Buyer']},
   Ads: [AdsSchema]
 })
 

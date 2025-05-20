@@ -7,7 +7,7 @@ const multer = require('multer')
 // // configuraton for the multer storage
 const storage = multer.diskStorage({
   destination: (req, file, callBack) => {
-    callBack(null, 'public/Ads/') // the folder to save
+    callBack(null, 'public/uploads/') // the folder to save
   },
   filename: (req, file, callBack) => {
     callBack(null, Date.now() + '-' + file.originalname)
@@ -38,6 +38,7 @@ router.post('/signUp', async (req, res) => {
   const newUser = {
     username: req.body.username,
     password: req.body.password,
+    category: req.body.category,
     contactNo: req.body.contactNo,
     email: req.body.email,
     profile: 'uploads/newUser.png'
@@ -224,7 +225,7 @@ router.post('/:userId/changePic', upload.single('profile'), async (req, res) => 
     console.log(error);
     res.redirect('/');
   }
-  // console.log(req.file);
+  console.log(req.file);
 })
 
 module.exports = router
