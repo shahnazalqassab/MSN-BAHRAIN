@@ -40,7 +40,7 @@ router.post('/signUp', async (req, res) => {
     password: req.body.password,
     contactNo: req.body.contactNo,
     email: req.body.email,
-    profile: 'public/uploads/newUser.png'
+    profile: 'uploads/newUser.png'
   }
 
   const user = await User.create(newUser)
@@ -212,17 +212,17 @@ router.post('/:userId/changePic', upload.single('profile'), async (req, res) => 
   try{
     const picPath = req.file.filename;
 
-    const currentUser = await User.findByIdAndUpdate({profile: picPath}, {new: true});
+    const currentUser = await User.findById(req.session.user._id);
+    currentUser.profile = picPath
 
-    console.log(picPath);
-    console.log(currentUser)
+    await currentUser.save()
 
   res.redirect(`/user/${currentUser._id}/user`);
   } catch (error) {
     console.log(error);
     res.redirect('/');
   }
-  console.log(req.file);
+  // console.log(req.file);
 })
 
 module.exports = router

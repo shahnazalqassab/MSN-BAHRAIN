@@ -6,7 +6,7 @@
     
 
             <h4>Welcome <%= user.username %></h4>
-            <img src="/public/uploads/newUser.png" style="border-radius: 50%" width="100px" height="auto">
+            <img src="/uploads/<%= user.profile %>" style="border-radius: 50%" width="100px" height="auto">
             <br>
             <a href="/user/<%= user._id %>/changePic">Change Profile Picture</a>
             <p>Contact No. <%= user.contactNo %> </p>
