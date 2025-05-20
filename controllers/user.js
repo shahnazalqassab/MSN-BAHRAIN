@@ -97,6 +97,10 @@ router.get('/signOut', (req, res) => {
   res.redirect('/')
 })
 
+router.get('/aboutUs', (req, res) => {
+  res.render('aboutUs.ejs');
+});
+
 ////////////////////////////// AFTER SIGN IN ROUTES /////////////////////////
 
 // GET /:USERID/USER DASHBOARD

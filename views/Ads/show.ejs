@@ -4,16 +4,19 @@
     <div class="container">
   <div class="signin-box" >
   <h1> <%= ad.title %> </h1>
+  <img src="/Ads/<%= ad.img %>" width="100px" height="auto"/>
   <li>Price: BD<%= ad.price %></li>
   <li>Description: <%= ad.description %></li>
   <li>Category: <%= ad.category %></li>
 
 
-   <button class="input-submit" type="submit"><a href="/Ads/<%= user._id %>/Ads/<%= ad._id %>/edit"> Edit </a></button>
+  <button class="input-submit" type="submit"><a href="/Ads/<%= user._id %>/Ads/<%= ad._id %>/edit"> Edit </a></button>
 
-   <form action="/Ads/<%= user._id %>/Ads/<%= ad._id %>?_method=DELETE" method="POST">
-     <button class="input-submit" type="submit">Delete </button>
-   </form>
+  <form action="/Ads/<%= user._id %>/Ads/<%= ad._id %>?_method=DELETE" method="POST">
+    <button class="input-submit" type="submit">Delete </button>
+    <button class="input-submit" type="submit"><a href="/Ads/<%= user._id %>/Ads"> Back to Ads </a></button>
+
+  </form>
   </div>
   </div>
 </body>
