@@ -45,10 +45,8 @@
 
     <h2>Updating pro    file picture</h2>
     <br>
-    <br>
-    <br>
         <form action="/user/<%=user._id%>/changePic" method="POST" enctype="multipart/form-data">
-            <input type="file" name="profile" accept="image/*" required/>
+            <input type="file" name="profile" accept="image/*"/>
             <hr>
             <input type="submit" value="Update Picture" name="submit">
             <input type="submit" value="Cancel" name="submit">
