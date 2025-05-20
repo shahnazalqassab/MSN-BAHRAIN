@@ -1,23 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSN Bahrain</title>
   <link rel="stylesheet" href="/stylesheets/style.css" />
-  <title>Home</title>
 </head>
 <body class="Home">
-  <div style="display: flex; gap: 1rem; justify-content: center; align-items: center;">
+  <!-- Top right auth buttons -->
+  <div class="top-right-auth">
+    <a href="/user/signIn" class="signInUp">Sign In</a>
+    <a href="/user/signUp" class="signInUp">Sign Up</a>
+  </div>
 
+  <!-- Main headline centered -->
+  <div class="main-center-container">
     <h1 class="h1-Home">
-        WHERE <span class="highlight">SELLERS</span><br />
-        MEET <span class="highlight">BUYERS</span>,<br />
-        INSTANTLY AND<br />
-        SEAMLESSLY
-      </h1>
+      WHERE <span class="highlight">SELLERS</span><br />
+      MEET <span class="highlight">BUYERS</span>,<br />
+      INSTANTLY AND<br />
+      SEAMLESSLY
+    </h1>
 
-   <a href="/user/signIn" class="signInUp">Sign In</a>
+    <!-- Show Categories Button -->
+    <button class="show-categories-btn"
+      onclick="const ads=document.querySelector('.ads-container');ads.style.display=ads.style.display==='flex'?'none':'flex';">
+      Show Categories
+    </button>
 
-  <a href="/user/signUp" class ="signInUp">Sign Up</a>
+    <!-- Categories Section (hidden by default) -->
+    <div class="ads-container" style="display: none;">
+      <div class="bar-box">
+        <img src="/images/picre1.gif" alt="Phone" />
+        <span>Phone</span>
+      </div>
+      <div class="bar-box">
+        <img src="/images/riding-reversing.gif" alt="Car's" />
+        <span>Car's</span>
+      </div>
+      <div class="bar-box">
+        <img src="/images/forte-love.gif" alt="Book" />
+        <span>Book</span>
+      </div>
+      <div class="bar-box">
+        <img src="/images/laptop_smmbcxkk.gif" alt="Laptop" />
+        <span>Laptop</span>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
