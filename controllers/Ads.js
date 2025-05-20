@@ -3,36 +3,28 @@ const User = require('../models/users.js')
 
 const router = express.Router()
 
+//get:index
+router.get('/:userId/Ads', async (req, res) => {
+  const currentUser = await User.findById(req.session.user._id)
+  const Ads = currentUser.Ads
+  res.render('Ads/index.ejs', { Ads, user: currentUser })
+})
+
 //:get:new
 router.get('/:userId/new', async (req, res) => {
   const currentUser = await User.findById(req.params.userId)
+
   res.render('Ads/new.ejs', { user: currentUser })
 })
 
 //:get:Create
 router.post('/:userId/Ads', async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
-  const { title, price, description, category } = req.body
 
-  const imagePath = req.file ? req.file.path : null
-
-  const newAd = {
-    title,
-    price,
-    description,
-    category,
-    img: imagePath // Store file path in the schema
-  }
-  currentUser.Ads.push(newAd)
+  currentUser.Ads.push(req.body)
+  console.log(req.body)
   await currentUser.save()
   res.redirect(`/Ads/${currentUser._id}/Ads`)
-})
-
-//get:index
-router.get('/:userId/Ads', async (req, res) => {
-  const currentUser = await User.findById(req.session.user._id)
-  const Ads = currentUser.Ads
-  res.render('Ads/index.ejs', { Ads })
 })
 
 //get:show
