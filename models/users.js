@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   contactNo: { type: Number, required: true },
   email: { type: String, required: true },
-  img: { type: String, required: true},
+  profile: { type: String, required: true},
   Ads: [AdsSchema]
 })
 
