@@ -35,7 +35,9 @@ router.get('/:userId/new', async (req, res) => {
 router.post('/:userId/Ads', upload.single('img'), async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
 
-  const picPath = req.file.path
+  const picPath = req.file.filename
+  
+  console.log(picPath)
 
   const info = {
     img: picPath,

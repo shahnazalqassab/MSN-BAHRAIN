@@ -7,7 +7,7 @@ const multer = require('multer')
 // // configuraton for the multer storage
 const storage = multer.diskStorage({
   destination: (req, file, callBack) => {
-    callBack(null, 'public/uploads/') // the folder to save
+    callBack(null, 'public/Ads/') // the folder to save
   },
   filename: (req, file, callBack) => {
     callBack(null, Date.now() + '-' + file.originalname)
