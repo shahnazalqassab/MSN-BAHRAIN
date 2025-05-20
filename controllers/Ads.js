@@ -1,7 +1,21 @@
 const express = require('express')
 const User = require('../models/users.js')
+const multer = require('multer')
 
 const router = express.Router()
+
+//add pic
+const storage = multer.diskStorage({
+  destination: (req, file, callBack) => {
+    callBack(null, 'public/Ads/') // the folder to save
+  },
+  filename: (req, file, callBack) => {
+    callBack(null, Date.now() + '-' + file.originalname)
+  }
+})
+
+//storage
+const upload = multer({ storage })
 
 //get:index
 router.get('/:userId/Ads', async (req, res) => {
@@ -18,11 +32,20 @@ router.get('/:userId/new', async (req, res) => {
 })
 
 //:get:Create
-router.post('/:userId/Ads', async (req, res) => {
+router.post('/:userId/Ads', upload.single('img'), async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
 
-  currentUser.Ads.push(req.body)
-  console.log(req.body)
+  const picPath = req.file.path
+
+  const info = {
+    img: picPath,
+    title: req.body.title,
+    price: req.body.price,
+    description: req.body.description,
+    category: req.body.category
+  }
+  console.log(info)
+  currentUser.Ads.push(info)
   await currentUser.save()
   res.redirect(`/Ads/${currentUser._id}/Ads`)
 })
