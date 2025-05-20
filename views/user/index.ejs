@@ -32,16 +32,53 @@
       </div>
     </div>
     <div class="your-ads-box">
-      <img class="your-ads-img" src="/images/giphy-1.gif" alt="Your Ads">
-      <a class="your-ads-link" href="/Ads/<%= user._id %>/Ads">
+        <h1 class="dashboard-title"><i class="fa fa-user-circle"></i> Your latest Ads</h1>
+        <ul class="ads-list">
+            <% if (user.Ads.length > 0) { %>
+            <li class="ads-list-item">
+                <a href="/Ads/<%= user._id %>/Ads/<%= user.Ads[user.Ads.length-1]._id %>">
+                <h5><%= user.Ads[user.Ads.length-1].title %></h5>
+                <img src="/Ads/<%= user.Ads[user.Ads.length-1].img %>" width="100px" height="auto"/>
+                </a>
+            </li>
+            <% } else { %>
+                <h5>Still no ad to display</h5>
+            <% } %>
+        </ul>
+    <img class="your-ads-img" src="/images/giphy-1.gif" alt="Your Ads">
+    <a class="your-ads-link" href="/Ads/<%= user._id %>/Ads">
         <span style="font-size:1.3rem;font-weight:600;letter-spacing:1px;">
-          <i class="fa fa-bullhorn"></i> Your Ads
+        <i class="fa fa-bullhorn"></i>All Your Ads
         </span>
+        
         <span class="your-ads-desc" style="display:block;font-size:0.98rem;color:#555;margin-top:0.3rem;">
-          
+        
         </span>
-      </a>
+    </a>
     </div>
+    <!-- STILL WORKING ON IT, SO I COMMENT IT OUT TO NOT CAUSE ERRORS -->
+        <!-- <div class="your-ads-box">
+            <h1 class="dashboard-title"><i class="fa fa-user-circle"></i>All Sys Users</h1>
+            <a class="your-ads-link" href="/Ads/<%= user._id %>/Ads">
+            <span style="font-size:1.3rem;font-weight:600;letter-spacing:1px;">
+            <i class="fa fa-bullhorn"></i>All System Users
+            </span>
+        
+            <span class="your-ads-desc" style="display:block;font-size:0.98rem;color:#555;margin-top:0.3rem;">
+        
+            </span>
+            </a>
+      <ul class="ads-list">
+      <% if (user.Ads.length > 0) { %>
+        <li class="ads-list-item">
+          <a href="/Ads/<%= user._id %>/Ads/<%= user.Ads[user.Ads.length-1]._id %>">
+            <h5><%= user.Ads[user.Ads.length-1].title %></h5>
+            <img src="/Ads/<%= user.Ads[user.Ads.length-1].img %>" width="100px" height="auto"/>
+          </a>
+        </li>
+      <% } %>
+    </ul>
+    </div> -->
   </div>
 </body>
 <%- include('../partials/_footer') %>

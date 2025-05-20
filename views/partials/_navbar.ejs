@@ -8,9 +8,12 @@
       <% if (user) { %>
         <li><a href="/user/<%= user._id %>/user"><i class="fa fa-user"></i> Dashboard</a></li>
         <li><a href="/user/signOut"><i class="fa fa-sign-out-alt"></i> Sign Out</a></li>
+        <li><a href="/user/aboutUs"><i class="fa fa-sign-out-alt"></i> About Us</a></li>
+
       <% } else { %>
         <li><a href="/user/signIn"><i class="fa fa-sign-in-alt"></i> Sign In</a></li>
         <li><a href="/user/signUp"><i class="fa fa-user-plus"></i> Sign Up</a></li>
+        <li><a href="/user/aboutUs"><i class="fa fa-sign-out-alt"></i> About Us</a></li>
       <% } %>
     </ul>
   </div>
