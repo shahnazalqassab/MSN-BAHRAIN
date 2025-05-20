@@ -2,36 +2,30 @@
 <%- include('../partials/_navbar.ejs') %>
 
 <body>
- 
   <div class="container">
-        <div class="signin-box" >
-           <h1 class="h1-SignIn">Add Ads</h1>
-          <form action="/ads/<%= user._id %>/Ads" method="POST" enctype="multipart/form-data">
-            
-    <label for="img">Upload Image:</label>
-  <input class="input" type="file" name="img" id="img" accept="image/*" required>
-    <br>
+  <div class="signin-box" >
+  <h1 class="h1-SignIn">Add Ads</h1>
+  <form action="/Ads/<%= user._id %>/Ads" method="POST">
 
-    <label for="title">title</label>
-    <input class="input"type="text" name="title" id="title">
-    <br>
 
-    <label for="price">price</label>
-    <input class="input" type="text" name="price" id="price">
-    <br>
+  <label for="title">title</label>
+  <input class="input"type="text" name="title" id="title">
+  <br>
+
+  <label for="price">price</label>
+  <input class="input" type="text" name="price" id="price" >
+  <br>
 
     <label  for="description">description</label>
     <textarea class="input" type="text" name="description" id="description"></textarea>
     <br>
 
-
-    <label for="category">category</label>
-    <select class= "input" name="category" id="category">
-      <option value="books">books</option>
-      <option value="phones">phones</option>
-      <option value="cars">cars</option>
-      <option value="spare parts">spare parts</option>
-    </select>
+    <select name="category" id="category">
+    <option value="phones">phones</option>
+    <option value="cars">cars</option>
+    <option value="books">books</option>
+    <option value="spare parts">spare parts</option>
+  </select>
     <br>
 
     <button class="input-submit" type="submit">submit</button>
