@@ -61,7 +61,7 @@ router.put('/:userId/Ads/:adId', async (req, res) => {
 // Delete Ad
 router.delete('/:userId/Ads/:adId', async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
-  currentUser.Ads.id(req.params.adId).remove()
+  currentUser.Ads.id(req.params.adId).deleteOne()
   await currentUser.save()
   res.redirect(`/Ads/${currentUser._id}/Ads`)
 })
