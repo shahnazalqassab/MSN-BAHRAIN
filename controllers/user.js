@@ -83,6 +83,8 @@ router.post('/signIn', async (req, res) => {
     _id: userInDatabase._id
   }
 
+  const currentUser = await User.findById(req.session.user._id);
+  console.log(currentUser.Ads)
   req.session.save(() => {
     res.redirect('/')
   })
