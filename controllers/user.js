@@ -5,9 +5,14 @@ const User = require('../models/users')
 const multer = require('multer')
 
 // configuraton for the multer storage
-const storage = multer.diskStorage( (req, file, callBack) => {
+const storage = multer.diskStorage({
+  destination: (req, file, callBack) => {
     callBack(null, 'public/uploads/'); // the folder to save
-  })
+  },
+  filename: (req, file, callBack) => {
+    callBack(null, Date.now()+'-'+file.originalname);
+  }
+});
 
 const upload = multer({storage});
 
@@ -202,8 +207,12 @@ router.get('/:userId/changePic', async (req, res) => {
 //   res.send('correct so far')
 // });
 
-router.post('/:userId/changePic', upload.single('profilePic'), (req, res) => {
-  console.log(req.file);
+router.post('/:userId/changePic', upload.single('profilePic'), async (req, res) => {
+  const currentUser = await User.findById(req.session.user._id);
+  const picPath = req.file.filename;
+
+
+  console.log(picPath);
   res.send('correct so far');
 })
 
