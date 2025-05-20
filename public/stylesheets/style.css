@@ -43,19 +43,19 @@ html, body {
   align-items: center;
 }
 @media (max-width: 600px) {
-.main-center-container {
-  max-width: 700px;
-  margin: 90px auto 0 auto;
-  background:  url('/images/giphy-1.gif') center center/cover no-repeat;
-  border-radius: 24px;
-  box-shadow: 0 8px 40px rgba(25,101,178,0.10);
-  padding: 2.5rem 2.2rem 2.5rem 2.2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-}
+  .main-center-container {
+    max-width: 700px;
+    margin: 90px auto 0 auto;
+    background:  url('/images/giphy-1.gif') center center/cover no-repeat;
+    border-radius: 24px;
+    box-shadow: 0 8px 40px rgba(25,101,178,0.10);
+    padding: 2.5rem 2.2rem 2.5rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
 }
 
 /* Headline */
@@ -491,7 +491,7 @@ html, body {
   margin: 0 auto;
   text-align: center;
   position: relative;
-  border: 4px solid #28a74544; /* Increased border thickness and made it more visible */
+  border: 2px solid #28a74544; /* Reduced border thickness */
   transition: box-shadow 0.3s, transform 0.2s, background 0.3s, border 0.3s;
   animation: ads-glow 2s infinite alternate;
 }
@@ -513,7 +513,9 @@ html, body {
 
 .your-ads-img {
   width: 100%;
-  height: 160px;
+  height: 100%;
+  min-height: 160px;
+  flex: 1 1 auto;
   object-fit: cover;
   margin-bottom: 1.1rem;
   border-radius: 16px;
@@ -601,7 +603,6 @@ html, body {
   color: #1965b2;
 }
 /* Add to your CSS file */
-/* filepath: /Users/bosaad77/ga/porjects/MSN-BAHRAIN/public/stylesheets/style.css */
 .profile-ads-flex-container {
   display: flex;
   align-items: flex-start;    /* Align items to the top */
@@ -646,4 +647,63 @@ html, body {
     padding-left: 0;
     padding-right: 0;
   }
+}
+
+.ads-page-container {
+  max-width: 700px;
+  margin: 40px auto 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #1965b233;
+  padding: 2rem 2.2rem 2.2rem 2.2rem;
+}
+.ads-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.add-ad-btn {
+  background: linear-gradient(90deg, #28a745 60%, #007bff 100%);
+  color: #fff;
+  padding: 0.6rem 1.3rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px #28a74522;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.add-ad-btn:hover {
+  background: linear-gradient(90deg, #007bff 60%, #28a745 100%);
+  color: #8c0909;
+}
+.ads-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ads-list-item {
+  margin-bottom: 1.1rem;
+  background: #f8fffa;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #28a74511;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.ads-list-item a {
+  display: block;
+  padding: 1rem 1.2rem;
+  color: #1965b2;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-radius: 10px;
+}
+.ads-list-item a:hover {
+  background: #e0eafc;
+  color: #28a745;
+  box-shadow: 0 4px 16px #28a74522;
 }

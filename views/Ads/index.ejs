@@ -1,14 +1,22 @@
 <%- include('../partials/_head.ejs')%>
 <%- include('../partials/_navbar.ejs') %> 
 <body>
-    <a href="/Ads/<%= user._id %>/new"> add an new Ad</a>
-
-<h1>Your Ads</h1>
-    <ul>
-        <% Ads.forEach(Ads => { %>
-            <a href="/Ads/<%= user._id %>/Ads/<%=Ads._id%>">
-            <h4><li><%= Ads.title %></li></h4></a>
-        <% }) %>
-        </ul>
+  <div class="ads-page-container">
+    <div class="ads-header">
+      <h1>Your Ads</h1>
+      <a class="add-ad-btn" href="/Ads/<%= user._id %>/new">
+        <i class="fa fa-plus-circle"></i> Add New Ad
+      </a>
+    </div>
+    <ul class="ads-list">
+      <% Ads.forEach(ad => { %>
+        <li class="ads-list-item">
+          <a href="/Ads/<%= user._id %>/Ads/<%= ad._id %>">
+            <h4><%= ad.title %></h4>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
 </body>
 <%- include('../partials/_footer.ejs') %>
