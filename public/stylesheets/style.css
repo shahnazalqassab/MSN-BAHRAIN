@@ -319,8 +319,7 @@ html, body {
   font-weight: 700;
 }
 
-/* Add this to your CSS file */
-
+/* Username & Password Shadow */
 .signin-box input#username,
 .signin-box input#password {
   box-shadow: 0 2px 12px rgba(0, 255, 21, 0.13);
@@ -335,13 +334,13 @@ html, body {
   border: 1.5px solid #007bff45;
 }
 
-/* Dashboard Styles */
+/* Add a glowing effect to the dashboard box */
 .dashboard-box {
   background: #fff;
   border-radius: 22px;
-  box-shadow: 0 8px 40px rgba(25,101,178,0.13);
-  padding: 2.7rem 2.5rem 2.2rem 2.5rem;
-  max-width: 420px;
+  box-shadow: 0 0 24px 6px #007bff33, 0 8px 40px rgba(25,101,178,0.13);
+  padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+  max-width: 340px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -349,8 +348,18 @@ html, body {
   border: 2px solid #e0eafc;
   margin: 0;
   position: relative;
+  animation: dashboard-glow 2s infinite alternate;
+  transition: box-shadow 0.3s;
 }
 
+@keyframes dashboard-glow {
+  0% {
+    box-shadow: 0 0 24px 6px #007bff33, 0 8px 40px rgba(25,101,178,0.13);
+  }
+  100% {
+    box-shadow: 0 0 40px 16px #28a74577, 0 16px 48px rgba(40,167,69,0.18);
+  }
+}
 .dashboard-title {
   font-family: 'Montserrat', Arial, sans-serif;
   font-size: 2.1rem;
@@ -455,4 +464,186 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Improved "Your Ads" box: modern, centered, and visually appealing */
+.your-ads-center-container {
+  width: 100vw;
+  min-height: 30vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.your-ads-box {
+  background: linear-gradient(135deg, #f8fffa 60%, #e0eafc 100%);
+  border-radius: 24px;
+  box-shadow: 0 6px 32px 0 #28a74522, 0 2px 12px rgba(25,101,178,0.10);
+  padding: 2.2rem 1.5rem 1.7rem 1.5rem;
+  max-width: 320px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  border: 4px solid #28a74544; /* Increased border thickness and made it more visible */
+  transition: box-shadow 0.3s, transform 0.2s, background 0.3s, border 0.3s;
+  animation: ads-glow 2s infinite alternate;
+}
+.your-ads-box:hover {
+  transform: translateY(-4px) scale(1.025);
+  box-shadow: 0 12px 40px 0 #28a74533, 0 8px 28px rgba(25,101,178,0.16);
+  background: linear-gradient(135deg, #e0eafc 70%, #f8fffa 100%);
+}
+@keyframes ads-glow {
+  0% {
+    box-shadow: 0 0 24px 6px #28a74555, 0 2px 12px rgba(25,101,178,0.13);
+    border-color: #28a74555;
+  }
+  100% {
+    box-shadow: 0 0 40px 16px #28a74599, 0 8px 32px rgba(40,167,69,0.18);
+    border-color: #007bff77;
+  }
+}
+
+.your-ads-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  margin-bottom: 1.1rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #28a74522;
+  background: #fff;
+  display: block;
+}
+.your-ads-box:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 40px 0 #28a74533, 0 6px 28px rgba(25,101,178,0.18);
+}
+.your-ads-link {
+  color: #1965b2;
+  font-size: 1.18rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 0.8rem 1.7rem;
+  background: linear-gradient(90deg, #28a745 60%, #007bff 100%);
+  box-shadow: 0 2px 12px rgba(40,167,69,0.08);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  border: none;
+}
+.your-ads-link:hover {
+  background: linear-gradient(90deg, #007bff 60%, #28a745 100%);
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(0,123,255,0.13);
+  transform: scale(1.05);
+}
+.navbar {
+  width: 100%;
+  background: linear-gradient(90deg, #1965b2 60%, #28a745 100%);
+  padding: 0.7rem 0;
+  box-shadow: 0 2px 12px rgba(25,101,178,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navbar-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 0.7rem;
+}
+.navbar-brand {
+  color: #fff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.08rem;
+  font-weight: 500;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-links li a:hover {
+  background: #fff;
+  color: #1965b2;
+}
+/* Add to your CSS file */
+/* filepath: /Users/bosaad77/ga/porjects/MSN-BAHRAIN/public/stylesheets/style.css */
+.profile-ads-flex-container {
+  display: flex;
+  align-items: flex-start;    /* Align items to the top */
+  justify-content: center;
+  gap: 2.5rem;
+  width: 100vw;
+  min-height: 100vh;
+  height: 100vh;
+  box-sizing: border-box;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.dashboard-box,
+.your-ads-box {
+  margin: 0;
+  min-width: 220px;
+  max-width: 340px;
+  width: 100%;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .dashboard-box,
+  .your-ads-box {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+    min-height: 320px;
+  }
+  .profile-ads-flex-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+    height: auto;
+    min-height: 100vh;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

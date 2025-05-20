@@ -1,16 +1,17 @@
 <nav class="navbar">
-      <!-- Navigation -->
-      <div class="navbar-container">
-        <ul class="nav-links">
-          <% if (user) { %> 
-          <li><a href="/user/signOut">Sign Out</a></li>
-          <li><a href="/user/<%=user._id%>/user">Dashboard</a></li>
-          <% } else { %>
-          <!-- <li><a href="/user/signIn">Sign in</a></li>
-          <li><a href="/user/signUp">Sign Up</a></li> -->
-          <% } %>
-        </ul>
-      <!-- Ads container -->
-      <!-- ads content -->
-      </div>
-</nav>
+  <div class="navbar-container">
+    <a href="/" class="navbar-logo">
+      <img src="/images/logo.png" alt="MSN Bahrain" style="height:36px;vertical-align:middle;">
+      <span class="navbar-brand">MSN Bahrain</span>
+    </a>
+    <ul class="nav-links">
+      <% if (user) { %>
+        <li><a href="/user/<%= user._id %>/user"><i class="fa fa-user"></i> Dashboard</a></li>
+        <li><a href="/user/signOut"><i class="fa fa-sign-out-alt"></i> Sign Out</a></li>
+      <% } else { %>
+        <li><a href="/user/signIn"><i class="fa fa-sign-in-alt"></i> Sign In</a></li>
+        <li><a href="/user/signUp"><i class="fa fa-user-plus"></i> Sign Up</a></li>
+      <% } %>
+    </ul>
+  </div>
+</nav
