@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const AdsSchema = new mongoose.Schema(
   {
     // properties of Ads
-    img: { type: String },
+    img: { type: String, required: true },
     title: { type: String, required: true },
     price: { type: Number, required: true },
     description: { type: String, required: true },
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   contactNo: { type: Number, required: true },
   email: { type: String, required: true },
-  profile: { type: String, required: true},
+  profile: { type: String, required: true },
   Ads: [AdsSchema]
 })
 

@@ -5,7 +5,12 @@
   <div class="container">
   <div class="signin-box" >
   <h1 class="h1-SignIn">Add Ads</h1>
-  <form action="/Ads/<%= user._id %>/Ads" method="POST">
+  <form action="/Ads/<%= user._id %>/Ads" method="POST" enctype="multipart/form-data">
+
+
+    <label for="img">img</label>
+  <input class="input" type="file" name="img" id="img" accept="image/*" required>
+  <br>
 
 
   <label for="title">title</label>
