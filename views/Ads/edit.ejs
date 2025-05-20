@@ -1,41 +1,34 @@
 <%- include('../partials/_head.ejs') %>
 <%- include('../partials/_navbar.ejs') %>
 
-<body>
-  <div class="container">
-  <div class="signin-box" >
-  <h1 class="h1-SignIn">Add Ads</h1>
-  <form action="/Ads/<%= user._id %>/Ads/<%=Ad._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+<body class="auth-bg">
+  <div class="auth-center-container">
+    <div class="signin-box">
+      <h1 class="h1-SignIn">Edit Ad</h1>
+      <form action="/Ads/<%= user._id %>/Ads/<%= Ad._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <label for="img">Upload Image</label>
+        <input class="input" type="file" name="img" id="img" accept="image/*">
 
-  <label for="img">Upload Image:</label>
-  <input class="input" type="file" name="img" id="img" accept="image/*" >
-  <br>
+        <label for="title">Title</label>
+        <input class="input" type="text" name="title" id="title" value="<%= Ad.title %>" required>
 
-  <label for="title">title</label>
-  <input class="input"type="text" name="title" id="title" value="<%= Ad.title %>">
-  <br>
+        <label for="price">Price</label>
+        <input class="input" type="text" name="price" id="price" value="<%= Ad.price %>" required>
 
-  <label for="price">price</label>
-  <input class="input" type="text" name="price" id="price" value="<%= Ad.price %>">
-  <br>
+        <label for="description">Description</label>
+        <textarea class="input" name="description" id="description" rows="3" required><%= Ad.description %></textarea>
 
-    <label  for="description">description</label>
-    <textarea class="input" type="text" name="description" id="description">value="<%= Ad.description %>"</textarea>
-    <br>
+        <label for="category">Category</label>
+        <select class="input" name="category" id="category" required>
+          <option value="phones" <%= Ad.category === "phones" ? "selected" : "" %>>Phone</option>
+          <option value="cars" <%= Ad.category === "cars" ? "selected" : "" %>>Car</option>
+          <option value="books" <%= Ad.category === "books" ? "selected" : "" %>>Book</option>
+          <option value="spare parts" <%= Ad.category === "spare parts" ? "selected" : "" %>>Spare Parts</option>
+        </select>
 
-
-    <label for="category">category</label>
-    <select class= "input" name="category" id="category">
-      <option value="phones" <%= Ad.category === "phones" ? "selected":"" %>>Phone</option>
-      <option value="cars" <%= Ad.category === "cars" ? "selected":"" %>>Car</option>
-      <option value="books" <%= Ad.category === "books" ? "selected":"" %>>Book</option>
-      <option value="spare parts" <%= Ad.category === "spare parts" ? "selected":"" %>>spare parts</option>
-    </select>
-    <br>
-
-    <button class="input-submit" type="submit">submit</button>
-  </form>
-  </div>
+        <button class="input-submit" type="submit">Update Ad</button>
+      </form>
+    </div>
   </div>
 </body>
 

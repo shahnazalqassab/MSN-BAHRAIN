@@ -1,29 +1,37 @@
 <%- include('../partials/_head.ejs') %>
 <%- include('../partials/_navbar.ejs') %>
 
-<body>
-    <h1> DASHBOARD </h1>
-    
-
-            <h4>Welcome <%= user.username %></h4>
-            <img src="/uploads/<%= user.profile %>" style="border-radius: 50%" width="100px" height="auto">
-            <br>
-            <a href="/user/<%= user._id %>/changePic">Change Profile Picture</a>
-            <p>Contact No. <%= user.contactNo %> </p>
-            <p>Email:  <%= user.email %> </p>
-
-            <a href="/user/<%= user._id %>/edit">Edit Profile</a><br>
-            <a href="/user/<%= user._id %>/changePassword">Change Password (you'll have to re-log in)</a>
-
-            <a href="/Ads/<%= user._id %>/Ads">
-                <h4>Your Ads</h4>
-            </a>
-
+<body class="auth-bg">
+  <div class="auth-center-container">
+    <div class="dashboard-box">
+      <h1 class="dashboard-title">Profile</h1>
+      <div class="dashboard-profile">
+        <img src="/uploads/<%= user.profile %>" alt="Profile Picture" class="dashboard-avatar">
+        <h3 class="dashboard-welcome">Welcome, <span><%= user.username %></span></h3>
+        <a class="dashboard-link" href="/user/<%= user._id %>/changePic">Change Profile Picture</a>
+      </div>
+      <div class="dashboard-info">
+        <div class="dashboard-info-row">
+          <span class="dashboard-info-label">Contact No.:</span>
+          <span class="dashboard-info-value"><%= user.contactNo %></span>
+        </div>
+        <div class="dashboard-info-row">
+          <span class="dashboard-info-label">Email:</span>
+          <span class="dashboard-info-value"><%= user.email %></span>
+        </div>
+      </div>
+      <div class="dashboard-actions">
+        <a class="dashboard-link" href="/user/<%= user._id %>/edit">
+          <i class="fa fa-user-edit"></i> Edit Profile
+        </a>
+        <a class="dashboard-link" href="/user/<%= user._id %>/changePassword">
+          <i class="fa fa-key"></i> Change Password <span class="dashboard-note">(you'll have to re-log in)</span>
+        </a>
+        <a class="dashboard-link" href="/Ads/<%= user._id %>/Ads">
+          <i class="fa fa-bullhorn"></i> Your Ads
+        </a>
+      </div>
+    </div>
+  </div>
 </body>
 <%- include('../partials/_footer') %>
-
-<!-- Show Categories Button -->
-<button class="show-categories-btn" onclick="document.querySelector('.ads-container').style.display = document.querySelector('.ads-container').style.display === 'flex' ? 'none' : 'flex';">
-  Show Categories
-</button>
-
