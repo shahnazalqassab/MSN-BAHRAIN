@@ -43,10 +43,19 @@ html, body {
   align-items: center;
 }
 @media (max-width: 600px) {
-  .main-center-container {
-    padding: 1.2rem 0.5rem;
-    margin-top: 60px;
-  }
+.main-center-container {
+  max-width: 700px;
+  margin: 90px auto 0 auto;
+  background:  url('/images/giphy-1.gif') center center/cover no-repeat;
+  border-radius: 24px;
+  box-shadow: 0 8px 40px rgba(25,101,178,0.10);
+  padding: 2.5rem 2.2rem 2.5rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
 }
 
 /* Headline */
@@ -203,14 +212,14 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid #e0eafc;
+  border: 2px solid #e0eafc00;
 }
 
 .h1-SignIn {
   font-family: 'Montserrat', Arial, sans-serif;
   font-size: 2rem;
   font-weight: bold;
-  color: #1965b2;
+  color: #0ec43b92;
   margin-bottom: 1.5rem;
   text-align: center;
   letter-spacing: 1px;
@@ -238,7 +247,7 @@ html, body {
 }
 
 .signin-box .input:focus {
-  border: 1.5px solid #007bff;
+  border: 1.5px solid #007bff32;
   outline: none;
 }
 
@@ -259,7 +268,7 @@ html, body {
 }
 
 .input-submit:hover {
-  background: linear-gradient(90deg, #0056b3 60%, #218838 100%);
+  background: linear-gradient(90deg, #03b3002e 60%, #218838 100%);
   box-shadow: 0 4px 18px rgba(40,167,69,0.18);
 }
 
@@ -277,12 +286,12 @@ html, body {
   border-radius: 7px;
   text-decoration: none;
   transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(0,123,255,0.08);
+  box-shadow: 0 2px 8px rgba(9, 145, 20, 0.631);
 }
 .signin-extra .signInUp:hover {
   background: #28a745;
   color: #fff;
-  box-shadow: 0 4px 18px rgba(40,167,69,0.18);
+  box-shadow: 0 4px 18px rgba(10, 196, 54, 0.582);
 }
 
 /* Footer */
@@ -294,18 +303,156 @@ html, body {
   background: linear-gradient(90deg, #1965b2 60%, #28a745 100%);
   color: #fff;
   text-align: center;
-  padding: 1rem 0;
-  font-size: 1rem;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.07);
+  padding: 0.4rem 0;
+  font-size: 0.95rem;
+  box-shadow: 0 -2px 8px rgba(6, 125, 22, 0.451);
   letter-spacing: 1px;
-  z-index: 100;
+  z-index: 90;
   font-family: 'Montserrat', Arial, sans-serif;
 }
 .footer-content {
-  max-width: 900px;
+  max-width: 700px;
   margin: 0 auto;
 }
 .footer strong {
   color: #ffe066;
   font-weight: 700;
+}
+
+/* Add this to your CSS file */
+
+.signin-box input#username,
+.signin-box input#password {
+  box-shadow: 0 2px 12px rgba(0, 255, 21, 0.13);
+  background: #f8f9fa;
+  border: 1.5px solid #e0eafc;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+
+.signin-box input#username:focus,
+.signin-box input#password:focus {
+  box-shadow: 0 4px 18px rgba(0, 123, 255, 0.22);
+  border: 1.5px solid #007bff45;
+}
+
+/* Dashboard Styles */
+.dashboard-box {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 8px 40px rgba(25,101,178,0.13);
+  padding: 2.7rem 2.5rem 2.2rem 2.5rem;
+  max-width: 420px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #e0eafc;
+  margin: 0;
+  position: relative;
+}
+
+.dashboard-title {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 2.1rem;
+  font-weight: bold;
+  color: #1965b2;
+  margin-bottom: 1.3rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.dashboard-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.3rem;
+}
+
+.dashboard-avatar {
+  border-radius: 50%;
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border: 3px solid #e0eafc;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 2px 12px rgba(0,123,255,0.13);
+}
+
+.dashboard-welcome {
+  font-size: 1.25rem;
+  color: #28a745;
+  margin-bottom: 0.5rem;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+.dashboard-welcome span {
+  color: #1965b2;
+  font-weight: bold;
+}
+
+.dashboard-info {
+  width: 100%;
+  margin-bottom: 1.3rem;
+}
+.dashboard-info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+.dashboard-info-label {
+  font-weight: 600;
+  color: #1965b2;
+}
+.dashboard-info-value {
+  color: #333;
+}
+
+.dashboard-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  align-items: flex-start;
+}
+
+.dashboard-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.07rem;
+  transition: color 0.2s, background 0.2s;
+  border-radius: 7px;
+  padding: 0.4rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.dashboard-link:hover {
+  color: #fff;
+  background: #28a745;
+  text-decoration: none;
+}
+.dashboard-note {
+  font-size: 0.92em;
+  color: #888;
+  margin-left: 0.3em;
+}
+
+/* Optional: Font Awesome for icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+/* Center the dashboard vertically and horizontally */
+.auth-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0eafc 0%, #1965b2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-center-container {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
