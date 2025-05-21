@@ -84,7 +84,7 @@ router.delete('/:userId/Ads/:adId', async (req, res) => {
 })
 
 //category
-router.get('/', async (req, res) => {
+router.get('/categories', async (req, res) => {
   const Ads = Ads.id(req.params.adId)
   if (Ads.category === 'books') {
     res.redirect(`/Ads/categories/book`)
