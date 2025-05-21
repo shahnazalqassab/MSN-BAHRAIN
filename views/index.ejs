@@ -7,16 +7,7 @@
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body class="Home">
-  <!-- Navbar -->
   <%- include('./partials/_navbar.ejs') %>
-
-  <!-- Top right auth buttons (optional, can be removed if handled in navbar) -->
-  <!-- <div class="top-right-auth">
-    <a href="/user/signIn" class="signInUp">Sign In</a>
-    <a href="/user/signUp" class="signInUp">Sign Up</a>
-  </div> -->
-
-  <!-- Main headline centered -->
   <div class="main-center-container">
     <h1 class="h1-Home">
       WHERE <span class="highlight">SELLERS</span><br />
@@ -24,15 +15,10 @@
       INSTANTLY AND<br />
       SEAMLESSLY
     </h1>
-
-    <!-- Show Categories Button -->
-    <button class="show-categories-btn"
-      onclick="const ads=document.querySelector('.ads-container');ads.style.display=ads.style.display==='flex'?'none':'flex';">
+    <button class="show-categories-btn" id="showCategoriesBtn">
       Show Categories
     </button>
-
-    <!-- Categories Section (hidden by default) -->
-    <div class="ads-container" style="display: none;">
+    <div class="ads-container" id="categories-container" style="display: none;">
       <div class="bar-box">
         <img src="/images/picre1.gif" alt="Phone" />
         <a href="/categories?category=phones">phones</a>
@@ -41,7 +27,9 @@
       
       <div class="bar-box">
         <img src="/images/riding-reversing.gif" alt="Car's" />
+
         <a href="/categories?category=cars">Cars</a>
+
       </div>
 
       <div class="bar-box">
@@ -58,11 +46,22 @@
         <img src="/images/laptop_smmbcxkk.gif" alt="Laptop" />
         <a href="/categories?category=spare parts">Spare Parts</a>
       </div>
+      <div class="bar-box">
+        <img src="/images/107ave-eng.gif" alt="Spare Parts" />
+        <a href="/categories">Spare Parts</a>
+      </div>
     </div>
     </div>
   </div>
 
 
   <%- include('./partials/_footer.ejs') %>
+  <script>
+    document.getElementById('showCategoriesBtn').onclick = function() {
+      const ads = document.getElementById('categories-container');
+      ads.style.display = ads.style.display === 'flex' ? 'none' : 'flex';
+      return false;
+    };
+  </script>
 </body>
 </html>
