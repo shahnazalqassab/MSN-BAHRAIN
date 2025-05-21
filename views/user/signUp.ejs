@@ -6,22 +6,22 @@
       <h1 class="h1-SignIn"><i class="fa fa-user-plus"></i> Sign Up</h1>
       <form action="/user/signUp" method="POST" autocomplete="off">
         <div style="display: flex; flex-direction: column; gap: 1rem;">
-          <label for="username"><i class="fa fa-user"></i> Username</label>
-          <input class="input" type="text" id="username" name="username" required>
+          <div class="form-group">
+            <label for="username"><i class="fa fa-user"></i> Username</label>
+            <input class="input" type="text" id="username" name="username" required>
+          </div>
 
-          <label for="password"><i class="fa fa-lock"></i> Password</label>
-          <input class="input" type="password" id="password" name="password" required>
+          <div class="form-group">
+            <label for="password"><i class="fa fa-lock"></i> Password</label>
+            <input class="input" type="password" id="password" name="password" required>
+          </div>
 
-          <label for="confirmPassword"><i class="fa fa-lock"></i> Confirm Password</label>
-          <input class="input" type="password" id="confirmPassword" name="confirmPassword" required>
+          <div class="form-group">
+            <label for="confirmPassword"><i class="fa fa-lock"></i> Confirm Password</label>
+            <input class="input" type="password" id="confirmPassword" name="confirmPassword" required>
+          </div>
 
-          <label for="category"><i class="fa fa-users"></i> Category</label>
-          <select class="input" name="category" id="category" required>
-            <option value="" disabled selected>Select Category</option>
-            <option value="Seller">Seller</option>
-            <option value="Buyer">Buyer</option>
-          </select>
-
+          <div class="form-group">
           <label for="contactNo"><i class="fa fa-phone"></i> Contact No.</label>
           <input class="input" type="tel" id="contactNo" name="contactNo" pattern="[0-9]{8,15}" required>
 

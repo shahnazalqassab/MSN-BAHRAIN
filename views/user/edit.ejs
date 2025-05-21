@@ -1,57 +1,85 @@
 <%- include('../partials/_head.ejs') %>
 <%- include('../partials/_navbar.ejs') %>
-
-<body>
-<div class="container">
-    
-    <% if(checkVar === 1) { %>
-    <h2>Change Password</h2>
-    <br><br>
-        <form action="/user/<%= user._id %>/user?_method=PUT" method="POST">
-            <label for="username">Username:</label>
-                <input type="text" id="username" name="username" value="<%= user.username %>" disabled>
-            <br>
-            <label for="currentPassword">Current Password:</label>
-                <input type="password" id="currentPassword" name="currentPassword">
-            <br>
-            <label for="newPassword">New Password:</label>
-                <input type="password" id="newPassword" name="newPassword">
-            <br>
-            <label for="confirmPassword">Confirm Password:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword">
-            <hr>
-            <input type="submit" value="Change Password" name="submit">
-            <input type="submit" value="Cancel" name="submit">
-    </form>
-    <% } else if(checkVar === 0) { %>
-    <h2>Edit Profile</h2>
-    
-        <form action="/user/<%= user._id %>/user?_method=PUT" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" value="<%= user.username %>" disabled>
-            <br>
-            <label for="contactNo">Contact No.:</label>
-            <input type="number" id="contactNo" name="contactNo" value="<%= user.contactNo %>">
-            <br>
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" value="<%= user.email %>">
-            <hr>
-            <input type="submit" value="Update Profile" name="submit">
-            <input type="submit" value="Cancel" name="submit">
-
+<body class="auth-bg">
+  <div class="auth-center-container">
+    <% if (checkVar === 1) { %>
+      <div class="update-profile-box">
+        <h2 class="update-profile-title"><i class="fa fa-key"></i> Change Password</h2>
+        <form class="update-profile-form" action="/user/<%= user._id %>/user?_method=PUT" method="POST">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" value="<%= user.username %>" disabled>
+          <label for="currentPassword">Current Password</label>
+          <input type="password" id="currentPassword" name="currentPassword" required>
+          <label for="newPassword">New Password</label>
+          <input type="password" id="newPassword" name="newPassword" required>
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required>
+          <div style="display: flex; gap: 1rem; margin-top: 1.2rem;">
+            <button class="update-profile-btn" type="submit" name="submit" value="Change Password">
+              <i class="fa fa-save"></i> Change Password
+            </button>
+            <a href="/user/<%= user._id %>/user" class="update-profile-btn cancel-btn">
+              <i class="fa fa-times"></i> Cancel
+            </a>
+          </div>
         </form>
-    <% } else if(checkVar === 2) { %>
-        <img src=<% user.img %>>
-
-    <h2>Updating pro    file picture</h2>
-    <br>
-        <form action="/user/<%=user._id%>/changePic" method="POST" enctype="multipart/form-data">
-            <input type="file" name="profile" accept="image/*"/>
-            <hr>
-            <input type="submit" value="Update Picture" name="submit">
-            <input type="submit" value="Cancel" name="submit">
+      </div>
+    <% } else if (checkVar === 0) { %>
+      <div class="update-profile-box">
+        <h2 class="update-profile-title"><i class="fa fa-user-edit"></i> Edit Profile</h2>
+        <form class="update-profile-form" action="/user/<%= user._id %>/user?_method=PUT" method="POST">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" value="<%= user.username %>" disabled>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" value="<%= user.email %>" required>
+          <label for="contactNo">Contact No.</label>
+          <input type="number" id="contactNo" name="contactNo" value="<%= user.contactNo %>" required>
+          <div style="display: flex; gap: 1rem; margin-top: 1.2rem;">
+            <button class="update-profile-btn" type="submit" name="submit" value="Update Profile">
+              <i class="fa fa-save"></i> Update Profile
+            </button>
+            <a href="/user/<%= user._id %>/user" class="update-profile-btn cancel-btn">
+              <i class="fa fa-times"></i> Cancel
+            </a>
+          </div>
         </form>
+      </div>
+    <% } else if (checkVar === 2) { %>
+      <div class="update-profile-box">
+        <h2 class="update-profile-title"><i class="fa fa-image"></i> Update Profile Picture</h2>
+        <% if (user.img) { %>
+          <img src="/uploads/<%= user.img %>" alt="Profile" class="update-profile-avatar">
+        <% } else { %>
+          <img src="/images/default-profile.png" alt="Profile" class="update-profile-avatar">
+        <% } %>
+        <form class="update-profile-form" action="/user/<%= user._id %>/changePic" method="POST" enctype="multipart/form-data">
+          <label for="profile">Profile Image</label>
+          <input type="file" name="profile" id="profile" accept="image/*" required>
+          <div style="display: flex; gap: 1rem; margin-top: 1.2rem;">
+            <button class="update-profile-btn" type="submit" name="submit" value="Update Picture">
+              <i class="fa fa-save"></i> Update Picture
+            </button>
+            <a href="/user/<%= user._id %>/user" class="update-profile-btn cancel-btn">
+              <i class="fa fa-times"></i> Cancel
+            </a>
+          </div>
+        </form>
+      </div>
     <% } %>
-</div>
+  </div>
+  <%- include('../partials/_footer.ejs') %>
 </body>
-</html>
+<style>
+/* Add this to your style.css for the cancel button */
+.cancel-btn {
+  background: #e0eafc !important;
+  color: #1965b2 !important;
+  border: 1.5px solid #1965b2;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.cancel-btn:hover {
+  background: #1965b2 !important;
+  color: #fff !important;
+  border: 1.5px solid #1965b2;
+}
+</style>
