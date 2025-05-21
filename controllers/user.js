@@ -229,17 +229,15 @@ router.post('/:userId/changePic', upload.single('profile'), async (req, res) => 
 )
 
 router.get('/:userID/dashboard', async (req, res) => {
-  const currentUser = await User.findById(req.session.user)
+  const currentUser = await User.findById(req.session.user._id)
 
-  try{
-
+  try {
     const systemUsers = await User.find({});
-  res.render('user/index.ejs', { user: currentUser, all: systemUsers  })
+    res.render('user/index.ejs', { user: currentUser, all: systemUsers  })
   
   } catch (error){
     console.log(error);
   }
-  
 })
 
 

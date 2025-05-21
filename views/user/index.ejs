@@ -1,9 +1,23 @@
 <%- include('../partials/_head.ejs') %> <%- include('../partials/_navbar.ejs')
 %>
 <body class="auth-bg">
-  <div class="profile-ads-flex-container">
+  <div
+    class="profile-ads-flex-container"
+    style="
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 2.5rem;
+      justify-content: center;
+      align-items: stretch;
+      padding: 2rem 0;
+      overflow-x: auto;
+    "
+  >
     <!-- Profile Box -->
-    <div class="dashboard-box modern-box">
+    <div
+      class="dashboard-box modern-box"
+      style="min-width: 340px; max-width: 400px; width: 100%"
+    >
       <h1 class="dashboard-title"><i class="fa fa-user-circle"></i> Profile</h1>
       <div class="dashboard-profile">
         <img
@@ -43,20 +57,26 @@
       </div>
     </div>
     <!-- Latest Ads Box -->
-    <div class="dashboard-box modern-box">
+    <div
+      class="dashboard-box modern-box"
+      style="min-width: 340px; max-width: 400px; width: 100%"
+    >
       <h1 class="dashboard-title">
-        <i class="fa fa-bullhorn"></i> Your Latest Ads
+        <i class="fa fa-bullhorn"></i> Ads Control
       </h1>
       <ul class="ads-list">
         <% if (user.Ads.length > 0) { %>
-        <li class="ads-list-item">
+        <li class="ads-list-item" style="margin-bottom: 1.2rem">
           <a
             href="/Ads/<%= user._id %>/Ads/<%= user.Ads[user.Ads.length-1]._id %>"
           >
-            <h5><%= user.Ads[user.Ads.length-1].title %></h5>
+            <h5 style="margin-bottom: 0.5rem">
+              <%= user.Ads[user.Ads.length-1].title %>
+            </h5>
             <img
               src="/Ads/<%= user.Ads[user.Ads.length-1].img %>"
               width="100"
+              style="border-radius: 8px; box-shadow: 0 2px 8px #e0eafc"
             />
           </a>
         </li>
@@ -65,30 +85,39 @@
         <% } %>
       </ul>
       <a class="your-ads-link" href="/Ads/<%= user._id %>/Ads">
-        <span> <i class="fa fa-list"></i> View All Your Ads </span>
+        <span style="font-size: 1.1rem; font-weight: 600; letter-spacing: 1px">
+          <i class="fa fa-list"></i> View All Your Ads
+        </span>
       </a>
     </div>
-    <!-- Admin Section -->
-    <% if(user.category==='Admin') { %>
-    <div class="dashboard-box modern-box">
-      <h1 class="dashboard-title"><i class="fa fa-users"></i> System Users</h1>
-      <a class="your-user-link" href="/">
-        <span> <i class="fa fa-bullhorn"></i> View all users </span>
-      </a>
-      <ul class="user-list">
-        <% all.forEach(function(u) { %>
-        <li><%= u.username %></li>
-        <% }) %>
-        <li class="user-list-item">
-          <a
-            href="/Ads/<%= user._id %>/Ads/<%= user.Ads[user.Ads.length-1]._id %>"
-          >
-            <h5>Creating New User</h5>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <% } %>
+        <% if(user.category==='Admin') { %>
+         <div
+      class="dashboard-box modern-box"
+      style="min-width: 340px; max-width: 400px; width: 100%"
+    >
+            <h1 class="dashboard-title"><i class="fa fa-user-circle"></i> System Control</h1>
+            <a class="your-user-link" href="/">
+            <span style="font-size:1.3rem;font-weight:600;letter-spacing:1px;">
+            <i class="fa fa-bullhorn"></i>View all users
+            </span>
+        
+            <span class="your-user-desc" style="display:block;font-size:0.98rem;color:#555;margin-top:0.3rem;">
+        
+            </span>
+            </a>
+        <ul class="user-list">
+            <% all.forEach((user) => { %>
+            <li>Name: <%= user.username %><br>
+            Title: <%= user.category %></li>                                   
+            <% }) %>
+            <li class="user-list-item">
+            <a href="/Ads/<%= user._id %>">
+                <h5>Creating New User</h5></a>
+            </li>
+        </ul>
+        </div>
+        <% } %>
   </div>
 </body>
 <%- include('../partials/_footer') %>
+

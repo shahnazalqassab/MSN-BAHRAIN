@@ -392,24 +392,25 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: 1.2rem;
-  text-align: center;
 }
 .dashboard-avatar {
   border-radius: 50%;
-  width: 90px;
-  height: 90px;
+  width: 110px;
+  height: 110px;
   object-fit: cover;
-  border: 3px solid #1965b2;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px #e0eafc;
+  border: 3px solid #28a74555;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 2px 12px #28a74533;
   background: #fff;
 }
 .dashboard-welcome {
   font-size: 1.18rem;
-  color: #1965b2;
+  color: #28a745;
   margin-bottom: 0.5rem;
-  font-family: 'Montserrat', Arial, sans-serif;
-  font-weight: 700;
+
+  font-family: "Montserrat", Arial, sans-serif;
+  font-weight: 600;
+
 }
 .dashboard-welcome span {
   color: #1965b2;
@@ -422,12 +423,11 @@ body {
   border-radius: 12px;
   padding: 1rem 1.2rem;
   box-shadow: 0 2px 8px #28a74511;
-  margin: 1.2rem 0;
 }
 .dashboard-info-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.4rem;
   flex-wrap: wrap;
   word-break: break-word;
 }
@@ -444,12 +444,11 @@ body {
   flex-direction: column;
   gap: 0.7rem;
   align-items: flex-start;
-  margin-top: auto;
 }
 .dashboard-link {
-  color: #28a745;
+  color: #007bff;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.07rem;
   transition: color 0.2s, background 0.2s;
   border-radius: 7px;
@@ -465,7 +464,7 @@ body {
   text-decoration: none;
 }
 .dashboard-note {
-  font-size: 0.95rem;
+  font-size: 0.92em;
   color: #888;
   margin-left: 0.3em;
 }
@@ -771,98 +770,12 @@ body {
   font-weight: 500;
   letter-spacing: 0.5px;
 }
-.profile-ads-flex-container {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 2.5rem;
-  justify-content: center;
-  align-items: stretch;
-  padding: 2rem 0;
-  overflow-x: auto;
-}
-
-.dashboard-box.modern-box {
-  min-width: 340px;
-  max-width: 400px;
-  width: 100%;
-  background: linear-gradient(135deg, #e0eafc 60%, #f8fffa 100%);
-  border-radius: 18px;
-  box-shadow: 0 8px 32px #28a74522, 0 4px 24px #1965b233;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 2rem 1.5rem;
-  box-sizing: border-box;
-}
-
-.dashboard-title {
-  color: #1965b2;
-  margin-bottom: 1.2rem;
-}
-
-.dashboard-profile {
-  text-align: center;
-}
-
-.dashboard-avatar {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 3px solid #1965b2;
-  box-shadow: 0 2px 8px #e0eafc;
-  margin-bottom: 1rem;
-}
-
-.dashboard-welcome {
-  color: #1965b2;
-  font-weight: 700;
-}
-
-.dashboard-link {
-  color: #28a745;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.dashboard-info {
-  margin: 1.2rem 0;
-}
-
-.dashboard-info-row {
-  margin-bottom: 0.7rem;
-}
-
-.dashboard-info-label {
-  color: #1965b2;
-}
-
-.dashboard-info-value {
-  color: #333;
-}
-
-.dashboard-actions {
-  margin-top: auto;
-}
-
-.dashboard-note {
-  font-size: 0.95rem;
-  color: #888;
-}
-
-/* Remove the "Your Ads" container styles */
-.your-ads-link,
-.your-ads-link span {
-  all: unset;
-  display: revert;
-  background: none;
-  color: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
-  margin: 0;
-  letter-spacing: normal;
-  transition: none;
-  cursor: auto;
+@media (max-width: 800px) {
+  .team-list {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .aboutus-container {
+    padding: 1.2rem 0.5rem;
+  }
 }
