@@ -1,36 +1,43 @@
 <%- include('./partials/_head.ejs') %>
 <%- include('./partials/_navbar.ejs') %>
-
 <body>
   <div class="aboutus-container">
     <h1 class="aboutus-title"><i class="fa fa-users"></i> Meet the Team</h1>
     <div class="team-list">
       <div class="team-member">
-
-        <div class="team-avatar" style="background-image:url('/images/mem.png');"></div>
-
         <div class="team-avatar">
-          <img src="/images/msm.JPG" alt="Mohammed Al-Abdulla">
+          <img src="/images/mem.png" alt="Mohammed Al-Abdulla">
         </div>
-
-
-        <div class="team-avatar" style="background-image:url('/images/1747771993486-IMG_2926.JPG');"></div>
-
-        <div>
+        <div class="team-info">
+          <h3>Mohammed Al-Abdulla</h3>
+          <p class="team-role">Lead Designer</p>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="team-avatar">
+          <img src="/images/1747771993486-IMG_2926.JPG" alt="Shahnaz Al-Qassab">
+        </div>
+        <div class="team-info">
           <h3>Shahnaz Al-Qassab</h3>
           <p class="team-role">The Trouble-Maker</p>
         </div>
       </div>
       <div class="team-member">
         <div class="team-avatar">
-          <img src="/images/" alt="Noora Al-Qahtani">
+          <img src="/images/mem.png" alt="Noora Al-Qahtani">
         </div>
-        <div>
+        <div class="team-info">
           <h3>Noora Al-Qahtani</h3>
           <p class="team-role">The Brain Behind the Scene</p>
         </div>
       </div>
     </div>
   </div>
-</body>
-<%- include('./partials/_footer.ejs') %>
+  <style>
+    .team-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3.5rem; /* Increased gap for more separation */
+      justify-content: center;
+    }
+
