@@ -89,7 +89,7 @@ router.get('/categories', async (req, res) => {
   const category = rawCategory.trim().toLowerCase()
 
   if (category === 'phones') {
-    res.render('/categories/phone')
+    res.render('categories/phone')
   } else if (category === 'cars') {
     res.render('categories/cars')
   } else if (category === 'books') {
