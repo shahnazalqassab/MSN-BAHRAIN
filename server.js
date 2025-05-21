@@ -11,8 +11,11 @@ const mongoose = require('mongoose')
 const methodOverride = require('method-override')
 const morgan = require('morgan')
 const expressSession = require('express-session')
-
 const MongoStore = require('connect-mongo')
+
+// Multer for file uploads
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 const passUserToView = require('./middleware/pass-user-to-view')
 const isSignedIn = require('./middleware/is-signed-in')
@@ -26,18 +29,14 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI, {
-  // useNewUrlParser: true,
-  //useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB: ${mongoose.connection.name}`)
 })
 
 // Middleware
 app.use(express.urlencoded({ extended: false }))
-app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))
 app.use(
@@ -54,17 +53,15 @@ app.use(passUserToView)
 
 // Routes
 app.get('/', (req, res) => {
-  if (req.session.user) {
-    res.redirect(`/user/${req.session.user._id}/user`)
-  } else {
-    res.render('index', { user: req.user });
-  }
+  // Always render the main page, even if logged in
+  res.render('index', { user: req.user });
 });
 
-app.use('/user', userController);
-app.use('/Ads', adsController);
-app.use(isSignedIn);
+app.use('/user', userController)
+// If you want to use multer in your adsController, you can pass upload as middleware there
+app.use('/Ads', adsController)
+app.use(isSignedIn)
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+  console.log(`Server running on port ${PORT}`)
+})

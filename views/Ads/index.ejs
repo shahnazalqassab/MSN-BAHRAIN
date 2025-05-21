@@ -1,5 +1,5 @@
-<%- include('../partials/_head.ejs')%>
-<%- include('../partials/_navbar.ejs') %> 
+<%- include('../partials/_head.ejs') %>
+<%- include('../partials/_navbar.ejs') %>
 <body>
   <div class="ads-page-container">
     <div class="ads-header">
@@ -13,7 +13,22 @@
         <li class="ads-list-item">
           <a href="/Ads/<%= user._id %>/Ads/<%= ad._id %>">
             <h4><%= ad.title %></h4>
-            <img src="/Ads/<%= ad.img %>" width="100px" height="auto"/>
+            <% if (ad.img) { %>
+              <img 
+                src="<%= ad.img.startsWith('http') ? ad.img : '/uploads/' + ad.img %>" 
+                width="100px" 
+                height="auto" 
+                alt="<%= ad.title %>"
+                onerror="this.onerror=null;this.src='/images/default-image.png';"
+              />
+            <% } else { %>
+              <img 
+                src="/images/default-image.png" 
+                width="100px" 
+                height="auto" 
+                alt="No image"
+              />
+            <% } %>
           </a>
         </li>
       <% }) %>
