@@ -86,18 +86,26 @@ router.delete('/:userId/Ads/:adId', async (req, res) => {
 //category
 router.get('/categories', async (req, res) => {
   const category = req.query.category
-  const ad = User.Ads(req.params)
+
+  const users = await User.find({})
+  let allAds = []
+
+  //concat is a combined method
+  users.forEach((user) => {
+    allAds = allAds.concat(user.Ads)
+  })
+  const filteredAds = allAds.filter((ad) => ad.category === category)
 
   if (category === 'phones') {
-    res.render('categories/phone', ad)
+    res.render('categories/phone', { ads: filteredAds, category })
   } else if (category === 'cars') {
-    res.render('categories/car', ad)
+    res.render('categories/car', { ads: filteredAds, category })
   } else if (category === 'books') {
-    res.render('categories/book', ad)
+    res.render('categories/book', { ads: filteredAds, category })
   } else if (category === 'laptop') {
-    res.render('categories/laptop', ad)
+    res.render('categories/laptop', { ads: filteredAds, category })
   } else if (category === 'spare parts') {
-    res.render('categories/spareParts', ad)
+    res.render('categories/spareParts', { ads: filteredAds, category })
   }
 })
 
