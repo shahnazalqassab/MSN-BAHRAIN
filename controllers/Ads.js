@@ -85,19 +85,19 @@ router.delete('/:userId/Ads/:adId', async (req, res) => {
 
 //category
 router.get('/categories', async (req, res) => {
-  const rawCategory = req.query.category
-  const category = rawCategory.trim().toLowerCase()
+  const category = req.query.category
+  const ad = User.Ads(req.params)
 
   if (category === 'phones') {
-    res.render('categories/phone')
+    res.render('categories/phone', ad)
   } else if (category === 'cars') {
-    res.render('categories/cars')
+    res.render('categories/car', ad)
   } else if (category === 'books') {
-    res.render('categories/book')
+    res.render('categories/book', ad)
   } else if (category === 'laptop') {
-    res.render('categories/laptop')
+    res.render('categories/laptop', ad)
   } else if (category === 'spare parts') {
-    res.render('categories/spareParts')
+    res.render('categories/spareParts', ad)
   }
 })
 
