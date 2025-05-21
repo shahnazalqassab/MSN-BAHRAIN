@@ -142,7 +142,7 @@ body {
   max-width: 160px;
   background: linear-gradient(135deg, #fff 70%, #e0eafc 100%);
   border-radius: 18px;
-  box-shadow: 0 4px 18px rgba(27, 224, 13, 0.08);
+  box-shadow: 0 4px 18px #28a74522, 0 0 0 #28a74500;
   padding: 18px 10px 12px 10px;
   text-align: center;
   font-weight: bold;
@@ -156,6 +156,16 @@ body {
   align-items: center;
   cursor: pointer;
   justify-content: center;
+  animation: bar-glow 2s infinite alternate;
+}
+
+@keyframes bar-glow {
+  0% {
+    box-shadow: 0 4px 18px #28a74522, 0 0 0 #28a74500;
+  }
+  100% {
+    box-shadow: 0 8px 32px #28a74544, 0 0 24px #1965b244;
+  }
 }
 .bar-box img {
   width: 100%;
