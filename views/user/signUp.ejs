@@ -3,29 +3,33 @@
 <body class="auth-bg">
   <div class="auth-center-container">
     <div class="signin-box">
-      <h1 class="h1-SignIn">Sign Up</h1>
-      <form action="/user/signUp" method="POST">
-        <label for="username">Username</label>
+      <h1 class="h1-SignIn"><i class="fa fa-user-plus"></i> Sign Up</h1>
+      <form action="/user/signUp" method="POST" autocomplete="off">
+        <label for="username"><i class="fa fa-user"></i> Username</label>
         <input class="input" type="text" id="username" name="username" required>
 
-        <label for="password">Password</label>
+        <label for="password"><i class="fa fa-lock"></i> Password</label>
         <input class="input" type="password" id="password" name="password" required>
 
-        <label for="confirmPassword">Confirm Password</label>
+        <label for="confirmPassword"><i class="fa fa-lock"></i> Confirm Password</label>
         <input class="input" type="password" id="confirmPassword" name="confirmPassword" required>
 
-        <label  for="category">Category</label>
-        <select class="input" name="category" id="category">
-        <option value="Seller">Seller</option>
-        <option value="Buyer">Buyer</option>
+        <label for="category"><i class="fa fa-users"></i> Category</label>
+        <select class="input" name="category" id="category" required>
+          <option value="" disabled selected>Select Category</option>
+          <option value="Seller">Seller</option>
+          <option value="Buyer">Buyer</option>
+        </select>
 
-        <label for="contactNo">Contact No.</label>
-        <input class="input" type="number" id="contactNo" name="contactNo" required>
+        <label for="contactNo"><i class="fa fa-phone"></i> Contact No.</label>
+        <input class="input" type="tel" id="contactNo" name="contactNo" pattern="[0-9]{8,15}" required>
 
-        <label for="email">Email</label>
+        <label for="email"><i class="fa fa-envelope"></i> Email</label>
         <input class="input" type="email" id="email" name="email" required>
 
-        <button class="input-submit" type="submit">Sign Up</button>
+        <button class="input-submit" type="submit">
+          <i class="fa fa-user-plus"></i> Sign Up
+        </button>
       </form>
       <div class="signin-extra">
         <span>Already have an account?</span>
