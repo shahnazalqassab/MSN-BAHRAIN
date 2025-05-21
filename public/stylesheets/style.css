@@ -125,12 +125,39 @@ body {
 }
 
 /* Categories Section */
+/* Add to your main CSS file, e.g., style.css */
+.ads-box-modern {
+  margin-top: 2rem;
+  padding: 1.2rem 1rem;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #e0eafc 60%, #28a74522 100%);
+  box-shadow: 0 4px 24px #28a74522, 0 2px 12px #1965b233;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+.ads-box-modern-img {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px #1965b233;
+}
+.ads-box-modern-title {
+  font-weight: 600;
+  color: #1965b2;
+  font-size: 1.08rem;
+}
+.ads-box-modern-desc {
+  font-size: 0.98rem;
+  color: #28a745;
+}
 .ads-container {
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
   margin: 0 auto;
-  max-width: 700px;
+  max-width: 1000px;
   justify-content: center;
   transition: all 0.3s;
   padding: 0;
