@@ -106,8 +106,6 @@ router.get('/aboutUs', (req, res) => {
 // GET /:USERID/USER DASHBOARD
 router.get('/:userId/user', async (req, res) => {
   const currentUser = await User.findById(req.session.user)
-
-  // res.render('user/index.ejs', { user: currentUser })
   res.render('index.ejs', { user: currentUser })
 })
 
@@ -192,6 +190,7 @@ router.get('/:userId/changePassword', async (req, res) => {
   }
 })
 
+// GET :USERID/CHANGEPIC (CALLING THE UPLOAD PAGE)
 router.get('/:userId/changePic', async (req, res) => {
   const checkVar = 2
 
@@ -209,17 +208,9 @@ router.get('/:userId/changePic', async (req, res) => {
   }
 })
 
-// router.post('/:userId/changePic', async (req, res) => {
-// const currentUser = await User.findById(req.session._id);
 
-//   console.log(req.file);
-//   res.send('correct so far')
-// });
-
-router.post(
-  '/:userId/changePic',
-  upload.single('profile'),
-  async (req, res) => {
+// POST :USERID/CHANGEPIC (UPDATING THE PICTURE IN THE DB)
+router.post('/:userId/changePic', upload.single('profile'), async (req, res) => {
     try {
       const picPath = req.file.filename
 
@@ -236,5 +227,12 @@ router.post(
     console.log(req.file)
   }
 )
+
+
+router.get('/:userID/dashboard', async (req, res) => {
+  const currentUser = await User.findById(req.session.user)
+  res.render('user/index.ejs', { user: currentUser })
+})
+
 
 module.exports = router
