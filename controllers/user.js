@@ -107,7 +107,8 @@ router.get('/aboutUs', (req, res) => {
 router.get('/:userId/user', async (req, res) => {
   const currentUser = await User.findById(req.session.user)
 
-  res.render('user/index.ejs', { user: currentUser })
+  // res.render('user/index.ejs', { user: currentUser })
+  res.render('index.ejs', { user: currentUser })
 })
 
 // GET /:USERID/EDIT (EDIT PROFILE ROUTE)
