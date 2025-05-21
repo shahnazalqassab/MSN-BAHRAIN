@@ -1,18 +1,32 @@
 <%- include('./partials/_head.ejs') %>
 <%- include('./partials/_navbar.ejs') %>
 
-
 <body>
-<h1>Meet the team behind this:</h1>
-<hr>
-<h3>Mohammed Al-Abdulla:</h3>
-<p>The senior designer of the interface</p>
-<hr>
-<h3>Shahnaz Al-Qassab</h3>
-<p>The trouble-maker</p>
-<hr>
-<h3>Noora Al-Qahtani</h3>
-<p>The brain behind the scene</p>
-
+  <div class="aboutus-container">
+    <h1 class="aboutus-title"><i class="fa fa-users"></i> Meet the Team</h1>
+    <div class="team-list">
+      <div class="team-member">
+        <div class="team-avatar" style="background-image:url('/images/avatar1.png');"></div>
+        <div>
+          <h3>Mohammed Al-Abdulla</h3>
+          <p class="team-role">Senior Designer of the Interface</p>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="team-avatar" style="background-image:url('/images/avatar2.png');"></div>
+        <div>
+          <h3>Shahnaz Al-Qassab</h3>
+          <p class="team-role">The Trouble-Maker</p>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="team-avatar" style="background-image:url('/images/avatar3.png');"></div>
+        <div>
+          <h3>Noora Al-Qahtani</h3>
+          <p class="team-role">The Brain Behind the Scene</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 <%- include('./partials/_footer.ejs') %>
