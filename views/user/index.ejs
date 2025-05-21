@@ -56,26 +56,25 @@
     </a>
     </div>
         <% if(user.category==='Admin') { %>
-        <div class="your-ads-box">
-            <h1 class="dashboard-title"><i class="fa fa-user-circle"></i>All Sys Users</h1>
-            <a class="your-ads-link" href="/Ads/<%= user._id %>/Ads">
+        <div class="your-user-box">
+            <h1 class="dashboard-title"><i class="fa fa-user-circle"></i>System Users</h1>
+            <a class="your-user-link" href="/">
             <span style="font-size:1.3rem;font-weight:600;letter-spacing:1px;">
-            <i class="fa fa-bullhorn"></i>All System Users
+            <i class="fa fa-bullhorn"></i>View all users
             </span>
         
-            <span class="your-ads-desc" style="display:block;font-size:0.98rem;color:#555;margin-top:0.3rem;">
+            <span class="your-user-desc" style="display:block;font-size:0.98rem;color:#555;margin-top:0.3rem;">
         
             </span>
             </a>
-        <ul class="ads-list">
-        <% if (user.Ads.length > 0) { %>
-            <li class="ads-list-item">
+        <ul class="user-list">
+            <% all.forEach((user) => { %>
+            <li><%= user.username %></li>                                   
+            <% }) %>
+            <li class="user-list-item">
             <a href="/Ads/<%= user._id %>/Ads/<%= user.Ads[user.Ads.length-1]._id %>">
-                <h5><%= user.Ads[user.Ads.length-1].title %></h5>
-                <img src="/Ads/<%= user.Ads[user.Ads.length-1].img %>" width="100px" height="auto"/>
-            </a>
+                <h5>Creating New User</h5></a>
             </li>
-        <% } %>
         </ul>
         </div>
         <% } %>
