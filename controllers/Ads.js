@@ -36,7 +36,7 @@ router.post('/:userId/Ads', upload.single('img'), async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
 
   const picPath = req.file.filename
-  
+
   console.log(picPath)
 
   const info = {
@@ -83,4 +83,19 @@ router.delete('/:userId/Ads/:adId', async (req, res) => {
   res.redirect(`/Ads/${currentUser._id}/Ads`)
 })
 
+//category
+router.get('/', async (req, res) => {
+  const Ads = Ads.id(req.params.adId)
+  if (Ads.category === 'books') {
+    res.redirect(`/Ads/categories/book`)
+  } else if (Ads.category === 'phones') {
+    res.redirect('/Ads/categories/phone')
+  } else if (Ads.category === 'laptop') {
+    res.redirect('/Ads/categories/laptop')
+  } else if (Ads.category === 'cars') {
+    res.redirect('/Ads/categories/cars')
+  } else if (Ads.category === 'spare parts') {
+    res.redirect('/Ads/categories/spareParts')
+  }
+})
 module.exports = router
