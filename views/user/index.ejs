@@ -62,7 +62,7 @@
       style="min-width: 340px; max-width: 400px; width: 100%"
     >
       <h1 class="dashboard-title">
-        <i class="fa fa-bullhorn"></i> Your Latest Ads
+        <i class="fa fa-bullhorn"></i> Ads Control
       </h1>
       <ul class="ads-list">
         <% if (user.Ads.length > 0) { %>
@@ -91,8 +91,11 @@
       </a>
     </div>
         <% if(user.category==='Admin') { %>
-        <div class="your-user-box">
-            <h1 class="dashboard-title"><i class="fa fa-user-circle"></i>System Users</h1>
+         <div
+      class="dashboard-box modern-box"
+      style="min-width: 340px; max-width: 400px; width: 100%"
+    >
+            <h1 class="dashboard-title"><i class="fa fa-user-circle"></i> System Control</h1>
             <a class="your-user-link" href="/">
             <span style="font-size:1.3rem;font-weight:600;letter-spacing:1px;">
             <i class="fa fa-bullhorn"></i>View all users
@@ -104,18 +107,16 @@
             </a>
         <ul class="user-list">
             <% all.forEach((user) => { %>
-            <li><%= user.username %></li>                                   
+            <li>Name: <%= user.username %><br>
+            Title: <%= user.category %></li>                                   
             <% }) %>
             <li class="user-list-item">
-            <a href="/Ads/<%= user._id %>/Ads/<%= user.Ads[user.Ads.length-1]._id %>">
+            <a href="/Ads/<%= user._id %>">
                 <h5>Creating New User</h5></a>
             </li>
         </ul>
         </div>
         <% } %>
-      </ul>
-    </div>
-    <% } %>
   </div>
 </body>
 <%- include('../partials/_footer') %>
