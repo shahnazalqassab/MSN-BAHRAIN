@@ -796,11 +796,16 @@ body {
   background-position: center;
   box-shadow: 0 2px 8px #1965b233;
   flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.team-role {
-  color: #28a745;
-  font-size: 1.05rem;
-  margin-top: 0.3rem;
-  font-style: italic;
+.team-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
 }
