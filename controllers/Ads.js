@@ -92,9 +92,12 @@ router.get('/categories', async (req, res) => {
 
   //concat is a combined method
   users.forEach((user) => {
-    allAds = allAds.concat(user.Ads)
+    // allAds = allAds.concat(user.Ads)
+    allAds = allAds.concat(user.username,user.Ads);
+    console.log(allAds)
   })
   const filteredAds = allAds.filter((ad) => ad.category === category)
+  console.log(filteredAds);
 
   if (category === 'phones') {
     res.render('categories/phone', { ads: filteredAds, category })
