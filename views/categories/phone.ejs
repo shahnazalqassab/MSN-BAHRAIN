@@ -1,9 +1,13 @@
 <%- include('../partials/_head.ejs') %>
 <%- include('../partials/_navbar.ejs') %>
 <body>
+  <h1 >Phones</h1>
   <div class="container">
   <div class="signin-box">
-    <h1 class="h1-SignIn">Phone</h1>
+    <% ad.forEach(ad => { %>
+       <h4><%= ad.name %></h4>
+      <% }) %>
+   
     </div>
     </div>
 </body>
