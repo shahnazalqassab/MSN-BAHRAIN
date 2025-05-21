@@ -40,7 +40,7 @@ router.post('/:userId/Ads', upload.single('img'), async (req, res) => {
   console.log(picPath)
 
   const info = {
-    img: picPath,
+    img: req.file.filename,
     title: req.body.title,
     price: req.body.price,
     description: req.body.description,
