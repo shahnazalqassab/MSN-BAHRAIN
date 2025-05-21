@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
   filename: (req, file, callBack) => {
     callBack(null, Date.now() + '-' + file.originalname)
   }
-});
+})
 
 // const upload = multer({destination: 'public/uploads/'});
 const upload = multer({ storage })
@@ -84,7 +84,7 @@ router.post('/signIn', async (req, res) => {
     _id: userInDatabase._id
   }
 
-  const currentUser = await User.findById(req.session.user._id);
+  const currentUser = await User.findById(req.session.user._id)
   console.log(currentUser.Ads)
   req.session.save(() => {
     res.redirect('/')
@@ -98,16 +98,15 @@ router.get('/signOut', (req, res) => {
 })
 
 router.get('/aboutUs', (req, res) => {
-  res.render('aboutUs.ejs');
-});
+  res.render('aboutUs.ejs')
+})
 
 ////////////////////////////// AFTER SIGN IN ROUTES /////////////////////////
 
 // GET /:USERID/USER DASHBOARD
 router.get('/:userId/user', async (req, res) => {
   const currentUser = await User.findById(req.session.user)
-
-  res.render('user/index.ejs', { user: currentUser })
+  res.render('index.ejs', { user: currentUser })
 })
 
 // GET /:USERID/EDIT (EDIT PROFILE ROUTE)
@@ -191,6 +190,7 @@ router.get('/:userId/changePassword', async (req, res) => {
   }
 })
 
+// GET :USERID/CHANGEPIC (CALLING THE UPLOAD PAGE)
 router.get('/:userId/changePic', async (req, res) => {
   const checkVar = 2
 
@@ -208,28 +208,31 @@ router.get('/:userId/changePic', async (req, res) => {
   }
 })
 
-// router.post('/:userId/changePic', async (req, res) => {
-// const currentUser = await User.findById(req.session._id);
 
-//   console.log(req.file);
-//   res.send('correct so far')
-// });
-
+// POST :USERID/CHANGEPIC (UPDATING THE PICTURE IN THE DB)
 router.post('/:userId/changePic', upload.single('profile'), async (req, res) => {
-  try{
-    const picPath = req.file.filename;
+    try {
+      const picPath = req.file.filename
 
-    const currentUser = await User.findById(req.session.user._id);
-    currentUser.profile = picPath
+      const currentUser = await User.findById(req.session.user._id)
+      currentUser.profile = picPath
 
-    await currentUser.save()
+      await currentUser.save()
 
-  res.redirect(`/user/${currentUser._id}/user`);
-  } catch (error) {
-    console.log(error);
-    res.redirect('/');
+      res.redirect(`/user/${currentUser._id}/user`)
+    } catch (error) {
+      console.log(error)
+      res.redirect('/')
+    }
+    console.log(req.file)
   }
-  console.log(req.file);
+)
+
+
+router.get('/:userID/dashboard', async (req, res) => {
+  const currentUser = await User.findById(req.session.user)
+  res.render('user/index.ejs', { user: currentUser })
 })
+
 
 module.exports = router

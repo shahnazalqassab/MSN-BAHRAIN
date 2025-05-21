@@ -16,17 +16,9 @@
         <a href="/"><i class="fa fa-home"></i> Home</a>
       </li>
       <% if (user) { %>
-      <li>
-        <a href="/user/<%= user._id %>/user"
-          ><i class="fa fa-user"></i> Dashboard</a
-        >
-      </li>
-      <li>
-        <a href="/user/signOut"><i class="fa fa-sign-out-alt"></i> Sign Out</a>
-      </li>
-      <li>
-        <a href="/user/aboutUs"><i class="fa fa-users"></i> About Us</a>
-      </li>
+        <li><a href="/user/<%= user._id %>/dashboard"><i class="fa fa-user"></i> Dashboard</a></li>
+        <li><a href="/user/signOut"><i class="fa fa-sign-out-alt"></i> Sign Out</a></li>
+        <li><a href="/user/aboutUs"><i class="fa fa-users"></i> About Us</a></li>
       <% } else { %>
       <li>
         <a href="/user/signIn"><i class="fa fa-sign-in-alt"></i> Sign In</a>
