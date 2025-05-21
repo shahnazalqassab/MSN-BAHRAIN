@@ -85,18 +85,19 @@ router.delete('/:userId/Ads/:adId', async (req, res) => {
 
 //category
 router.get('/categories', async (req, res) => {
-  const categories = Ads.filter(Ads.category)
-  console.log(Ads)
-  if (categories === 'Phone') {
-    res.render('categories/phone.ejs')
-  } else if (categories === 'cars') {
-    res.render('categories/cars.ejs')
-  } else if (categories === 'book') {
-    res.render('categories/cars.ejs')
-  } else if (categories === 'laptop') {
-    res.render('categories/cars.ejs')
-  } else if (categories === 'spare parts') {
-    res.render('categories/cars.ejs')
+  const rawCategory = req.query.category
+  const category = rawCategory.trim().toLowerCase()
+
+  if (category === 'phones') {
+    res.render('/categories/phone')
+  } else if (category === 'cars') {
+    res.render('categories/cars')
+  } else if (category === 'books') {
+    res.render('categories/book')
+  } else if (category === 'laptop') {
+    res.render('categories/laptop')
+  } else if (category === 'spare parts') {
+    res.render('categories/spareParts')
   }
 })
 
