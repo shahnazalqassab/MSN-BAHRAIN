@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
   filename: (req, file, callBack) => {
     callBack(null, Date.now() + '-' + file.originalname)
   }
-});
+})
 
 // const upload = multer({destination: 'public/uploads/'});
 const upload = multer({ storage })
@@ -84,7 +84,7 @@ router.post('/signIn', async (req, res) => {
     _id: userInDatabase._id
   }
 
-  const currentUser = await User.findById(req.session.user._id);
+  const currentUser = await User.findById(req.session.user._id)
   console.log(currentUser.Ads)
   req.session.save(() => {
     res.redirect('/')
@@ -98,8 +98,8 @@ router.get('/signOut', (req, res) => {
 })
 
 router.get('/aboutUs', (req, res) => {
-  res.render('aboutUs.ejs');
-});
+  res.render('aboutUs.ejs')
+})
 
 ////////////////////////////// AFTER SIGN IN ROUTES /////////////////////////
 
@@ -215,21 +215,25 @@ router.get('/:userId/changePic', async (req, res) => {
 //   res.send('correct so far')
 // });
 
-router.post('/:userId/changePic', upload.single('profile'), async (req, res) => {
-  try{
-    const picPath = req.file.filename;
+router.post(
+  '/:userId/changePic',
+  upload.single('profile'),
+  async (req, res) => {
+    try {
+      const picPath = req.file.filename
 
-    const currentUser = await User.findById(req.session.user._id);
-    currentUser.profile = picPath
+      const currentUser = await User.findById(req.session.user._id)
+      currentUser.profile = picPath
 
-    await currentUser.save()
+      await currentUser.save()
 
-  res.redirect(`/user/${currentUser._id}/user`);
-  } catch (error) {
-    console.log(error);
-    res.redirect('/');
+      res.redirect(`/user/${currentUser._id}/user`)
+    } catch (error) {
+      console.log(error)
+      res.redirect('/')
+    }
+    console.log(req.file)
   }
-  console.log(req.file);
-})
+)
 
 module.exports = router
