@@ -57,14 +57,14 @@ app.get('/', (req, res) => {
   if (req.session.user) {
     res.redirect(`/user/${req.session.user._id}/user`)
   } else {
-    res.render('index.ejs')
+    res.render('index', { user: req.user });
   }
-})
+});
 
-app.use('/user', userController)
-app.use('/Ads', adsController)
-app.use(isSignedIn)
+app.use('/user', userController);
+app.use('/Ads', adsController);
+app.use(isSignedIn);
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+  console.log(`Server running on port ${PORT}`);
+});

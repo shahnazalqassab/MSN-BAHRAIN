@@ -2,32 +2,33 @@
 <%- include('../partials/_navbar.ejs') %>
 <body class="auth-bg">
   <div class="auth-center-container">
-    <div class="signin-box">
+    <div class="signin-box" style="max-width: 400px; width: 100%;">
       <h1 class="h1-SignIn"><i class="fa fa-user-plus"></i> Sign Up</h1>
       <form action="/user/signUp" method="POST" autocomplete="off">
-        <label for="username"><i class="fa fa-user"></i> Username</label>
-        <input class="input" type="text" id="username" name="username" required>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <label for="username"><i class="fa fa-user"></i> Username</label>
+          <input class="input" type="text" id="username" name="username" required>
 
-        <label for="password"><i class="fa fa-lock"></i> Password</label>
-        <input class="input" type="password" id="password" name="password" required>
+          <label for="password"><i class="fa fa-lock"></i> Password</label>
+          <input class="input" type="password" id="password" name="password" required>
 
-        <label for="confirmPassword"><i class="fa fa-lock"></i> Confirm Password</label>
-        <input class="input" type="password" id="confirmPassword" name="confirmPassword" required>
+          <label for="confirmPassword"><i class="fa fa-lock"></i> Confirm Password</label>
+          <input class="input" type="password" id="confirmPassword" name="confirmPassword" required>
 
-        <label for="category"><i class="fa fa-users"></i> Category</label>
-        <select class="input" name="category" id="category" required>
-          <option value="" disabled selected>Select Category</option>
-          <option value="Seller">Seller</option>
-          <option value="Buyer">Buyer</option>
-        </select>
+          <label for="category"><i class="fa fa-users"></i> Category</label>
+          <select class="input" name="category" id="category" required>
+            <option value="" disabled selected>Select Category</option>
+            <option value="Seller">Seller</option>
+            <option value="Buyer">Buyer</option>
+          </select>
 
-        <label for="contactNo"><i class="fa fa-phone"></i> Contact No.</label>
-        <input class="input" type="tel" id="contactNo" name="contactNo" pattern="[0-9]{8,15}" required>
+          <label for="contactNo"><i class="fa fa-phone"></i> Contact No.</label>
+          <input class="input" type="tel" id="contactNo" name="contactNo" pattern="[0-9]{8,15}" required>
 
-        <label for="email"><i class="fa fa-envelope"></i> Email</label>
-        <input class="input" type="email" id="email" name="email" required>
-
-        <button class="input-submit" type="submit">
+          <label for="email"><i class="fa fa-envelope"></i> Email</label>
+          <input class="input" type="email" id="email" name="email" required>
+        </div>
+        <button class="input-submit" type="submit" style="margin-top: 1.2rem;">
           <i class="fa fa-user-plus"></i> Sign Up
         </button>
       </form>
