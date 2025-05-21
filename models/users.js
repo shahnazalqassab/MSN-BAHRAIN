@@ -13,7 +13,6 @@ const AdsSchema = new mongoose.Schema(
       type: String,
       enum: ['books', 'phones', 'cars', 'spare parts', 'laptop']
     }
-
   },
   { timestamps: true }
 )

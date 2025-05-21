@@ -8,33 +8,34 @@
   <form action="/Ads/<%= user._id %>/Ads" method="POST" enctype="multipart/form-data">
 
 
-    <label for="img">image</label>
+    <label for="img">Image</label>
     <input class="input" type="file" name="img" accept="image/*"/>
   <br>
 
 
-  <label for="title">title</label>
+  <label for="title">Title</label>
   <input class="input"type="text" name="title" id="title">
   <br>
 
-  <label for="price">price</label>
+  <label for="price">Price</label>
   <input class="input" type="text" name="price" id="price" >
   <br>
 
-    <label  for="description">description</label>
+    <label  for="description">Description</label>
     <textarea class="input" type="text" name="description" id="description"></textarea>
     <br>
 
     <label  for="category">Category</label>
     <select class="input" name="category" id="category">
-    <option value="phones">phones</option>
-    <option value="cars">cars</option>
-    <option value="books">books</option>
-    <option value="spare parts">spare parts</option>
+    <option value="phones">Phones</option>
+    <option value="cars">Cars</option>
+    <option value="books">Books</option>
+    <option value="spare parts">Spare Parts</option>
+    <option value="laptop">Laptop</option>
   </select>
     <br>
 
-    <button class="input-submit" type="submit">submit</button>
+    <button class="input-submit" type="submit">Submit</button>
   </form>
   </div>
   </div>

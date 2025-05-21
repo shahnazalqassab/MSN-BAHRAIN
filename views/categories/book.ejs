@@ -1,10 +1,23 @@
 <%- include('../partials/_head.ejs') %>
 <%- include('../partials/_navbar.ejs') %>
 <body>
+  <br>
+  <h1>books</h1>
+<ul>
+  <% ads.forEach(function(ad) { %>
   <div class="container">
-  <div class="signin-box">
-    <h1 class="h1-SignIn">Book</h1>
-    </div>
-    </div>
+  <div class="signin-box" >
+    
+      <img src="/Ads/<%= ad.img %>" alt="<%= ad.title %>" width="120">
+    <li>
+      <h1>Title : <%= ad.title %></h1>
+      <h2>Price : <%= ad.price %></h2>
+      <h2>Description :<%= ad.description %></h2>
+      <h2>user :<%= user %></h2>
+    </li>
+  </div>
+  </div>
+  <% }); %>
+</ul>
 </body>
 <%- include('../partials/_footer.ejs') %>
