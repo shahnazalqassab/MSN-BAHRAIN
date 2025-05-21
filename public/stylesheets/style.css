@@ -44,21 +44,28 @@ body {
   align-items: center;
 }
 @media (max-width: 600px) {
-  .main-center-container {
-    max-width: 700px;
-    margin: 90px auto 0 auto;
-    background:  url('/images/giphy-1.gif') center center/cover no-repeat;
-    border-radius: 24px;
-    box-shadow: 0 8px 40px rgba(25,101,178,0.10);
-    padding: 2.5rem 2.2rem 2.5rem 2.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+.main-center-container {
+  max-width: 700px;
+  margin: 90px auto 0 auto;
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 24px;
+  box-shadow: 0 8px 40px rgba(25, 101, 178, 0.1);
+  padding: 2.5rem 2.2rem 2.5rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: main-glow 2.5s infinite alternate;
+  transition: box-shadow 0.3s;
+}
+}
+@keyframes main-glow {
+  0% {
+    box-shadow: 0 8px 40px rgba(25, 101, 178, 0.1), 0 0 0 #fff0;
+  }
+  100% {
+    box-shadow: 0 16px 64px #fff8, 0 0 32px #fff6;
   }
 }
-
 /* Headline */
 .h1-Home {
   font-family: 'Montserrat', Arial, sans-serif;
@@ -194,7 +201,8 @@ body {
   transform: scale(1.12) rotate(-4deg);
 }
 
-/* Auth background */
+/* Add or update these styles for perfect centering and fit */
+
 .auth-bg {
   min-height: 100vh;
   background: linear-gradient(135deg, #e0eafc 0%, #1965b2 100%);
@@ -203,7 +211,6 @@ body {
   justify-content: center;
 }
 
-/* Center container for auth pages */
 .auth-center-container {
   width: 100vw;
   min-height: 100vh;
@@ -211,28 +218,34 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-/* Sign In Box */
 .signin-box {
-  /* background: url('/images/200w.gif') center center/cover no-repeat; */
-  background-color: white;
-  border-radius: 18px;
-  box-shadow: 0 8px 40px rgba(25, 101, 178, 0.1);
-  padding: 2.5rem 2.2rem 2rem 2.2rem;
-  max-width: 370px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 0 18px 4px #28a74533, 0 4px 24px rgba(25,101,178,0.10);
+  padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+  max-width: 320px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid #e0eafc00;
+  animation: signin-glow 2s infinite alternate;
+  transition: box-shadow 0.3s;
 }
 
+@keyframes signin-glow {
+  0% {
+    box-shadow: 0 0 18px 4px #28a74533, 0 4px 24px rgba(25,101,178,0.10);
+  }
+  100% {
+    box-shadow: 0 0 32px 12px #1965b277, 0 8px 32px #28a74544;
+  }
+}
 .h1-SignIn {
   font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #28a745;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-align: center;
   letter-spacing: 1px;
 }
@@ -240,19 +253,19 @@ body {
 .signin-box label {
   font-weight: 500;
   color: #1965b2;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
   display: block;
-  font-size: 1.05rem;
-  letter-spacing: 0.5px;
+  font-size: 0.98rem;
+  letter-spacing: 0.3px;
 }
 
 .signin-box .input {
   width: 100%;
-  margin-bottom: 1.1rem;
-  padding: 0.55rem 0.8rem;
-  border-radius: 7px;
-  border: 1.5px solid #e0eafc;
-  font-size: 1.05rem;
+  margin-bottom: 0.7rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  border: 1.2px solid #e0eafc;
+  font-size: 0.98rem;
   background: #f8f9fa;
   transition: border 0.2s;
   font-family: 'Roboto', Arial, sans-serif;
@@ -747,11 +760,20 @@ body {
   display: flex;
   align-items: center;
   gap: 1.3rem;
-  background: linear-gradient(90deg, #111112 60%, #2c302d 100%);
+  background: linear-gradient(90deg, #1965b2 60%, #28a745 100%);
   border-radius: 14px;
-  box-shadow: 0 2px 12px #28a74511;
+  box-shadow: 0 2px 12px #1965b233;
   padding: 1.2rem 1.2rem;
   transition: box-shadow 0.2s, transform 0.2s;
+  animation: team-glow 2s infinite alternate;
+}
+@keyframes team-glow {
+  0% {
+    box-shadow: 0 2px 12px #28a74522, 0 0 0 #28a74500;
+  }
+  100% {
+    box-shadow: 0 8px 32px #1965b277, 0 0 24px #28a74544;
+  }
 }
 .team-member:hover {
   box-shadow: 0 8px 32px #28a74522;
@@ -761,53 +783,23 @@ body {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: #414244;
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0 2px 8px #28a74522;
-  flex-shrink: 0;
-}
-.team-role {
-  color: #28a745;
-  font-size: 1.05rem;
-  margin-top: 0.3rem;
-  font-style: italic;
-}
-
-/*  */
-
-.team-member {
-  display: flex;
-  align-items: center;
-  gap: 1.3rem;
-  background: linear-gradient(90deg, #1965b2 60%, #28a745 100%);
-  border-radius: 14px;
-  box-shadow: 0 2px 12px #1965b233;
-  padding: 1.2rem 1.2rem;
-  transition: box-shadow 0.2s, transform 0.2s;
-  animation: team-glow 2s infinite alternate;
-}
-
-@keyframes team-glow {
-  0% {
-    box-shadow: 0 2px 12px #28a74522, 0 0 0 #28a74500;
-  }
-  100% {
-    box-shadow: 0 8px 32px #1965b277, 0 0 24px #28a74544;
-  }
-}
-
-.team-avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
   background: #fff;
   background-size: cover;
   background-position: center;
   box-shadow: 0 2px 8px #1965b233;
   flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
+.team-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
 .team-role {
   color: #28a745;
   font-size: 1.05rem;

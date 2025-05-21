@@ -1,20 +1,22 @@
-<nav class="navbar">
+<nav class="navbar" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 100;">
   <div class="navbar-container">
     <a href="/" class="navbar-logo">
-      <img src="/images/flag.gif" alt="MSN Bahrain" style="height:36px;vertical-align:middle;">
+      <img src="/images/flag.gif" alt="MSN Bahrain" style="height:28px;vertical-align:middle;">
       <span class="navbar-brand">MSN Bahrain</span>
     </a>
     <ul class="nav-links">
+      <li>
+        <a href="/"><i class="fa fa-home"></i> Home</a>
+      </li>
       <% if (user) { %>
         <li><a href="/user/<%= user._id %>/user"><i class="fa fa-user"></i> Dashboard</a></li>
         <li><a href="/user/signOut"><i class="fa fa-sign-out-alt"></i> Sign Out</a></li>
-        <li><a href="/user/aboutUs"><i class="fa fa-sign-out-alt"></i> About Us</a></li>
-
+        <li><a href="/user/aboutUs"><i class="fa fa-users"></i> About Us</a></li>
       <% } else { %>
         <li><a href="/user/signIn"><i class="fa fa-sign-in-alt"></i> Sign In</a></li>
         <li><a href="/user/signUp"><i class="fa fa-user-plus"></i> Sign Up</a></li>
-        <li><a href="/user/aboutUs"><i class="fa fa-sign-out-alt"></i> About Us</a></li>
+        <li><a href="/user/aboutUs"><i class="fa fa-users"></i> About Us</a></li>
       <% } %>
     </ul>
   </div>
-</nav
+</nav>

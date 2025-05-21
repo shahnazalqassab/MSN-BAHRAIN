@@ -7,11 +7,14 @@
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body class="Home">
-  <!-- Top right auth buttons -->
-  <div class="top-right-auth">
+  <!-- Navbar -->
+  <%- include('./partials/_navbar.ejs') %>
+
+  <!-- Top right auth buttons (optional, can be removed if handled in navbar) -->
+  <!-- <div class="top-right-auth">
     <a href="/user/signIn" class="signInUp">Sign In</a>
     <a href="/user/signUp" class="signInUp">Sign Up</a>
-  </div>
+  </div> -->
 
   <!-- Main headline centered -->
   <div class="main-center-container">
@@ -48,5 +51,7 @@
       </div>
     </div>
   </div>
+
+  <%- include('./partials/_footer.ejs') %>
 </body>
 </html>
