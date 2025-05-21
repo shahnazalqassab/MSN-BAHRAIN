@@ -1,24 +1,48 @@
-<%- include('../partials/_head.ejs') %>
-<%- include('../partials/_navbar.ejs') %>
-
+<%- include('../partials/_head.ejs') %> <%- include('../partials/_navbar.ejs')
+%>
 <body class="auth-bg">
-  <div class="profile-ads-flex-container">
-    <div class="dashboard-box">
+  <div
+    class="profile-ads-flex-container"
+    style="
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 2.5rem;
+      justify-content: center;
+      align-items: stretch;
+      padding: 2rem 0;
+      overflow-x: auto;
+    "
+  >
+    <!-- Profile Box -->
+    <div
+      class="dashboard-box modern-box"
+      style="min-width: 340px; max-width: 400px; width: 100%"
+    >
       <h1 class="dashboard-title"><i class="fa fa-user-circle"></i> Profile</h1>
       <div class="dashboard-profile">
-        <img src="/uploads/<%= user.profile %>" alt="Profile Picture" class="dashboard-avatar">
-        <h3 class="dashboard-welcome">Welcome, <span><%= user.username %></span></h3>
+        <img
+          src="/uploads/<%= user.profile %>"
+          alt="Profile Picture"
+          class="dashboard-avatar"
+        />
+        <h3 class="dashboard-welcome">
+          Welcome, <span><%= user.username %></span>
+        </h3>
         <a class="dashboard-link" href="/user/<%= user._id %>/changePic">
           <i class="fa fa-image"></i> Change Profile Picture
         </a>
       </div>
       <div class="dashboard-info">
         <div class="dashboard-info-row">
-          <span class="dashboard-info-label"><i class="fa fa-phone"></i> Contact No.:</span>
+          <span class="dashboard-info-label"
+            ><i class="fa fa-phone"></i> Contact No.:</span
+          >
           <span class="dashboard-info-value"><%= user.contactNo %></span>
         </div>
         <div class="dashboard-info-row">
-          <span class="dashboard-info-label"><i class="fa fa-envelope"></i> Email:</span>
+          <span class="dashboard-info-label"
+            ><i class="fa fa-envelope"></i> Email:</span
+          >
           <span class="dashboard-info-value"><%= user.email %></span>
         </div>
       </div>
@@ -27,33 +51,44 @@
           <i class="fa fa-user-edit"></i> Edit Profile
         </a>
         <a class="dashboard-link" href="/user/<%= user._id %>/changePassword">
-          <i class="fa fa-key"></i> Change Password <span class="dashboard-note">(you'll have to re-log in)</span>
+          <i class="fa fa-key"></i> Change Password
+          <span class="dashboard-note">(you'll have to re-log in)</span>
         </a>
       </div>
     </div>
-    <div class="your-ads-box">
-        <h1 class="dashboard-title"><i class="fa fa-user-circle"></i> Your latest Ads</h1>
-        <ul class="ads-list">
-            <% if (user.Ads.length > 0) { %>
-            <li class="ads-list-item">
-                <a href="/Ads/<%= user._id %>/Ads/<%= user.Ads[user.Ads.length-1]._id %>">
-                <h5><%= user.Ads[user.Ads.length-1].title %></h5>
-                <img src="/Ads/<%= user.Ads[user.Ads.length-1].img %>" width="100px" height="auto"/>
-                </a>
-            </li>
-            <% } else { %>
-                <h5>Still no ad to display</h5>
-            <% } %>
-        </ul>
-    <a class="your-ads-link" href="/Ads/<%= user._id %>/Ads">
-        <span style="font-size:1.3rem;font-weight:600;letter-spacing:1px;">
-        <i class="fa fa-bullhorn"></i>All Your Ads
+    <!-- Latest Ads Box -->
+    <div
+      class="dashboard-box modern-box"
+      style="min-width: 340px; max-width: 400px; width: 100%"
+    >
+      <h1 class="dashboard-title">
+        <i class="fa fa-bullhorn"></i> Your Latest Ads
+      </h1>
+      <ul class="ads-list">
+        <% if (user.Ads.length > 0) { %>
+        <li class="ads-list-item" style="margin-bottom: 1.2rem">
+          <a
+            href="/Ads/<%= user._id %>/Ads/<%= user.Ads[user.Ads.length-1]._id %>"
+          >
+            <h5 style="margin-bottom: 0.5rem">
+              <%= user.Ads[user.Ads.length-1].title %>
+            </h5>
+            <img
+              src="/Ads/<%= user.Ads[user.Ads.length-1].img %>"
+              width="100"
+              style="border-radius: 8px; box-shadow: 0 2px 8px #e0eafc"
+            />
+          </a>
+        </li>
+        <% } else { %>
+        <li><h5>No ads to display yet.</h5></li>
+        <% } %>
+      </ul>
+      <a class="your-ads-link" href="/Ads/<%= user._id %>/Ads">
+        <span style="font-size: 1.1rem; font-weight: 600; letter-spacing: 1px">
+          <i class="fa fa-list"></i> View All Your Ads
         </span>
-        
-        <span class="your-ads-desc" style="display:block;font-size:0.98rem;color:#555;margin-top:0.3rem;">
-        
-        </span>
-    </a>
+      </a>
     </div>
         <% if(user.category==='Admin') { %>
         <div class="your-user-box">
@@ -78,6 +113,9 @@
         </ul>
         </div>
         <% } %>
+      </ul>
+    </div>
+    <% } %>
   </div>
 </body>
 <%- include('../partials/_footer') %>
