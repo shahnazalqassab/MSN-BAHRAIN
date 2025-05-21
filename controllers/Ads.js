@@ -85,14 +85,19 @@ router.delete('/:userId/Ads/:adId', async (req, res) => {
 
 //category
 router.get('/categories', async (req, res) => {
-  const Ads = Ads.filter(Ads.category)
+  const categories = Ads.filter(Ads.category)
   console.log(Ads)
-  if (Ads === 'Phone') {
+  if (categories === 'Phone') {
     res.render('categories/phone.ejs')
-  } else if (Ads === 'cars') {
+  } else if (categories === 'cars') {
     res.render('categories/cars.ejs')
-  } else if (Ads === 'Book') {
+  } else if (categories === 'book') {
+    res.render('categories/cars.ejs')
+  } else if (categories === 'laptop') {
+    res.render('categories/cars.ejs')
+  } else if (categories === 'spare parts') {
     res.render('categories/cars.ejs')
   }
 })
+
 module.exports = router
