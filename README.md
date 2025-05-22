@@ -71,19 +71,9 @@
 - Ads
 
   - AdsID
-  - CategoryID
+  - Category
   - UserID
   - Title
   - Price
   - Date
   - Description
-
-- Category
-  - CategoryID
-  - Title
-  - Description
-  - Quantity
-  - isAvailable
-  - Date
-
----
