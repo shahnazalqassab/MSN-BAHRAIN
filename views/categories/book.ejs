@@ -10,10 +10,11 @@
     
       <img src="/Ads/<%= ad.img %>" alt="<%= ad.title %>" width="120">
     <li>
-      <h1>Title : <%= ad.title %></h1>
-      <h2>Price : <%= ad.price %></h2>
+      <h2>Title : <%= ad.title %></h2>
+      <h2>Price : BD<%= ad.price %></h2>
       <h2>Description :<%= ad.description %></h2>
-      <h2>Published by :<%= ad.owner %></h2>
+      <h2>Published by :<%= ad.owner.username %></h2>
+      <h2>Contact number :<%= ad.owner.contactNo %></h2>
     </li>
   </div>
   </div>
