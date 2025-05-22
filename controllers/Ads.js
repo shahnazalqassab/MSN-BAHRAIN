@@ -107,6 +107,7 @@ router.get('/categories', async (req, res) => {
 
   const filteredAds = allAds.filter((ad) => ad.category === selectedCategory)
 
+  //.populate('owner')  
   if (selectedCategory === 'phones') {
     res.render('categories/phone', { ads: filteredAds})
   } else if (selectedCategory === 'cars') {

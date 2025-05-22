@@ -14,6 +14,7 @@ body {
   min-height: 100vh;
   color: #222;
   box-sizing: border-box;
+  margin-top: 18px;
 }
 
 /* Navbar */
@@ -792,4 +793,3 @@ body {
   color: #fff !important;
   border: 1.5px solid #1965b2;
 }
-</style>
