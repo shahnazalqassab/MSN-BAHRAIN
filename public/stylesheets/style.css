@@ -1,7 +1,7 @@
 /* Google Fonts & Font Awesome */
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Montserrat:700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
 
 /* Reset & Base */
 html,
@@ -9,7 +9,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   background: linear-gradient(135deg, #1965b2 0%, #e0eafc 100%);
   min-height: 100vh;
   color: #222;
@@ -52,7 +52,7 @@ body {
 }
 .navbar-brand {
   color: #fff;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   font-size: 1.3rem;
   font-weight: bold;
   letter-spacing: 1px;
@@ -81,6 +81,29 @@ body {
   color: #1965b2;
 }
 
+/* Profile picture in navbar */
+.navbar-profile-link {
+  display: flex;
+  align-items: center;
+  margin-left: 1.2rem;
+  text-decoration: none;
+}
+
+.navbar-profile-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #28a745;
+  box-shadow: 0 2px 8px #e0eafc;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.navbar-profile-avatar:hover {
+  border: 2px solid #1965b2;
+  box-shadow: 0 4px 16px #28a74533;
+}
+
 /* Main Center Container */
 .main-center-container {
   max-width: 700px;
@@ -106,7 +129,7 @@ body {
 
 /* Headline */
 .h1-Home {
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   font-size: 2.3rem;
   font-weight: bold;
   color: #1965b2;
@@ -234,7 +257,7 @@ body {
   margin-top: 4px;
   font-size: 1rem;
   color: #1965b2;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
 }
 .bar-box:hover {
   transform: translateY(-7px) scale(1.05);
@@ -294,7 +317,7 @@ body {
   }
 }
 .h1-SignIn {
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   font-size: 1.4rem;
   font-weight: bold;
   color: #28a745;
@@ -322,8 +345,8 @@ body {
 }
 
 /* Make the username field stand out and always visible */
-.update-profile-form label[for='username'],
-.signin-box label[for='username'] {
+.update-profile-form label[for="username"],
+.signin-box label[for="username"] {
   font-size: 1.15rem;
   font-weight: 700;
   color: #1965b2;
@@ -379,7 +402,7 @@ body {
   }
 }
 .dashboard-title {
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   font-size: 2rem;
   font-weight: bold;
   color: #1965b2;
@@ -408,7 +431,7 @@ body {
   font-size: 1.18rem;
   color: #28a745;
   margin-bottom: 0.5rem;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   font-weight: 600;
 }
 .dashboard-welcome span {
@@ -543,7 +566,7 @@ body {
   box-shadow: 0 -2px 8px rgba(6, 125, 22, 0.451);
   letter-spacing: 1px;
   z-index: 90;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
 }
 .footer-content {
   max-width: 700px;
@@ -583,7 +606,7 @@ body {
 }
 
 .update-profile-title {
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   font-size: 1.7rem;
   font-weight: bold;
   color: #1965b2;
@@ -614,7 +637,7 @@ body {
   font-size: 1.05rem;
   background: #f8f9fa;
   transition: border 0.2s, box-shadow 0.2s;
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   box-shadow: 0 2px 8px #28a74511;
 }
 
@@ -646,7 +669,7 @@ body {
   border: none;
   border-radius: 9px;
   font-size: 1.13rem;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s;
@@ -790,4 +813,106 @@ body {
   background: #1965b2 !important;
   color: #fff !important;
   border: 1.5px solid #1965b2;
+}
+
+/* Professional horizontal ads list styling */
+.ads-list {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+  margin: 0 auto 1.2rem auto; /* Center horizontally and add bottom space */
+  justify-content: center; /* Center items in the container */
+  align-items: flex-end; /* Align items to the bottom */
+  scrollbar-width: thin;
+  scrollbar-color: #1965b2 #e0eafc;
+}
+
+.ads-list::-webkit-scrollbar {
+  height: 8px;
+}
+.ads-list::-webkit-scrollbar-thumb {
+  background: #1965b2;
+  border-radius: 6px;
+}
+.ads-list::-webkit-scrollbar-track {
+  background: #e0eafc;
+  border-radius: 6px;
+}
+
+.ads-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 150px;
+  max-width: 180px;
+  background: linear-gradient(135deg, #fff 70%, #e0eafc 100%);
+  border-radius: 14px;
+  box-shadow: 0 4px 18px #28a74522;
+  padding: 1.1rem 0.7rem 1.3rem 0.7rem;
+  margin: 0;
+  transition: box-shadow 0.2s, transform 0.2s;
+  border: 2px solid #e0eafc;
+}
+
+.ads-list-item:hover {
+  box-shadow: 0 8px 32px #28a74533;
+  transform: translateY(-6px) scale(1.04);
+  border-color: #28a745;
+}
+
+.ads-list-item img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.7rem;
+  box-shadow: 0 2px 8px #e0eafc;
+  background: #fff;
+}
+
+.ads-list-item h4,
+.ads-list-item h5 {
+  font-size: 1.08rem;
+  color: #1965b2;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.ads-list-item a {
+  color: #1965b2;
+  text-decoration: none;
+  transition: color 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ads-list-item a:hover {
+  color: #28a745;
+}
+
+@media (max-width: 600px) {
+  .ads-list {
+    gap: 1rem;
+  }
+  .ads-list-item {
+    min-width: 120px;
+    max-width: 140px;
+    padding: 0.7rem 0.3rem 1rem 0.3rem;
+  }
+  .ads-list-item img {
+    width: 65px;
+    height: 65px;
+  }
+}
+
+/* Add a little space at the bottom of the horizontal ads list */
+.ads-list {
+  margin-bottom: 1.2rem;
 }
