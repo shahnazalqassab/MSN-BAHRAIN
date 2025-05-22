@@ -57,61 +57,54 @@
       </div>
     </div>
     <!-- Latest Ads Box -->
-    <div
-      class="dashboard-box modern-box"
-      style="min-width: 340px; max-width: 400px; width: 100%"
-    >
+    <div class="dashboard-box modern-box"
+      style="min-width: 340px; max-width: 400px; width: 100%">
       <h1 class="dashboard-title">
         <i class="fa fa-bullhorn"></i> Ads Control
       </h1>
+      <span class="your-user-desc" style="display:block;font-size:0.98rem;color:#555;margin-top:0.3rem;">
+      <h2>Latest Ad</h2>
+      </span>
+    <% if (myAds.length > 0) { %> 
       <ul class="ads-list">
-        
         <li class="ads-list-item" style="margin-bottom: 1.2rem">
-          <a
-            href="/Ads/"
-          >
-            <h5 style="margin-bottom: 0.5rem">
-            </h5>
-            <img
-              src="/Ads/"
-              width="100"
-              style="border-radius: 8px; box-shadow: 0 2px 8px #e0eafc"
-            />
+          <a href="/Ads/" >
+            <h5 style="margin-bottom: 0.5rem"><%= myAds[myAds.length-1].title %></h5>
+            <img src="/Ads/<%= myAds[myAds.length-1].img %>" width="100" style="border-radius: 8px; box-shadow: 0 2px 8px #e0eafc"/>
           </a>
         </li>
-        <li><h5>No ads to display yet.</h5></li>
       </ul>
+      <% } else { %>
+        <h5>No ads to display yet.</h5>
+      <% } %>
       <a class="your-ads-link" href="/Ads/<%= user._id %>/Ads">
         <span style="font-size: 1.1rem; font-weight: 600; letter-spacing: 1px">
-          <i class="fa fa-list"></i> View All Your Ads
-        </span>
-      </a>
+          <i class="fa fa-list"></i>Show More</span></a>
     </div>
         <% if(user.category==='Admin') { %>
          <div
       class="dashboard-box modern-box"
-      style="min-width: 340px; max-width: 400px; width: 100%"
-    >
+      style="min-width: 340px; max-width: 400px; width: 100%">
             <h1 class="dashboard-title"><i class="fa fa-user-circle"></i> System Control</h1>
-            <a class="your-user-link" href="/">
-            <span style="font-size:1.3rem;font-weight:600;letter-spacing:1px;">
-            <i class="fa fa-bullhorn"></i>View all users
-            </span>
-        
             <span class="your-user-desc" style="display:block;font-size:0.98rem;color:#555;margin-top:0.3rem;">
-        
+            <h2>System Users:</h2>
             </span>
             </a>
         <ul class="user-list">
             <% all.forEach((user) => { %>
             <li>Name: <%= user.username %><br>
-            Title: <%= user.category %></li>                                   
+            Account type: <%= user.category %></li>
+            <br>                                   
             <% }) %>
             <li class="user-list-item">
             <a href="/Ads/<%= user._id %>">
                 <h5>Creating New User</h5></a>
             </li>
         </ul>
+        
+        <a class="your-ads-link" href="/">
+        <span style="font-size: 1.1rem; font-weight: 600; letter-spacing: 1px">
+        <i class="fa fa-list"></i>View all users</span></a>
         </div>
         <% } %>
   </div>
