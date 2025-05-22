@@ -103,7 +103,7 @@ router.delete('/:userId/Ads/:adId', async (req, res) => {
 router.get('/categories', async (req, res) => {
   const selectedCategory = req.query.category
 
-  const allAds = await Ads.find({})
+  const allAds = await Ads.find({}).populate('owner')
 
   const filteredAds = allAds.filter((ad) => ad.category === selectedCategory)
 
@@ -116,7 +116,7 @@ router.get('/categories', async (req, res) => {
     res.render('categories/book', { ads: filteredAds })
   } else if (selectedCategory === 'laptop') {
     res.render('categories/laptop', { ads: filteredAds })
-  } else if (selectedCategory === 'Spare Parts') {
+  } else if (selectedCategory === 'Spare%Parts') {
     res.render('categories/spareParts', { ads: filteredAds })
   }
 })
