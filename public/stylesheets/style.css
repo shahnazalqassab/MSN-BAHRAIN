@@ -14,6 +14,7 @@ body {
   min-height: 100vh;
   color: #222;
   box-sizing: border-box;
+  margin-top: 18px;
 }
 
 /* Navbar */
@@ -776,4 +777,17 @@ body {
   .aboutus-container {
     padding: 1.2rem 0.5rem;
   }
+}
+
+/* Add this to your style.css for the cancel button */
+.cancel-btn {
+  background: #e0eafc !important;
+  color: #1965b2 !important;
+  border: 1.5px solid #1965b2;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.cancel-btn:hover {
+  background: #1965b2 !important;
+  color: #fff !important;
+  border: 1.5px solid #1965b2;
 }

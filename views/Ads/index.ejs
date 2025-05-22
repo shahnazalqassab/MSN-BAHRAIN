@@ -9,7 +9,7 @@
       </a>
     </div>
     <ul class="ads-list">
-      <% Ads.forEach(ad => { %>
+      <% myAds.forEach(ad => { %>
         <li class="ads-list-item">
           <a href="/Ads/<%= user._id %>/Ads/<%= ad._id %>">
             <h4><%= ad.title %></h4>

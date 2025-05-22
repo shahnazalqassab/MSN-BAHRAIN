@@ -1,6 +1,7 @@
 const express = require('express')
 const User = require('../models/users.js')
 const multer = require('multer')
+const Ads = require('../models/ads.js');
 
 const router = express.Router()
 
@@ -20,14 +21,14 @@ const upload = multer({ storage })
 //get:index
 router.get('/:userId/Ads', async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
-  const Ads = currentUser.Ads
-  res.render('Ads/index.ejs', { Ads, user: currentUser })
+  const myAds = await Ads.find().populate('owner');
+
+  res.render('Ads/index.ejs', { myAds, user: currentUser })
 })
 
 //:get:new
 router.get('/:userId/new', async (req, res) => {
   const currentUser = await User.findById(req.params.userId)
-
   res.render('Ads/new.ejs', { user: currentUser })
 })
 
@@ -37,75 +38,86 @@ router.post('/:userId/Ads', upload.single('img'), async (req, res) => {
 
   const picPath = req.file.filename
 
-  console.log(picPath)
-
   const info = {
-    img: req.file.filename,
+    img: picPath,
     title: req.body.title,
     price: req.body.price,
     description: req.body.description,
-    category: req.body.category
+    condition: req.body.condition,
+    category: req.body.category,
+    owner: req.session.user._id
   }
   console.log(info)
-  currentUser.Ads.push(info)
-  await currentUser.save()
+  await Ads.create(info);
   res.redirect(`/Ads/${currentUser._id}/Ads`)
 })
 
 //get:show
-router.get('/:userId/Ads/:AdsId', async (req, res) => {
-  const currentUser = await User.findById(req.session.user._id)
-  const ads = currentUser.Ads.id(req.params.AdsId)
-  res.render('Ads/show.ejs', { ad: ads })
+router.get('/:userId/Ads/:adId', async (req, res) => {
+  const selectedAd = await Ads.findById(req.params.adId).populate('owner');
+  console.log(req.body);
+  res.render('Ads/show.ejs', { ad: selectedAd })
 })
 
 //get:edit
 router.get('/:userId/Ads/:adId/edit', async (req, res) => {
-  const currentUser = await User.findById(req.session.user._id)
-  const Ad = currentUser.Ads.id(req.params.adId)
-  res.render('Ads/edit.ejs', { currentUser, Ad })
+  const selectedAd = await Ads.findById(req.params.adId); 
+  res.render('Ads/edit.ejs', { Ad: selectedAd })
 })
 
 // Update Ad
 router.put('/:userId/Ads/:adId', async (req, res) => {
-  const currentUser = await User.findById(req.session.user._id)
-  const ad = currentUser.Ads.id(req.params.adId)
-  ad.set(req.body)
-  await currentUser.save()
-  res.redirect(`/Ads/${currentUser._id}/Ads/${req.params.adId}`)
-})
+  try{
+    const editedAd = await Ads.findById(req.params.adId);
+  
+  if (editedAd.owner.equals(req.session.user._id)) {
+      await editedAd.updateOne(req.body);
+      res.redirect(`/Ads/${req.session.user._id}/Ads/${req.params.adId}`)
+    } else {
+      res.send("You don't have permission to do that.");
+    }
+  } catch(error){
+    console.log(error);
+    res.redirect('/');
+  }
+});
 
 // Delete Ad
 router.delete('/:userId/Ads/:adId', async (req, res) => {
-  const currentUser = await User.findById(req.session.user._id)
-  currentUser.Ads.id(req.params.adId).deleteOne()
-  await currentUser.save()
-  res.redirect(`/Ads/${currentUser._id}/Ads`)
-})
+  try {
+    const selectedAd = await Ads.findById(req.params.adId);
+  
+  if (selectedAd.owner.equals(req.session.user._id)) {
+      await selectedAd.deleteOne();
+      res.redirect(`/Ads/${req.session.user._id}/Ads`)
+    } else {
+      res.send("You don't have permission to do that.");
+    }
+    } catch (error) {
+      console.error(error);
+      res.redirect('/');
+  }
+});
 
 //category
 router.get('/categories', async (req, res) => {
-  const category = req.query.category
+  const selectedCategory = req.query.category
 
-  const users = await User.find({})
-  let allAds = []
+  const allAds = await Ads.find({});
 
-  //concat is a combined method
-  users.forEach((user) => {
-    allAds = allAds.concat(user.Ads)
-  })
-  const filteredAds = allAds.filter((ad) => ad.category === category)
+  const filteredAds = allAds.filter((ad) => ad.category === selectedCategory)
 
-  if (category === 'phones') {
-    res.render('categories/phone', { ads: filteredAds, category })
-  } else if (category === 'cars') {
-    res.render('categories/car', { ads: filteredAds, category })
-  } else if (category === 'books') {
-    res.render('categories/book', { ads: filteredAds, category })
-  } else if (category === 'laptop') {
-    res.render('categories/laptop', { ads: filteredAds, category })
-  } else if (category === 'spare parts') {
-    res.render('categories/spareParts', { ads: filteredAds, category })
+  //.populate('owner')  
+  if (selectedCategory === 'phones') {
+    res.render('categories/phone', { ads: filteredAds})
+  } else if (selectedCategory === 'cars') {
+    res.render('categories/car', { ads: filteredAds })
+  } else if (selectedCategory === 'books') {
+    res.render('categories/book', { ads: filteredAds })
+  } else if (selectedCategory === 'laptop') {
+    res.render('categories/laptop', { ads: filteredAds})
+  } else if (selectedCategory === 'Spare Parts') {
+    res.render('categories/spareParts', { ads: filteredAds})
   }
 })
 
