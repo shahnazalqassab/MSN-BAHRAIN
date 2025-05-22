@@ -116,7 +116,7 @@ router.get('/categories', async (req, res) => {
     res.render('categories/book', { ads: filteredAds })
   } else if (selectedCategory === 'laptop') {
     res.render('categories/laptop', { ads: filteredAds })
-  } else if (selectedCategory === 'Spare Parts') {
+  } else if (selectedCategory === 'Spare%Parts') {
     res.render('categories/spareParts', { ads: filteredAds })
   }
 })
