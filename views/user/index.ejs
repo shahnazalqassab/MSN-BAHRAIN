@@ -66,9 +66,10 @@
       <h2>Latest Ad</h2>
       </span>
     <% if (myAds.length > 0) { %> 
+      
       <ul class="ads-list">
         <li class="ads-list-item" style="margin-bottom: 1.2rem">
-          <a href="/Ads/" >
+          <a href="/Ads/<%= user._id %>/Ads/<%= myAds._id %>">
             <h5 style="margin-bottom: 0.5rem"><%= myAds[myAds.length-1].title %></h5>
             <img src="/Ads/<%= myAds[myAds.length-1].img %>" width="100" style="border-radius: 8px; box-shadow: 0 2px 8px #e0eafc"/>
           </a>

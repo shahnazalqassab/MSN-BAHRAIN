@@ -9,14 +9,15 @@
       </a>
     </div>
     <ul class="ads-list">
-      <% myAds.forEach(ad => { %>
+      <% myAds.forEach((ad) => { %>
+        <% if (ad.owner.toString() === user._id.toString()) { %>
         <li class="ads-list-item">
           <a href="/Ads/<%= user._id %>/Ads/<%= ad._id %>">
             <h4><%= ad.title %></h4>
             <img src="/Ads/<%= ad.img %>" width="100px" height="auto"/>
           </a>
         </li>
-      <% }) %>
+      <% }}) %>
     </ul>
   </div>
 </body>

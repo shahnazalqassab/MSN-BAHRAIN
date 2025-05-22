@@ -21,7 +21,8 @@ const upload = multer({ storage })
 //get:index
 router.get('/:userId/Ads', async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
-  const myAds = await Ads.find().populate('owner')
+  const myAds = await Ads.find();
+
 
   res.render('Ads/index.ejs', { myAds, user: currentUser })
 })

@@ -232,12 +232,19 @@ router.post('/:userId/changePic', upload.single('profile'), async (req, res) => 
 
 router.get('/:userID/dashboard', async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
-  console.log(currentUser);
 
-  const ads = await Ads.find().populate('owner'); 
+  const ads = await Ads.find();
+  
+  let filteredAds = []
+    ads.forEach( (ad) => {
+      if (ad.owner.toString() === currentUser._id.toString()){
+        filteredAds.push(ad)
+      }
+    })
+  
   try {
     const systemUsers = await User.find({});
-    res.render('user/index.ejs', { user: currentUser, all: systemUsers, myAds: ads  })
+    res.render('user/index.ejs', { user: currentUser, all: systemUsers, myAds: filteredAds  })
   
   } catch (error){
     console.log(error);
