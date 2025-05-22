@@ -5,7 +5,7 @@
 <body class="auth-bg">
   <div class="auth-center-container">
   <div class="signin-box" >
-  <h1 class="h1-SignIn">Add Ads</h1>
+  <h1 class="h1-SignIn">Editing <%= Ad.title %></h1>
   <form action="/Ads/<%= user._id %>/Ads/<%=Ad._id%>?_method=PUT" method="POST">
 
 
@@ -20,8 +20,11 @@
     <label  for="description">Description</label>
     <textarea class="input" type="text" name="description" id="description"><%= Ad.description %></textarea>
     <br>
-
-
+    <label for="condition">Condition</label>
+    <select class= "input" name="condition" id="condition">
+      <option value="new" <%= Ad.category === "new" ? "selected":"" %>>New</option>
+      <option value="used" <%= Ad.category === "used" ? "selected":"" %>>Used</option></select>
+      <br>
     <label for="category">Category</label>
     <select class= "input" name="category" id="category">
       <option value="phones" <%= Ad.category === "phones" ? "selected":"" %>>Phone</option>

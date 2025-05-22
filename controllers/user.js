@@ -3,6 +3,8 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 const User = require('../models/users')
 const multer = require('multer')
+const Ads = require('../models/ads.js');
+
 
 // // configuraton for the multer storage
 const storage = multer.diskStorage({
@@ -36,15 +38,15 @@ router.post('/signUp', async (req, res) => {
   req.body.password = hashedPassword
 
   const newUser = {
-    username: req.body.username,
-    password: req.body.password,
-    category: req.body.category,
-    contactNo: req.body.contactNo,
-    email: req.body.email,
-    profile: 'uploads/newUser.png'
+  username: req.body.username,
+  password: req.body.password,
+  contactNo: req.body.contactNo,
+  email: req.body.email,
+  profile: 'newUser.png',
+  category: req.body.category
   }
 
-  const user = await User.create(newUser)
+  const user = await User.create(newUser);
 
   req.session.user = {
     username: user.username,
@@ -170,7 +172,7 @@ router.put('/:userId/user', async (req, res) => {
       res.redirect('/')
     }
   } else {
-    res.redirect('/')
+    res.redirect(`/user/${currentUser._id}/dashboard`)
   }
 })
 
@@ -199,7 +201,7 @@ router.get('/:userId/changePic', async (req, res) => {
     console.log(currentUser)
 
     res.render('user/edit.ejs', {
-      currentUser,
+      user: currentUser,
       checkVar
     })
   } catch (error) {
@@ -219,7 +221,7 @@ router.post('/:userId/changePic', upload.single('profile'), async (req, res) => 
 
       await currentUser.save()
 
-      res.redirect(`/user/${currentUser._id}/user`)
+      res.redirect(`/user/${currentUser._id}/dashboard`)
     } catch (error) {
       console.log(error)
       res.redirect('/')
@@ -230,10 +232,12 @@ router.post('/:userId/changePic', upload.single('profile'), async (req, res) => 
 
 router.get('/:userID/dashboard', async (req, res) => {
   const currentUser = await User.findById(req.session.user._id)
+  console.log(currentUser);
 
+  const ads = await Ads.find().populate('owner'); 
   try {
     const systemUsers = await User.find({});
-    res.render('user/index.ejs', { user: currentUser, all: systemUsers  })
+    res.render('user/index.ejs', { user: currentUser, all: systemUsers, myAds: ads  })
   
   } catch (error){
     console.log(error);

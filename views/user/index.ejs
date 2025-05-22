@@ -65,24 +65,21 @@
         <i class="fa fa-bullhorn"></i> Ads Control
       </h1>
       <ul class="ads-list">
-        <% if (user.Ads.length > 0) { %>
+        
         <li class="ads-list-item" style="margin-bottom: 1.2rem">
           <a
-            href="/Ads/<%= user._id %>/Ads/<%= user.Ads[user.Ads.length-1]._id %>"
+            href="/Ads/"
           >
             <h5 style="margin-bottom: 0.5rem">
-              <%= user.Ads[user.Ads.length-1].title %>
             </h5>
             <img
-              src="/Ads/<%= user.Ads[user.Ads.length-1].img %>"
+              src="/Ads/"
               width="100"
               style="border-radius: 8px; box-shadow: 0 2px 8px #e0eafc"
             />
           </a>
         </li>
-        <% } else { %>
         <li><h5>No ads to display yet.</h5></li>
-        <% } %>
       </ul>
       <a class="your-ads-link" href="/Ads/<%= user._id %>/Ads">
         <span style="font-size: 1.1rem; font-weight: 600; letter-spacing: 1px">
