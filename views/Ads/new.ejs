@@ -1,49 +1,94 @@
-<%- include('../partials/_head.ejs') %>
-<%- include('../partials/_navbar.ejs') %>
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/_head.ejs') %>
 
-<body>
-  <div class="container">
-  <div class="signin-box" >
-  <h1 class="h1-SignIn">Add Ads</h1>
-  <form action="/Ads/<%= user._id %>/Ads" method="POST" enctype="multipart/form-data">
+  <body class="auth-bg">
+    <%- include('../partials/_pageLoader.ejs') %> <%-
+    include('../partials/_navbar.ejs') %>
 
+    <div class="page">
+      <div class="page-inner">
+        <div class="ad-form-wrapper">
+          <div class="ad-image-side">
+            <img
+              src="/images/handshake.png"
+              alt="Ad Image"
+              class="ad-preview-img"
+            />
+          </div>
 
-    <label for="img">Image</label>
-    <input class="input" type="file" name="img" accept="image/*"/>
-  <br>
+          <div class="ad-form-side">
+            <h1 class="h1-SignIn">Add Ad</h1>
 
+            <form
+              action="/Ads/<%= user._id %>/Ads"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              <label for="img">Image</label>
+              <input
+                class="input"
+                type="file"
+                name="img"
+                id="img"
+                accept="image/*"
+                required
+              />
 
-  <label for="title">Title</label>
-  <input class="input"type="text" name="title" id="title">
-  <br>
+              <label for="title">Title</label>
+              <input
+                class="input"
+                type="text"
+                name="title"
+                id="title"
+                required
+              />
 
-  <label for="price">Price</label>
-  <input class="input" type="text" name="price" id="price" >
-  <br>
+              <label for="price">Price</label>
+              <input
+                class="input"
+                type="number"
+                name="price"
+                id="price"
+                step="0.01"
+                min="0"
+                placeholder="e.g. 99.99 BD"
+                required
+              />
 
-    <label  for="description">Description</label>
-    <textarea class="input" type="text" name="description" id="description"></textarea>
-    <br>
+              <label for="description">Description</label>
+              <textarea
+                class="input"
+                name="description"
+                id="description"
+                required
+              ></textarea>
 
-    <label  for="condition">Condition</label>
-    <select class="input" name="condition" id="condition">
-    <option value="new">New</option>
-    <option value="used">Used</option></select>
-    <br>
-    <label  for="category">Category</label>
-    <select class="input" name="category" id="category">
-    <option value="phones">Phones</option>
-    <option value="cars">Cars</option>
-    <option value="books">Books</option>
-    <option value="spare parts">Spare Parts</option>
-    <option value="laptop">Laptop</option>
-  </select>
-    <br>
+              <label for="condition">Condition</label>
+              <select class="input" name="condition" id="condition" required>
+                <option value="new">New</option>
+                <option value="used">Used</option>
+              </select>
 
-    <button class="input-submit" type="submit">Submit</button>
-  </form>
-  </div>
-  </div>
-</body>
+              <label for="category">Category</label>
+              <select class="input" name="category" id="category" required>
+                <option value="phones">Phones</option>
+                <option value="cars">Cars</option>
+                <option value="books">Books</option>
+                <option value="spare parts">Spare Parts</option>
+                <option value="laptop">Laptop</option>
+                <option value="random">Random</option>
+              </select>
 
-<%- include('../partials/_footer.ejs') %>
+              <button class="btn-primary" type="submit">Submit</button>
+
+              <a class="btn-ghost" href="/Ads/<%= user._id %>/Ads">
+                Back to Ads
+              </a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

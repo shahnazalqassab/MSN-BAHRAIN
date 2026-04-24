@@ -1,21 +1,55 @@
-<%- include('../partials/_head.ejs') %>
-<%- include('../partials/_navbar.ejs') %>
-<body class="auth-bg">
-  <div class="auth-center-container">
-    <div class="signin-box">
-      <h1 class="h1-SignIn">Sign In</h1>
-      <form action="/user/signIn" method="POST">
-        <label for="username">Username</label>
-        <input class="input" type="text" id="username" name="username" required>
-        <label for="password">Password</label>
-        <input class="input" type="password" id="password" name="password" required>
-        <button class="input-submit" type="submit">Sign In</button>
-      </form>
-      <div class="signin-extra">
-        <span>Don't have an account?</span>
-        <a href="/user/signUp" class="signInUp">Sign Up</a>
-      </div>
-    </div>
-  </div>
-</body>
-<%- include('../partials/_footer.ejs') %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/_head.ejs') %>
+  </head>
+
+  <body class="auth-bg">
+    <%- include('../partials/_navbar.ejs') %> <%-
+    include('../partials/_pageLoader.ejs') %>
+
+    <main class="profile-wrapper profile-wrapper--center">
+      <span class="auth-page-title">Sign In</span>
+      <section class="profile-card" style="max-width: 520px; width: 100%">
+        <div class="profile-card-header">
+          <span class="profile-dot"></span>
+          <span class="profile-title">Sign In</span>
+        </div>
+
+        <form action="/user/signIn" method="POST" class="profile-form">
+          <div class="profile-form-row">
+            <label for="username">Username</label>
+            <input
+              class="input"
+              type="text"
+              id="username"
+              name="username"
+              required
+            />
+          </div>
+
+          <div class="profile-form-row">
+            <label for="password">Password</label>
+            <input
+              class="input"
+              type="password"
+              id="password"
+              name="password"
+              required
+            />
+          </div>
+
+          <div class="profile-actions">
+            <button class="btn-primary" type="submit">
+              <i class="fa fa-right-to-bracket"></i>&nbsp; Sign In
+            </button>
+
+            <a href="/user/signUp" class="btn-outline">
+              <i class="fa fa-user-plus"></i>&nbsp; Sign Up
+            </a>
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

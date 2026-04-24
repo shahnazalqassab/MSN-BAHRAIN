@@ -1,99 +1,91 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
-const User = require('../models/users')
 const multer = require('multer')
-const Ads = require('../models/ads.js');
 
+const User = require('../models/users')
+const Ads = require('../models/ads')
 
-// // configuraton for the multer storage
-const storage = multer.diskStorage({
-  destination: (req, file, callBack) => {
-    callBack(null, 'public/uploads/') // the folder to save
-  },
-  filename: (req, file, callBack) => {
-    callBack(null, Date.now() + '-' + file.originalname)
-  }
+const { cloudinary, userStorage } = require('../config/cloudinary')
+
+const isStrongPassword = require('../middleware/isStrongPassword')
+
+const upload = multer({ storage: userStorage })
+
+const rateLimit = require('express-rate-limit')
+const loginLimiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 10,
+  message: 'Too many login attempts. Try again later.'
 })
 
-// const upload = multer({destination: 'public/uploads/'});
-const upload = multer({ storage })
-
-// SIGN UP PAGE CALL
 router.get('/signUp', (req, res) => {
   res.render('user/signUp.ejs')
 })
 
-// SIGN UP ROUTE
-router.post('/signUp', async (req, res) => {
-  const userExists = await User.findOne({ username: req.body.username })
-  if (userExists) {
-    return res.send('Username already taken')
-  }
-  if (req.body.password !== req.body.confirmPassword) {
-    return res.send('Passwords do not match')
-  }
+router.post('/signUp', isStrongPassword, async (req, res) => {
+  try {
+    const SALT_ROUNDS = 12
 
-  const hashedPassword = bcrypt.hashSync(req.body.password, 10)
-  req.body.password = hashedPassword
+    const userExists = await User.findOne({ username: req.body.username })
+    if (userExists) return res.send('Username already taken')
 
-  const newUser = {
-  username: req.body.username,
-  password: req.body.password,
-  contactNo: req.body.contactNo,
-  email: req.body.email,
-  profile: 'newUser.png',
-  category: req.body.category
-  }
+    if (req.body.password !== req.body.confirmPassword) {
+      return res.send('Passwords do not match')
+    }
 
-  const user = await User.create(newUser);
+    if (!req.body.contactNo) {
+      return res.status(400).send('Please enter a valid phone number.')
+    }
 
-  req.session.user = {
-    username: user.username,
-    _id: user._id
-  }
+    const hashedPassword = await bcrypt.hash(req.body.password, SALT_ROUNDS)
 
-  req.session.save(() => {
+    const newUser = {
+      username: req.body.username,
+      password: hashedPassword,
+      contactNo: req.body.contactNo,
+      email: req.body.email,
+      profile: 'Logo.png',
+      profilePublicId: null
+    }
+
+    const user = await User.create(newUser)
+
+    req.session.user = { username: user.username, _id: user._id }
+    req.session.save(() => res.redirect('/'))
+  } catch (error) {
     res.redirect('/')
-  })
+  }
 })
 
-// SIGN IN PAGE CALL
 router.get('/signIn', (req, res) => {
   res.render('user/signIn.ejs')
 })
 
-// SIGN IN ROUTE
-router.post('/signIn', async (req, res) => {
-  // res.send('new user sign in') JUST A TESTING CODE
-  const userInDatabase = await User.findOne({ username: req.body.username }) // getting the user from the db
-  // res.send(userInDatabase.username);
-  if (!userInDatabase) {
-    return res.send("User doesn't exist. Please try again.")
-  }
+router.post('/signIn', loginLimiter, async (req, res) => {
+  try {
+    const userInDatabase = await User.findOne({ username: req.body.username })
+    if (!userInDatabase) {
+      return res.send("User doesn't exist. Please try again.")
+    }
 
-  const validPassword = bcrypt.compareSync(
-    // user exist, testing password
-    req.body.password,
-    userInDatabase.password
-  )
-  if (!validPassword) {
-    return res.send('Wrong Password. Please try again.')
-  }
+    const validPassword = bcrypt.compareSync(
+      req.body.password,
+      userInDatabase.password
+    )
+    if (!validPassword) return res.send('Wrong Password. Please try again.')
 
-  req.session.user = {
-    username: userInDatabase.username,
-    _id: userInDatabase._id
-  }
+    req.session.user = {
+      username: userInDatabase.username,
+      _id: userInDatabase._id
+    }
 
-  const currentUser = await User.findById(req.session.user._id)
-  console.log(currentUser.Ads)
-  req.session.save(() => {
+    req.session.save(() => res.redirect('/'))
+  } catch (error) {
     res.redirect('/')
-  })
+  }
 })
 
-// SIGN OUT ROUTE
 router.get('/signOut', (req, res) => {
   req.session.destroy()
   res.redirect('/')
@@ -103,153 +95,146 @@ router.get('/aboutUs', (req, res) => {
   res.render('aboutUs.ejs')
 })
 
-////////////////////////////// AFTER SIGN IN ROUTES /////////////////////////
-
-// GET /:USERID/USER DASHBOARD
 router.get('/:userId/user', async (req, res) => {
-  const currentUser = await User.findById(req.session.user)
-  res.render('index.ejs', { user: currentUser })
-})
-
-// GET /:USERID/EDIT (EDIT PROFILE ROUTE)
-router.get('/:userId/edit', async (req, res) => {
-  const checkVar = 0
-
   try {
     const currentUser = await User.findById(req.session.user._id)
-    res.render('user/edit.ejs', {
-      user: currentUser,
-      checkVar
-    })
+    res.render('index.ejs', { user: currentUser })
   } catch (error) {
-    console.log(error)
     res.redirect('/')
   }
 })
 
-// PUT :USERID/USER (SAVING PROFILE UPDATES ROUTE)
+router.get('/:userId/edit', async (req, res) => {
+  const checkVar = 0
+  try {
+    const currentUser = await User.findById(req.session.user._id)
+    res.render('user/edit.ejs', { user: currentUser, checkVar })
+  } catch (error) {
+    res.redirect('/')
+  }
+})
+
 router.put('/:userId/user', async (req, res) => {
-  const submit = req.body.submit // Learned this condition from stack overFlow
+  const submit = req.body.submit
+  try {
+    const currentUser = await User.findById(req.session.user._id)
 
-  const currentUser = await User.findById(req.session.user._id)
-
-  if (submit === 'Update Profile') {
-    // updating profile details
-    try {
+    if (submit === 'Update Profile') {
       currentUser.contactNo = req.body.contactNo
       currentUser.email = req.body.email
 
       await currentUser.save()
-
-      res.redirect(`/user/${currentUser._id}/user`)
-    } catch (error) {
-      console.log(error)
-      res.redirect('/')
+      return res.redirect(`/user/${currentUser._id}/user`)
     }
-  } else if (submit === 'Change Password') {
-    // updating password
-    try {
+
+    if (submit === 'Change Password') {
       const validPassword = bcrypt.compareSync(
         req.body.currentPassword,
         currentUser.password
       )
 
-      if (validPassword) {
-        if (req.body.newPassword === req.body.confirmPassword) {
-          currentUser.password = bcrypt.hashSync(req.body.newPassword, 10)
+      if (!validPassword) return res.redirect('/')
 
-          await currentUser.save()
-
-          res.redirect(`/user/signOut`)
-        } else {
-          res.redirect('/')
-        }
-      } else {
-        res.redirect('/')
+      if (req.body.newPassword !== req.body.confirmPassword) {
+        return res.redirect('/')
       }
-    } catch (error) {
-      console.log(error)
-      res.redirect('/')
+
+      currentUser.password = bcrypt.hashSync(req.body.newPassword, 10)
+      await currentUser.save()
+      return res.redirect(`/user/signOut`)
     }
-  } else {
+
     res.redirect(`/user/${currentUser._id}/dashboard`)
+  } catch (error) {
+    res.redirect('/')
   }
 })
 
-// GET :USERID/CHANGEPASSWORD (EDIT PASSWORD ROUTE)
 router.get('/:userId/changePassword', async (req, res) => {
   const checkVar = 1
-
   try {
     const currentUser = await User.findById(req.session.user._id)
-    res.render('user/edit.ejs', {
-      password: currentUser.password,
-      checkVar
-    })
+
+    res.render('user/edit.ejs', { user: currentUser, checkVar })
   } catch (error) {
-    console.log(error)
     res.redirect('/')
   }
 })
 
-// GET :USERID/CHANGEPIC (CALLING THE UPLOAD PAGE)
 router.get('/:userId/changePic', async (req, res) => {
   const checkVar = 2
-
   try {
     const currentUser = await User.findById(req.session.user._id)
-    console.log(currentUser)
-
-    res.render('user/edit.ejs', {
-      user: currentUser,
-      checkVar
-    })
+    res.render('user/edit.ejs', { user: currentUser, checkVar })
   } catch (error) {
-    console.log(error)
     res.redirect('/')
   }
 })
 
-
-// POST :USERID/CHANGEPIC (UPDATING THE PICTURE IN THE DB)
-router.post('/:userId/changePic', upload.single('profile'), async (req, res) => {
+router.post(
+  '/:userId/changePic',
+  upload.single('profile'),
+  async (req, res) => {
     try {
-      const picPath = req.file.filename
-
       const currentUser = await User.findById(req.session.user._id)
-      currentUser.profile = picPath
+
+      if (currentUser.profilePublicId) {
+        await cloudinary.uploader.destroy(currentUser.profilePublicId)
+      }
+
+      currentUser.profile = req.file.path
+      currentUser.profilePublicId = req.file.filename
+      public_id
 
       await currentUser.save()
 
       res.redirect(`/user/${currentUser._id}/dashboard`)
     } catch (error) {
-      console.log(error)
       res.redirect('/')
     }
-    console.log(req.file)
   }
 )
 
 router.get('/:userID/dashboard', async (req, res) => {
-  const currentUser = await User.findById(req.session.user._id)
-
-  const ads = await Ads.find();
-  
-  let filteredAds = []
-    ads.forEach( (ad) => {
-      if (ad.owner.toString() === currentUser._id.toString()){
-        filteredAds.push(ad)
-      }
-    })
-  
   try {
-    const systemUsers = await User.find({});
-    res.render('user/index.ejs', { user: currentUser, all: systemUsers, myAds: filteredAds  })
-  
-  } catch (error){
-    console.log(error);
+    const user = await User.findById(req.session.user._id)
+
+    const myAds = await Ads.find({ owner: user._id }).sort({ createdAt: -1 })
+
+    const totalAds = myAds.length
+    const totalValue = myAds.reduce(
+      (sum, ad) => sum + (Number(ad.price) || 0),
+      0
+    )
+
+    const categoryCounts = myAds.reduce((acc, ad) => {
+      const c = ad.category || 'other'
+      acc[c] = (acc[c] || 0) + 1
+      return acc
+    }, {})
+
+    let adminStats = null
+    let all = []
+    if (user.category === 'Admin') {
+      adminStats = {
+        totalUsers: await User.countDocuments(),
+        totalAdsAll: await Ads.countDocuments()
+      }
+      all = await User.find({})
+    }
+
+    res.render('user/index.ejs', {
+      user,
+      myAds,
+      totalAds,
+      totalValue,
+      categoryCounts,
+      adminStats,
+      all
+    })
+  } catch (error) {
+    res.redirect('/')
   }
 })
-
 
 module.exports = router

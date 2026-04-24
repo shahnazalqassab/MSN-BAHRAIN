@@ -1,47 +1,154 @@
-<%- include('../partials/_head.ejs') %>
-<%- include('../partials/_navbar.ejs') %>
-<body class="auth-bg">
-  <div class="auth-center-container">
-    <div class="signin-box" style="max-width: 400px; width: 100%;">
-      <h1 class="h1-SignIn"><i class="fa fa-user-plus"></i> Sign Up</h1>
-      <form action="/user/signUp" method="POST" autocomplete="off">
-        <div style="display: flex; flex-direction: column; gap: 1rem;">
-          <div class="form-group">
-            <label for="username"><i class="fa fa-user"></i> Username</label>
-            <input class="input" type="text" id="username" name="username" required>
-          </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/_head.ejs') %>
+  </head>
 
-          <div class="form-group">
-            <label for="password"><i class="fa fa-lock"></i> Password</label>
-            <input class="input" type="password" id="password" name="password" required>
-          </div>
+  <body class="auth-bg">
+    <%- include('../partials/_navbar.ejs') %> <%-
+    include('../partials/_pageLoader.ejs') %>
 
-          <div class="form-group">
-            <label for="confirmPassword"><i class="fa fa-lock"></i> Confirm Password</label>
-            <input class="input" type="password" id="confirmPassword" name="confirmPassword" required>
-          </div>
+    <main class="profile-wrapper profile-wrapper--center">
+      <span class="auth-page-title">Sign Up</span>
 
-          <label  for="category">Category</label>
-          <select class="input" name="category" id="category">
-          <option value="Seller">Seller</option>
-          <option value="Buyer">Buyer</option></select>
-          
-          <div class="form-group">
-          <label for="contactNo"><i class="fa fa-phone"></i> Contact No.</label>
-          <input class="input" type="tel" id="contactNo" name="contactNo" pattern="[0-9]{8,15}" required>
-
-          <label for="email"><i class="fa fa-envelope"></i> Email</label>
-          <input class="input" type="email" id="email" name="email" required>
+      <section class="profile-card" style="max-width: 520px; width: 100%">
+        <div class="profile-card-header">
+          <span class="profile-dot"></span>
+          <span class="profile-title">
+            <i class="fa fa-user-plus"></i>&nbsp; Sign Up
+          </span>
         </div>
-        <button class="input-submit" type="submit" style="margin-top: 1.2rem;">
-          <i class="fa fa-user-plus"></i> Sign Up
-        </button>
-      </form>
-      <div class="signin-extra">
-        <span>Already have an account?</span>
-        <a href="/user/signIn" class="signInUp">Sign In</a>
-      </div>
-    </div>
-  </div>
-</body>
-<%- include('../partials/_footer.ejs') %>
+
+        <form
+          action="/user/signUp"
+          method="POST"
+          autocomplete="off"
+          class="profile-form"
+        >
+          <div class="profile-form-row">
+            <label for="username"><i class="fa fa-user"></i> Username</label>
+            <input
+              class="input"
+              type="text"
+              id="username"
+              name="username"
+              required
+            />
+          </div>
+
+          <div class="profile-form-row">
+            <label for="password"><i class="fa fa-lock"></i> Password</label>
+            <input
+              class="input"
+              type="password"
+              id="password"
+              name="password"
+              required
+            />
+
+            <ul class="password-rules" id="passwordRules">
+              <li id="rule-length">At least 8 characters</li>
+              <li id="rule-upper">One uppercase letter (A–Z)</li>
+              <li id="rule-lower">One lowercase letter (a–z)</li>
+              <li id="rule-number">One number (0–9)</li>
+            </ul>
+          </div>
+
+          <div class="profile-form-row">
+            <label for="confirmPassword"
+              ><i class="fa fa-lock"></i> Confirm Password</label
+            >
+            <input
+              class="input"
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              required
+            />
+          </div>
+
+          <div class="profile-form-row">
+            <label for="contactNo"
+              ><i class="fa fa-phone"></i> Contact No</label
+            >
+            <input type="tel" id="contactNo" class="input" />
+
+            <input type="hidden" name="contactNo" id="contactNoFull" required />
+          </div>
+
+          <div class="profile-form-row">
+            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+            <input
+              class="input"
+              type="email"
+              id="email"
+              name="email"
+              required
+            />
+          </div>
+
+          <div class="signup-actions">
+            <button class="btn-primary" type="submit">
+              <i class="fa fa-user-plus"></i>&nbsp; Sign Up
+            </button>
+
+            <span class="login-text">
+              Already have account?
+              <a href="/user/signIn">Sign In</a>
+            </span>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.5/build/js/intlTelInput.min.js"></script>
+
+    <script>
+      const input = document.querySelector('#contactNo')
+      const hidden = document.querySelector('#contactNoFull')
+
+      const iti = window.intlTelInput(input, {
+        initialCountry: 'bh',
+        separateDialCode: true,
+        nationalMode: false,
+        utilsScript:
+          'https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.5/build/js/utils.js'
+      })
+
+      input.form.addEventListener('submit', (e) => {
+        if (!iti.isValidNumber()) {
+          e.preventDefault()
+          alert('Please enter a valid phone number')
+        } else {
+          hidden.value = iti.getNumber()
+        }
+      })
+
+      const passwordInput = document.getElementById('password')
+
+      const rules = {
+        length: document.getElementById('rule-length'),
+        upper: document.getElementById('rule-upper'),
+        lower: document.getElementById('rule-lower'),
+        number: document.getElementById('rule-number')
+      }
+
+      passwordInput.addEventListener('input', () => {
+        const value = passwordInput.value
+
+        toggleRule(rules.length, value.length >= 8)
+        toggleRule(rules.upper, /[A-Z]/.test(value))
+        toggleRule(rules.lower, /[a-z]/.test(value))
+        toggleRule(rules.number, /[0-9]/.test(value))
+      })
+
+      function toggleRule(el, isValid) {
+        if (isValid) {
+          el.classList.add('valid')
+        } else {
+          el.classList.remove('valid')
+        }
+      }
+    </script>
+  </body>
+</html>

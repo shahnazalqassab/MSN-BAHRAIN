@@ -1,24 +1,107 @@
-<%- include('../partials/_head.ejs')%>
-<%- include('../partials/_navbar.ejs') %> 
-<body>
-  <div class="ads-page-container">
-    <div class="ads-header">
-      <h1>Your Ads</h1>
-      <a class="add-ad-btn" href="/Ads/<%= user._id %>/new">
-        <i class="fa fa-plus-circle"></i> Add New Ad
-      </a>
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/_head.ejs') %>
+
+  <body class="auth-bg">
+    <%- include('../partials/_pageLoader.ejs') %> <%-
+    include('../partials/_navbar.ejs') %>
+
+    <div class="page">
+      <div class="page-inner">
+        <div class="container-ads">
+          <div class="ads-header">
+            <h1 class="ads-title">My Ads</h1>
+
+            <div class="ads-search">
+              <form
+                action="/Ads/<%= user._id %>/Ads"
+                method="GET"
+                class="ads-search-form"
+              >
+                <input
+                  type="text"
+                  name="q"
+                  value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
+                  id="adsSearch"
+                  placeholder="Search"
+                />
+              </form>
+            </div>
+
+            <a class="add-ad-btn" href="/Ads/<%= user._id %>/new">
+              <i class="fa fa-plus-circle"></i> Add New Ad
+            </a>
+          </div>
+
+          <% if (ads && ads.length) { %>
+          <div class="ads-grid" id="adsGrid">
+            <% ads.forEach((ad) => { %>
+            <article class="ad-card ad-card--row">
+              <div class="ad-left">
+                <div class="ad-top">
+                  <span
+                    class="ad-pill ad-pill--cat cat-<%= String(ad.category).trim().toLowerCase().replace(/\s+/g,'-') %>"
+                  >
+                    <%= ad.category %>
+                  </span>
+                </div>
+                <div>
+                  <span class="ad-pill--title"><%= ad.title %></span>
+                </div>
+
+                <div class="ad-price">
+                  BD <%= Number(ad.price).toFixed(2) %>
+                </div>
+
+                <div>
+                  <span
+                    class="ad-condition cond-<%= String(ad.condition).trim().toLowerCase() %>"
+                  >
+                    <%= ad.condition %>
+                  </span>
+                </div>
+
+                <div class="ad-desc-box">
+                  <div class="ad-desc-label">Description</div>
+                  <div class="ad-desc-text"><%= ad.description %></div>
+                </div>
+
+                <div class="ad-bottom">
+                  <div class="ad-actions">
+                    <a
+                      class="btn-primary"
+                      href="/Ads/<%= ad.owner._id %>/Ads/<%= ad._id %>/edit"
+                    >
+                      Edit
+                    </a>
+
+                    <form
+                      action="/Ads/<%= ad.owner._id %>/Ads/<%= ad._id %>?_method=DELETE"
+                      method="POST"
+                      class="ad-delete-form"
+                    >
+                      <button class="btn-red" type="submit">Delete</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ad-right">
+                <img
+                  src="<%= ad.imgUrl || '/images/handshake.png' %>"
+                  alt="<%= ad.title %>"
+                  class="ad-image"
+                />
+              </div>
+            </article>
+            <% }) %>
+          </div>
+          <% } else { %>
+          <p class="ads-empty">No ads in this account.</p>
+          <% } %>
+        </div>
+      </div>
     </div>
-    <ul class="ads-list">
-      <% myAds.forEach((ad) => { %>
-        <% if (ad.owner.toString() === user._id.toString()) { %>
-        <li class="ads-list-item">
-          <a href="/Ads/<%= user._id %>/Ads/<%= ad._id %>">
-            <h4><%= ad.title %></h4>
-            <img src="/Ads/<%= ad.img %>" width="100px" height="auto"/>
-          </a>
-        </li>
-      <% }}) %>
-    </ul>
-  </div>
-</body>
-<%- include('../partials/_footer.ejs') %>
+
+  </body>
+</html>

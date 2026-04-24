@@ -1,27 +1,86 @@
-<%- include('../partials/_head.ejs') %>
-<%- include('../partials/_navbar.ejs') %>
-<body>
-  <br>
-  <h1>Laptop</h1>
-<ul>
-  <% ads.forEach((ad) => { %>
-  <div class="container">
-  <div class="signin-box" >
-    
-      <img src="/Ads/<%= ad.img %>" alt="<%= ad.title %>" width="120">
-    <li>
-      <h2>Title : <%= ad.title %></h2>
-      <h2>Price : BD<%= ad.price %></h2>
-      <h2>Description :<%= ad.description %></h2>
-      <h2>Published by :<%= ad.owner.username %></h2>
-      <h2>Contact number :<%= ad.owner.contactNo %></h2>
-    </li>
-  </div>
-  </div>
-  <% }); %>
-</ul>
-</body>
-<%- include('../partials/_footer.ejs') %>
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/_head.ejs') %>
 
+  <body class="auth-bg">
+    <%- include('../partials/_pageLoader.ejs') %> <%-
+    include('../partials/_navbar.ejs') %>
 
+    <div class="page">
+      <div class="page-inner">
+        <div class="container-ads">
+          <div class="ads-header">
+            <h1 class="ads-title">Laptop</h1>
 
+            <div class="ads-search">
+              <form method="GET">
+                <input
+                  type="text"
+                  name="q"
+                  value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
+                  id="adsSearch"
+                  placeholder="Search"
+                />
+              </form>
+            </div>
+          </div>
+
+          <% if (ads && ads.length) { %>
+          <div class="ads-grid">
+            <% ads.forEach(ad => { %>
+            <article class="ad-card ad-card--row">
+              <div class="ad-left">
+                <div>
+                  <span class="ad-pill--title"><%= ad.title %></span>
+                </div>
+
+                <div class="ad-price">
+                  BD <%= Number(ad.price).toFixed(2) %>
+                </div>
+
+                <div>
+                  <span
+                    class="ad-condition cond-<%= String(ad.condition).trim().toLowerCase() %>"
+                  >
+                    <%= ad.condition %>
+                  </span>
+                </div>
+
+                <div class="ad-desc-box">
+                  <div class="ad-desc-label">Description</div>
+                  <div class="ad-desc-text"><%= ad.description %></div>
+                </div>
+
+                <div class="ad-desc-box">
+                  <div class="ad-desc-label">Published by</div>
+                  <div class="ad-desc-text"><%= ad.owner.username %></div>
+                </div>
+
+                <div class="ad-bottom">
+                  <div class="ad-actions">
+                    <a href="tel:<%= ad.owner.contactNo %>" class="btn-primary">
+                      <i class="fa fa-phone"></i> Call Seller
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ad-right">
+                <img
+                  src="<%= ad.imgUrl || '/images/handshake.png' %>"
+                  alt="<%= ad.title %>"
+                  class="ad-image"
+                />
+              </div>
+            </article>
+            <% }) %>
+          </div>
+          <% } else { %>
+          <p class="ads-empty">No ads found in this category.</p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
